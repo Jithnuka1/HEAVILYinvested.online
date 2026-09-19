@@ -1,0 +1,625 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    background: #07120d;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* ==============================
+   GAME
+============================== */
+
+#game {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+
+/* ==============================
+   TOP SCORE BAR
+============================== */
+
+#topBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 85px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 30px;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    z-index: 20;
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+}
+
+.score span {
+    font-size: 11px;
+    letter-spacing: 2px;
+    opacity: 0.6;
+}
+
+.score strong {
+    font-size: 30px;
+}
+
+#game-info {
+    text-align: center;
+}
+
+#round-status {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+#trump-display {
+    font-size: 13px;
+    opacity: 0.65;
+}
+
+
+/* ==============================
+   TABLE
+============================== */
+
+#table {
+    position: absolute;
+
+    top: 85px;
+    bottom: 0;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            rgba(30, 115, 72, 1) 0%,
+            rgba(12, 70, 43, 1) 55%,
+            rgba(4, 34, 21, 1) 100%
+        );
+}
+
+
+/* subtle table texture */
+
+#table::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        repeating-linear-gradient(
+            45deg,
+            rgba(255,255,255,0.008) 0,
+            rgba(255,255,255,0.008) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+}
+
+
+/* ==============================
+   PLAYERS
+============================== */
+
+.player {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    z-index: 5;
+}
+
+.player-name {
+    background: rgba(0,0,0,0.55);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    border-radius: 30px;
+
+    padding: 6px 14px;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+}
+
+
+/* HUMAN */
+
+.bottom-player {
+    bottom: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+
+/* PARTNER */
+
+.top-player {
+    top: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+
+/* LEFT */
+
+.left-player {
+    left: 20px;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+
+/* RIGHT */
+
+.right-player {
+    right: 20px;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+
+/* ==============================
+   CARDS
+============================== */
+
+.card {
+    width: 78px;
+    height: 110px;
+
+    border-radius: 8px;
+
+    background: #f8f5ec;
+
+    color: #111;
+
+    border: 1px solid rgba(0,0,0,0.25);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.35);
+
+    position: relative;
+
+    user-select: none;
+
+    flex-shrink: 0;
+}
+
+.card.red {
+    color: #c81f32;
+}
+
+.card-rank {
+    position: absolute;
+
+    top: 7px;
+    left: 8px;
+
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.card-suit-small {
+    position: absolute;
+
+    top: 27px;
+    left: 9px;
+
+    font-size: 17px;
+}
+
+.card-suit {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    font-size: 42px;
+}
+
+
+/* ==============================
+   HUMAN HAND
+============================== */
+
+#human-hand {
+    display: flex;
+    justify-content: center;
+
+    min-height: 115px;
+}
+
+#human-hand .card {
+    margin-left: -12px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease;
+}
+
+#human-hand .card:first-child {
+    margin-left: 0;
+}
+
+#human-hand .card:hover {
+    transform: translateY(-15px);
+}
+
+#human-hand .card.illegal {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+#human-hand .card.illegal:hover {
+    transform: none;
+}
+
+
+/* ==============================
+   CARD BACKS
+============================== */
+
+.hidden-hand {
+    display: flex;
+}
+
+.hidden-hand.vertical {
+    flex-direction: column;
+}
+
+.card-back {
+    width: 54px;
+    height: 76px;
+
+    border-radius: 7px;
+
+    border: 3px solid #eee;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #13253f,
+            #13253f 5px,
+            #1d3a63 5px,
+            #1d3a63 10px
+        );
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.4);
+
+    margin-left: -30px;
+}
+
+.card-back:first-child {
+    margin-left: 0;
+}
+
+.vertical .card-back {
+    margin-left: 0;
+    margin-top: -48px;
+}
+
+.vertical .card-back:first-child {
+    margin-top: 0;
+}
+
+
+/* ==============================
+   CENTER
+============================== */
+
+#center-area {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 430px;
+    height: 330px;
+
+    z-index: 4;
+}
+
+#trick-counter {
+    position: absolute;
+
+    left: 50%;
+    top: -20px;
+
+    transform: translateX(-50%);
+
+    font-size: 12px;
+
+    background: rgba(0,0,0,0.3);
+
+    padding: 7px 14px;
+
+    border-radius: 20px;
+
+    white-space: nowrap;
+}
+
+#played-cards {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+
+.played-position {
+    position: absolute;
+
+    width: 78px;
+    height: 110px;
+}
+
+.played-top {
+    top: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+.played-bottom {
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+.played-left {
+    left: 35px;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+.played-right {
+    right: 35px;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+
+/* ==============================
+   MODALS
+============================== */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.72);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 100;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-box {
+    width: min(430px, 90vw);
+
+    background: #111713;
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,0.6);
+}
+
+.modal-box h2 {
+    margin-top: 0;
+}
+
+.modal-box p {
+    opacity: 0.7;
+    line-height: 1.5;
+}
+
+.suit-buttons {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.suit-buttons button {
+    height: 70px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #f8f5ec;
+
+    color: #111;
+
+    font-size: 32px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease;
+}
+
+.suit-buttons button:hover {
+    transform: translateY(-4px);
+}
+
+.suit-buttons button.red {
+    color: #c81f32;
+}
+
+#next-round,
+#restart-game {
+    border: 0;
+
+    background: white;
+    color: black;
+
+    border-radius: 30px;
+
+    padding: 12px 25px;
+
+    margin-top: 15px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 700px) {
+
+    #topBar {
+        height: 70px;
+        padding: 0 12px;
+    }
+
+    #table {
+        top: 70px;
+    }
+
+    .score span {
+        font-size: 8px;
+    }
+
+    .score strong {
+        font-size: 22px;
+    }
+
+    #round-status {
+        font-size: 11px;
+    }
+
+    .card {
+        width: 55px;
+        height: 80px;
+    }
+
+    .card-rank {
+        font-size: 14px;
+    }
+
+    .card-suit-small {
+        font-size: 13px;
+        top: 23px;
+    }
+
+    .card-suit {
+        font-size: 30px;
+    }
+
+    #human-hand .card {
+        margin-left: -10px;
+    }
+
+    #center-area {
+        width: 300px;
+        height: 260px;
+    }
+
+    .played-position {
+        width: 55px;
+        height: 80px;
+    }
+
+    .played-left {
+        left: 35px;
+    }
+
+    .played-right {
+        right: 35px;
+    }
+
+    .left-player {
+        left: 5px;
+    }
+
+    .right-player {
+        right: 5px;
+    }
+
+    .player-name {
+        font-size: 9px;
+        padding: 5px 9px;
+    }
+
+    .card-back {
+        width: 40px;
+        height: 58px;
+    }
+}
