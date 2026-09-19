@@ -53,9 +53,7 @@
         <div class="table-rail"></div>
 
 
-        <!-- =====================================
-             TEAMMATE - TOP
-        ====================================== -->
+        <!-- TEAMMATE -->
 
         <div class="player top-player">
 
@@ -78,6 +76,8 @@
                         YOUR TEAM
                     </div>
 
+                    <div class="thinking-dots"></div>
+
                 </div>
 
             </div>
@@ -90,9 +90,7 @@
         </div>
 
 
-        <!-- =====================================
-             LEFT OPPONENT
-        ====================================== -->
+        <!-- LEFT OPPONENT -->
 
         <div class="player left-player">
 
@@ -115,6 +113,8 @@
                         OPPONENT
                     </div>
 
+                    <div class="thinking-dots"></div>
+
                 </div>
 
             </div>
@@ -127,9 +127,7 @@
         </div>
 
 
-        <!-- =====================================
-             RIGHT OPPONENT
-        ====================================== -->
+        <!-- RIGHT OPPONENT -->
 
         <div class="player right-player">
 
@@ -152,6 +150,8 @@
                         OPPONENT
                     </div>
 
+                    <div class="thinking-dots"></div>
+
                 </div>
 
             </div>
@@ -165,36 +165,33 @@
 
 
         <!-- =====================================
-             CENTER OF TABLE
+             CENTER
         ====================================== -->
 
         <div id="center-area">
 
 
-            <!-- CURRENT HAND / TRICK SCORE -->
+            <!-- CURRENT SET TOTAL -->
 
             <div id="trick-counter">
+
+                <!-- OUR TEAM -->
 
                 <div
                     class="trick-score"
                     id="our-trick-target">
 
-                    <div class="trick-logo">
-
-                        <img
-                            src="/logo2.png"
-                            alt="Heavily Invested">
-
+                    <div
+                        class="trick-logo black-team-logo">
                     </div>
 
                     <div class="trick-score-text">
 
                         <span>
-                            YOUR TRICKS
+                            YOUR TOTAL
                         </span>
 
-                        <strong
-                            id="our-tricks">
+                        <strong id="our-tricks">
                             0
                         </strong>
 
@@ -208,25 +205,27 @@
                 </div>
 
 
+                <!-- OPPONENT TEAM -->
+
                 <div
                     class="trick-score"
                     id="their-trick-target">
 
-                    <div class="trick-score-text right-trick-text">
+                    <div
+                        class="trick-score-text right-trick-text">
 
                         <span>
-                            THEIR TRICKS
+                            THEIR TOTAL
                         </span>
 
-                        <strong
-                            id="their-tricks">
+                        <strong id="their-tricks">
                             0
                         </strong>
 
                     </div>
 
-                    <div class="trick-logo opponent-logo">
-                        O
+                    <div
+                        class="trick-logo red-checker-logo">
                     </div>
 
                 </div>
@@ -234,7 +233,7 @@
             </div>
 
 
-            <!-- FOUR PLAYED CARDS -->
+            <!-- PLAYED CARDS -->
 
             <div id="played-cards">
 
@@ -264,7 +263,7 @@
 
 
         <!-- =====================================
-             HUMAN PLAYER - BOTTOM
+             HUMAN
         ====================================== -->
 
         <div class="player bottom-player">
@@ -279,7 +278,6 @@
                         <div class="hair short"></div>
 
                         <div class="eye eye-left"></div>
-
                         <div class="eye eye-right"></div>
 
                         <div class="mouth"></div>
@@ -325,9 +323,7 @@
                 HEAVILY INVESTED
             </div>
 
-            <h1>
-                OMI
-            </h1>
+            <h1>OMI</h1>
 
             <p>
                 Enter your name to take a seat.
@@ -350,7 +346,7 @@
 
 
     <!-- =========================================
-         TRUMP SELECTION
+         TRUMP
     ========================================== -->
 
     <div
@@ -446,7 +442,7 @@
     </div>
 
 
-    <!-- CARD ANIMATION LAYER -->
+    <!-- CARD COLLECTION ANIMATIONS -->
 
     <div id="animation-layer"></div>
 
