@@ -551,17 +551,18 @@ input {
 
     border: 3px solid #eee;
 
-    background:
-        repeating-linear-gradient(
-            45deg,
-            #13253f,
-            #13253f 5px,
-            #1d3a63 5px,
-            #1d3a63 10px
-        );
+    background-color: #050505;
+
+    background-image: url("/logo2.png");
+
+    background-size: 85% auto;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
 
     box-shadow:
-        0 3px 10px rgba(0,0,0,0.4);
+        0 3px 10px rgba(0,0,0,0.45);
 
     margin-left: -30px;
 }
