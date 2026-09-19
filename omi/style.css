@@ -1,3 +1,7 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -11,9 +15,15 @@ body {
 
 body {
     overflow: hidden;
-    background: #07120d;
+
+    background: #050806;
+
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 }
 
 button,
@@ -21,24 +31,30 @@ input {
     font-family: inherit;
 }
 
-
-/* =========================================
-   GAME
-========================================= */
-
-#game {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+button {
+    cursor: pointer;
 }
 
 
-/* =========================================
-   TOP BAR
-========================================= */
+/* =========================================================
+   GAME
+========================================================= */
+
+#game {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/* =========================================================
+   TOP BAR - OVERALL TOKEN SCORE
+========================================================= */
 
 #topBar {
     position: absolute;
+
     top: 0;
     left: 0;
 
@@ -46,67 +62,87 @@ input {
     height: 85px;
 
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
+    justify-content: space-between;
 
-    padding: 0 30px;
+    padding:
+        0 30px;
 
-    background: rgba(0, 0, 0, 0.48);
+    background:
+        rgba(3, 6, 4, 0.96);
 
     border-bottom:
         1px solid rgba(255,255,255,0.08);
 
-    z-index: 20;
+    box-shadow:
+        0 8px 30px rgba(0,0,0,0.3);
+
+    z-index: 30;
 }
 
-.score {
+
+.overall-score {
     display: flex;
+
     flex-direction: column;
 
-    min-width: 110px;
-
-    transition:
-        transform 0.35s ease,
-        filter 0.35s ease;
+    min-width: 120px;
 }
 
-.opponent-score-box {
-    text-align: right;
-}
 
-.score span {
-    font-size: 10px;
+.overall-score span {
+    font-size: 9px;
+
     letter-spacing: 2px;
+
     opacity: 0.55;
 }
 
-.score strong {
-    font-size: 30px;
+
+.overall-score strong {
+    font-size: 29px;
+
+    line-height: 30px;
 }
 
-.score.score-hit {
-    transform: scale(1.35);
-    filter: brightness(1.8);
+
+.overall-score small {
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.3;
 }
+
+
+.right-score {
+    text-align: right;
+}
+
 
 #game-info {
     text-align: center;
 }
 
+
 #round-status {
-    font-size: 15px;
+    font-size: 14px;
+
     margin-bottom: 5px;
 }
 
+
 #trump-display {
-    font-size: 13px;
-    opacity: 0.65;
+    font-size: 12px;
+
+    opacity: 0.55;
 }
 
 
-/* =========================================
-   TABLE
-========================================= */
+/* =========================================================
+   POKER TABLE
+========================================================= */
 
 #table {
     position: absolute;
@@ -119,43 +155,21 @@ input {
     overflow: hidden;
 
     background:
+
         radial-gradient(
             ellipse at center,
-            #287652 0%,
-            #185d40 42%,
-            #0d422d 72%,
-            #07291d 100%
+            #24704c 0%,
+            #195b3f 38%,
+            #10472f 67%,
+            #082d20 100%
         );
 
     box-shadow:
-        inset 0 0 140px rgba(0,0,0,0.65);
+        inset 0 0 180px rgba(0,0,0,0.65);
 }
 
 
 /* FELT TEXTURE */
-
-#table::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 22px;
-
-    border-radius: 45%;
-
-    border:
-        14px solid rgba(18, 14, 10, 0.75);
-
-    box-shadow:
-        inset 0 0 0 3px rgba(255,255,255,0.05),
-        inset 0 0 70px rgba(0,0,0,0.35),
-        0 0 35px rgba(0,0,0,0.55);
-
-    pointer-events: none;
-
-    z-index: 1;
-}
-
 
 #table::after {
     content: "";
@@ -167,133 +181,199 @@ input {
     pointer-events: none;
 
     background-image:
+
         repeating-linear-gradient(
-            37deg,
+            35deg,
             rgba(255,255,255,0.008) 0,
             rgba(255,255,255,0.008) 1px,
             transparent 1px,
             transparent 4px
-        );
+        ),
 
-    opacity: 0.8;
+        repeating-linear-gradient(
+            -35deg,
+            rgba(0,0,0,0.012) 0,
+            rgba(0,0,0,0.012) 1px,
+            transparent 1px,
+            transparent 5px
+        );
 
     z-index: 2;
 }
 
 
-/* =========================================
+/* POKER TABLE RAIL */
+
+.table-rail {
+    position: absolute;
+
+    inset: 18px;
+
+    border:
+        15px solid #19140f;
+
+    border-radius:
+        46%;
+
+    box-shadow:
+
+        inset
+        0 0 0 3px
+        rgba(255,255,255,0.05),
+
+        inset
+        0 0 50px
+        rgba(0,0,0,0.55),
+
+        0 8px 35px
+        rgba(0,0,0,0.7);
+
+    pointer-events: none;
+
+    z-index: 3;
+}
+
+
+/* =========================================================
    PLAYERS
-========================================= */
+========================================================= */
 
 .player {
     position: absolute;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
-    z-index: 5;
+    z-index: 10;
 }
+
 
 .bottom-player {
-    bottom: 18px;
+    bottom: 17px;
+
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 }
+
 
 .top-player {
-    top: 15px;
+    top: 14px;
+
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 }
+
 
 .left-player {
-    left: 18px;
+    left: 20px;
+
     top: 50%;
 
-    transform: translateY(-50%);
+    transform:
+        translateY(-50%);
 }
+
 
 .right-player {
-    right: 18px;
+    right: 20px;
+
     top: 50%;
 
-    transform: translateY(-50%);
+    transform:
+        translateY(-50%);
 }
 
 
-/* =========================================
-   PLAYER IDENTITIES
-========================================= */
+/* =========================================================
+   PLAYER NAME BOX
+========================================================= */
 
 .identity {
     display: flex;
+
     align-items: center;
+
     gap: 9px;
 
-    margin-bottom: 9px;
+    margin-bottom: 8px;
 
-    background:
-        rgba(0,0,0,0.45);
-
-    border:
-        1px solid rgba(255,255,255,0.11);
+    padding:
+        5px 13px 5px 5px;
 
     border-radius: 50px;
 
-    padding: 5px 13px 5px 5px;
+    background:
+        rgba(0,0,0,0.58);
 
-    backdrop-filter: blur(8px);
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.2);
+
+    backdrop-filter:
+        blur(7px);
 }
+
 
 .identity-text {
     display: flex;
+
     flex-direction: column;
 }
 
+
 .player-name {
     font-size: 12px;
-    font-weight: bold;
 
-    letter-spacing: 0.5px;
+    font-weight: 700;
 
-    text-transform: capitalize;
+    text-transform:
+        capitalize;
 }
+
 
 .team-label {
+    margin-top: 2px;
+
     font-size: 7px;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1.4px;
 
     opacity: 0.4;
-
-    margin-top: 2px;
 }
 
 
-/* =========================================
+/* =========================================================
    CARTOON AVATARS
-========================================= */
+========================================================= */
 
 .avatar {
+    position: relative;
+
     width: 42px;
     height: 42px;
 
-    position: relative;
+    overflow: hidden;
+
+    flex-shrink: 0;
 
     border-radius: 50%;
 
-    background: #17211b;
-
-    overflow: hidden;
+    background:
+        #18201b;
 
     border:
         2px solid rgba(255,255,255,0.17);
-
-    flex-shrink: 0;
 }
+
 
 .avatar-face {
     position: absolute;
@@ -310,8 +390,10 @@ input {
     border-radius:
         45% 45% 48% 48%;
 
-    background: var(--skin);
+    background:
+        var(--skin);
 }
+
 
 .avatar-face::after {
     content: "";
@@ -327,9 +409,11 @@ input {
     transform:
         translateX(-50%);
 
-    border-radius: 50% 50% 0 0;
+    border-radius:
+        50% 50% 0 0;
 
-    background: #252b29;
+    background:
+        #292f2c;
 
     z-index: -1;
 }
@@ -343,16 +427,19 @@ input {
     width: 3px;
     height: 3px;
 
-    background: #171717;
+    top: 16px;
 
     border-radius: 50%;
 
-    top: 16px;
+    background:
+        #151515;
 }
+
 
 .eye-left {
     left: 7px;
 }
+
 
 .eye-right {
     right: 7px;
@@ -367,17 +454,16 @@ input {
     width: 8px;
     height: 3px;
 
+    left: 50%;
+    bottom: 7px;
+
+    transform:
+        translateX(-50%);
+
     border-bottom:
         1.5px solid rgba(0,0,0,0.55);
 
     border-radius: 50%;
-
-    bottom: 7px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
 }
 
 
@@ -388,8 +474,10 @@ input {
 
     z-index: 3;
 
-    background: var(--hair);
+    background:
+        var(--hair);
 }
+
 
 .hair.short {
     width: 31px;
@@ -402,6 +490,7 @@ input {
         60% 60% 35% 35%;
 }
 
+
 .hair.short::after {
     content: "";
 
@@ -413,14 +502,16 @@ input {
     left: 0;
     top: 6px;
 
-    background: var(--hair);
+    background:
+        var(--hair);
 
     border-radius: 5px;
 }
 
+
 .hair.long {
-    width: 34px;
-    height: 39px;
+    width: 35px;
+    height: 40px;
 
     left: -3px;
     top: -4px;
@@ -428,6 +519,7 @@ input {
     border-radius:
         50% 50% 40% 40%;
 }
+
 
 .hair.long::after {
     content: "";
@@ -440,57 +532,59 @@ input {
     left: 5px;
     top: 8px;
 
-    background: var(--skin);
+    background:
+        var(--skin);
 
     border-radius: 45%;
 }
 
-
-/* BALD */
 
 .avatar-face.bald .hair {
     display: none;
 }
 
 
-/* HUMAN PLACEHOLDER */
-
 .default-human {
     --skin: #c68b65;
-    --hair: #151515;
+    --hair: #171717;
 }
 
 
-/* =========================================
-   CARDS
-========================================= */
+/* =========================================================
+   PLAYING CARDS
+========================================================= */
 
 .card {
+    position: relative;
+
     width: 78px;
     height: 110px;
 
+    flex-shrink: 0;
+
     border-radius: 8px;
 
-    background: #faf7ee;
+    background:
+        #faf7ee;
 
-    color: #111;
+    color:
+        #111;
 
     border:
         1px solid rgba(0,0,0,0.25);
 
     box-shadow:
-        0 5px 15px rgba(0,0,0,0.35);
-
-    position: relative;
+        0 6px 17px rgba(0,0,0,0.4);
 
     user-select: none;
-
-    flex-shrink: 0;
 }
+
 
 .card.red {
-    color: #c81f32;
+    color:
+        #c51f31;
 }
+
 
 .card-rank {
     position: absolute;
@@ -499,8 +593,10 @@ input {
     left: 8px;
 
     font-size: 19px;
-    font-weight: bold;
+
+    font-weight: 700;
 }
+
 
 .card-suit-small {
     position: absolute;
@@ -510,6 +606,7 @@ input {
 
     font-size: 17px;
 }
+
 
 .card-suit {
     position: absolute;
@@ -524,16 +621,18 @@ input {
 }
 
 
-/* =========================================
+/* =========================================================
    HUMAN HAND
-========================================= */
+========================================================= */
 
 #human-hand {
     display: flex;
+
     justify-content: center;
 
     min-height: 115px;
 }
+
 
 #human-hand .card {
     margin-left: -12px;
@@ -542,83 +641,102 @@ input {
 
     transition:
         transform 0.18s ease,
-        filter 0.18s ease,
-        opacity 0.18s ease;
+        opacity 0.18s ease,
+        filter 0.18s ease;
 }
+
 
 #human-hand .card:first-child {
     margin-left: 0;
 }
+
 
 #human-hand .card:hover {
     transform:
         translateY(-15px);
 }
 
+
 #human-hand .card.illegal {
-    opacity: 0.32;
+    opacity: 0.3;
 
     cursor: not-allowed;
 }
+
 
 #human-hand .card.illegal:hover {
     transform: none;
 }
 
 
-/* =========================================
-   CARD BACKS
-========================================= */
+/* =========================================================
+   HIDDEN CARD BACKS
+   USES /logo2.png
+========================================================= */
 
 .hidden-hand {
     display: flex;
 }
 
+
 .hidden-hand.vertical {
     flex-direction: column;
 }
+
 
 .card-back {
     width: 54px;
     height: 76px;
 
-    border-radius: 7px;
-
-    border: 3px solid #eee;
-
-    background-color: #050505;
-
-    background-image: url("/logo2.png");
-
-    background-size: 85% auto;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    box-shadow:
-        0 3px 10px rgba(0,0,0,0.45);
+    flex-shrink: 0;
 
     margin-left: -30px;
+
+    border-radius: 7px;
+
+    border:
+        3px solid #e8e5dd;
+
+    background-color:
+        #050505;
+
+    background-image:
+        url("/logo2.png");
+
+    background-size:
+        88% auto;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+
+    box-shadow:
+        0 4px 13px rgba(0,0,0,0.5);
 }
+
 
 .card-back:first-child {
     margin-left: 0;
 }
 
+
 .vertical .card-back {
     margin-left: 0;
+
     margin-top: -48px;
 }
+
 
 .vertical .card-back:first-child {
     margin-top: 0;
 }
 
 
-/* =========================================
+/* =========================================================
    CENTER
-========================================= */
+========================================================= */
 
 #center-area {
     position: absolute;
@@ -632,30 +750,153 @@ input {
     width: 430px;
     height: 330px;
 
-    z-index: 4;
+    z-index: 8;
 }
+
+
+/* =========================================================
+   TRICK / SET SCORE
+========================================================= */
 
 #trick-counter {
     position: absolute;
 
     left: 50%;
-    top: -20px;
+    top: -45px;
 
     transform:
         translateX(-50%);
 
-    font-size: 12px;
+    display: flex;
 
-    background:
-        rgba(0,0,0,0.3);
+    align-items: center;
 
-    padding:
-        7px 14px;
-
-    border-radius: 20px;
+    gap: 13px;
 
     white-space: nowrap;
+
+    z-index: 15;
 }
+
+
+.trick-score {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 112px;
+
+    padding:
+        6px 9px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(0,0,0,0.52);
+
+    border:
+        1px solid rgba(255,255,255,0.13);
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.25);
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+
+.trick-score-text span {
+    display: block;
+
+    font-size: 7px;
+
+    letter-spacing: 1.2px;
+
+    opacity: 0.5;
+}
+
+
+.trick-score-text strong {
+    display: block;
+
+    margin-top: 1px;
+
+    font-size: 21px;
+
+    line-height: 21px;
+}
+
+
+.right-trick-text {
+    text-align: right;
+}
+
+
+.trick-logo {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 37px;
+    height: 37px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background:
+        #050505;
+
+    border:
+        1px solid rgba(255,255,255,0.18);
+}
+
+
+.trick-logo img {
+    width: 90%;
+    height: 90%;
+
+    object-fit: contain;
+}
+
+
+.opponent-logo {
+    font-size: 15px;
+
+    font-weight: 800;
+
+    background:
+        #171717;
+}
+
+
+.trick-divider {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.35;
+}
+
+
+.trick-score.trick-won {
+    transform:
+        scale(1.25);
+
+    filter:
+        brightness(1.7);
+}
+
+
+/* =========================================================
+   PLAYED CARDS
+========================================================= */
 
 #played-cards {
     position: relative;
@@ -664,6 +905,7 @@ input {
     height: 100%;
 }
 
+
 .played-position {
     position: absolute;
 
@@ -671,32 +913,40 @@ input {
     height: 110px;
 }
 
+
 .played-top {
     top: 0;
+
     left: 50%;
 
     transform:
         translateX(-50%);
 }
+
 
 .played-bottom {
     bottom: 0;
+
     left: 50%;
 
     transform:
         translateX(-50%);
 }
 
+
 .played-left {
     left: 35px;
+
     top: 50%;
 
     transform:
         translateY(-50%);
 }
+
 
 .played-right {
     right: 35px;
+
     top: 50%;
 
     transform:
@@ -704,9 +954,9 @@ input {
 }
 
 
-/* =========================================
-   WINNING TRICK ANIMATION
-========================================= */
+/* =========================================================
+   FLYING CARD ANIMATION
+========================================================= */
 
 #animation-layer {
     position: fixed;
@@ -718,48 +968,72 @@ input {
     z-index: 90;
 }
 
+
 .flying-card {
     position: fixed;
 
-    transition:
-        left 0.75s cubic-bezier(.2,.8,.2,1),
-        top 0.75s cubic-bezier(.2,.8,.2,1),
-        transform 0.75s cubic-bezier(.2,.8,.2,1),
-        opacity 0.75s ease;
-
     z-index: 91;
+
+    pointer-events: none;
+
+    transition:
+
+        left
+        0.8s
+        cubic-bezier(.2,.8,.2,1),
+
+        top
+        0.8s
+        cubic-bezier(.2,.8,.2,1),
+
+        transform
+        0.8s
+        cubic-bezier(.2,.8,.2,1),
+
+        opacity
+        0.8s
+        ease;
 }
 
 
-/* =========================================
+/* =========================================================
    MODALS
-========================================= */
+========================================================= */
 
 .modal {
     position: fixed;
 
     inset: 0;
 
-    background:
-        rgba(0,0,0,0.78);
-
     display: flex;
 
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(0,0,0,0.8);
+
+    backdrop-filter:
+        blur(8px);
 
     z-index: 100;
-
-    backdrop-filter: blur(8px);
 }
+
 
 .modal.hidden {
     display: none;
 }
 
+
 .modal-box {
     width:
         min(430px, 90vw);
+
+    padding: 35px;
+
+    text-align: center;
+
+    border-radius: 18px;
 
     background:
         #111713;
@@ -767,19 +1041,15 @@ input {
     border:
         1px solid rgba(255,255,255,0.15);
 
-    border-radius: 18px;
-
-    padding: 35px;
-
-    text-align: center;
-
     box-shadow:
-        0 25px 80px rgba(0,0,0,0.6);
+        0 25px 80px rgba(0,0,0,0.65);
 }
+
 
 .modal-box h2 {
     margin-top: 0;
 }
+
 
 .modal-box p {
     opacity: 0.7;
@@ -788,18 +1058,19 @@ input {
 }
 
 
-/* =========================================
-   START SCREEN
-========================================= */
+/* =========================================================
+   WELCOME SCREEN
+========================================================= */
 
 .welcome-box h1 {
+    margin:
+        5px 0 10px;
+
     font-size: 60px;
 
     letter-spacing: 8px;
-
-    margin:
-        5px 0 10px;
 }
+
 
 .omi-small {
     font-size: 9px;
@@ -809,12 +1080,22 @@ input {
     opacity: 0.4;
 }
 
+
 #name-input {
     width: 100%;
 
     margin-top: 15px;
 
-    padding: 14px 16px;
+    padding:
+        14px 16px;
+
+    text-align: center;
+
+    color: white;
+
+    font-size: 16px;
+
+    outline: none;
 
     border-radius: 10px;
 
@@ -823,46 +1104,40 @@ input {
 
     background:
         rgba(255,255,255,0.05);
-
-    color: white;
-
-    outline: none;
-
-    font-size: 16px;
-
-    text-align: center;
 }
+
 
 #name-input:focus {
     border-color:
         rgba(255,255,255,0.5);
 }
 
+
 #start-game,
 #next-round,
 #restart-game {
-    border: 0;
-
-    background: white;
-
-    color: black;
-
-    border-radius: 30px;
+    margin-top: 18px;
 
     padding:
         12px 25px;
 
-    margin-top: 18px;
+    border: 0;
 
-    cursor: pointer;
+    border-radius: 30px;
 
-    font-weight: bold;
+    background:
+        white;
+
+    color:
+        black;
+
+    font-weight: 700;
 }
 
 
-/* =========================================
+/* =========================================================
    TRUMP BUTTONS
-========================================= */
+========================================================= */
 
 .suit-buttons {
     display: grid;
@@ -875,6 +1150,7 @@ input {
     margin-top: 25px;
 }
 
+
 .suit-buttons button {
     height: 70px;
 
@@ -885,29 +1161,31 @@ input {
     background:
         #f8f5ec;
 
-    color: #111;
+    color:
+        #111;
 
     font-size: 32px;
-
-    cursor: pointer;
 
     transition:
         transform 0.15s ease;
 }
+
 
 .suit-buttons button:hover {
     transform:
         translateY(-4px);
 }
 
+
 .suit-buttons button.red {
-    color: #c81f32;
+    color:
+        #c81f32;
 }
 
 
-/* =========================================
+/* =========================================================
    MOBILE
-========================================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
@@ -915,85 +1193,160 @@ input {
         height: 70px;
 
         padding:
-            0 12px;
+            0 10px;
     }
+
 
     #table {
         top: 70px;
     }
 
-    .score {
+
+    .overall-score {
         min-width: 70px;
     }
 
-    .score span {
+
+    .overall-score span {
         font-size: 7px;
     }
 
-    .score strong {
+
+    .overall-score strong {
         font-size: 22px;
     }
+
+
+    .overall-score small {
+        font-size: 5px;
+    }
+
 
     #round-status {
         font-size: 10px;
     }
 
+
     #trump-display {
         font-size: 9px;
     }
+
+
+    .table-rail {
+        inset: 7px;
+
+        border-width: 8px;
+    }
+
 
     .card {
         width: 55px;
         height: 80px;
     }
 
+
     .card-rank {
         font-size: 14px;
     }
 
+
     .card-suit-small {
-        font-size: 13px;
         top: 23px;
+
+        font-size: 13px;
     }
+
 
     .card-suit {
         font-size: 30px;
     }
 
+
     #human-hand .card {
         margin-left: -10px;
     }
 
+
     #center-area {
         width: 300px;
-        height: 260px;
+        height: 250px;
     }
+
+
+    #trick-counter {
+        top: -48px;
+
+        gap: 5px;
+    }
+
+
+    .trick-score {
+        min-width: 85px;
+
+        padding: 4px 6px;
+    }
+
+
+    .trick-logo {
+        width: 29px;
+        height: 29px;
+    }
+
+
+    .trick-score-text span {
+        font-size: 5px;
+    }
+
+
+    .trick-score-text strong {
+        font-size: 17px;
+    }
+
+
+    .trick-divider {
+        font-size: 6px;
+    }
+
 
     .played-position {
         width: 55px;
         height: 80px;
     }
 
+
     .played-left {
-        left: 35px;
+        left: 32px;
     }
+
 
     .played-right {
-        right: 35px;
+        right: 32px;
     }
+
 
     .left-player {
-        left: 4px;
+        left: 5px;
     }
 
+
     .right-player {
-        right: 4px;
+        right: 5px;
     }
+
+
+    .identity {
+        gap: 5px;
+
+        padding:
+            4px 8px 4px 4px;
+    }
+
 
     .avatar {
         width: 34px;
         height: 34px;
     }
+
 
     .avatar-face {
         transform:
@@ -1004,23 +1357,20 @@ input {
             top center;
     }
 
-    .identity {
-        gap: 5px;
-
-        padding:
-            4px 8px 4px 4px;
-    }
 
     .player-name {
         font-size: 9px;
     }
 
+
     .team-label {
         font-size: 6px;
     }
+
 
     .card-back {
         width: 40px;
         height: 58px;
     }
+
 }
