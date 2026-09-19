@@ -16,14 +16,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-button {
+button,
+input {
     font-family: inherit;
 }
 
 
-/* ==============================
+/* =========================================
    GAME
-============================== */
+========================================= */
 
 #game {
     width: 100vw;
@@ -32,9 +33,9 @@ button {
 }
 
 
-/* ==============================
-   TOP SCORE BAR
-============================== */
+/* =========================================
+   TOP BAR
+========================================= */
 
 #topBar {
     position: absolute;
@@ -50,7 +51,10 @@ button {
 
     padding: 0 30px;
 
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.48);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
 
     z-index: 20;
 }
@@ -58,16 +62,31 @@ button {
 .score {
     display: flex;
     flex-direction: column;
+
+    min-width: 110px;
+
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease;
+}
+
+.opponent-score-box {
+    text-align: right;
 }
 
 .score span {
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 2px;
-    opacity: 0.6;
+    opacity: 0.55;
 }
 
 .score strong {
     font-size: 30px;
+}
+
+.score.score-hit {
+    transform: scale(1.35);
+    filter: brightness(1.8);
 }
 
 #game-info {
@@ -85,9 +104,9 @@ button {
 }
 
 
-/* ==============================
+/* =========================================
    TABLE
-============================== */
+========================================= */
 
 #table {
     position: absolute;
@@ -100,17 +119,13 @@ button {
     overflow: hidden;
 
     background:
-
         radial-gradient(
             ellipse at center,
-            rgba(30, 115, 72, 1) 0%,
-            rgba(12, 70, 43, 1) 55%,
-            rgba(4, 34, 21, 1) 100%
+            #24764d 0%,
+            #104c32 52%,
+            #061f16 100%
         );
 }
-
-
-/* subtle table texture */
 
 #table::after {
     content: "";
@@ -131,9 +146,9 @@ button {
 }
 
 
-/* ==============================
+/* =========================================
    PLAYERS
-============================== */
+========================================= */
 
 .player {
     position: absolute;
@@ -145,66 +160,275 @@ button {
     z-index: 5;
 }
 
-.player-name {
-    background: rgba(0,0,0,0.55);
-
-    border: 1px solid rgba(255,255,255,0.12);
-
-    border-radius: 30px;
-
-    padding: 6px 14px;
-
-    margin-bottom: 10px;
-
-    font-size: 12px;
-
-    letter-spacing: 1px;
-}
-
-
-/* HUMAN */
-
 .bottom-player {
-    bottom: 20px;
+    bottom: 18px;
     left: 50%;
 
     transform: translateX(-50%);
 }
-
-
-/* PARTNER */
 
 .top-player {
-    top: 20px;
+    top: 15px;
     left: 50%;
 
     transform: translateX(-50%);
 }
 
-
-/* LEFT */
-
 .left-player {
-    left: 20px;
+    left: 18px;
     top: 50%;
 
     transform: translateY(-50%);
 }
-
-
-/* RIGHT */
 
 .right-player {
-    right: 20px;
+    right: 18px;
     top: 50%;
 
     transform: translateY(-50%);
 }
 
 
-/* ==============================
+/* =========================================
+   PLAYER IDENTITIES
+========================================= */
+
+.identity {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 9px;
+
+    background:
+        rgba(0,0,0,0.45);
+
+    border:
+        1px solid rgba(255,255,255,0.11);
+
+    border-radius: 50px;
+
+    padding: 5px 13px 5px 5px;
+
+    backdrop-filter: blur(8px);
+}
+
+.identity-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.player-name {
+    font-size: 12px;
+    font-weight: bold;
+
+    letter-spacing: 0.5px;
+
+    text-transform: capitalize;
+}
+
+.team-label {
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+
+    opacity: 0.4;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================
+   CARTOON AVATARS
+========================================= */
+
+.avatar {
+    width: 42px;
+    height: 42px;
+
+    position: relative;
+
+    border-radius: 50%;
+
+    background: #17211b;
+
+    overflow: hidden;
+
+    border:
+        2px solid rgba(255,255,255,0.17);
+
+    flex-shrink: 0;
+}
+
+.avatar-face {
+    position: absolute;
+
+    width: 29px;
+    height: 34px;
+
+    left: 50%;
+    top: 9px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        45% 45% 48% 48%;
+
+    background: var(--skin);
+}
+
+.avatar-face::after {
+    content: "";
+
+    position: absolute;
+
+    width: 35px;
+    height: 17px;
+
+    left: 50%;
+    bottom: -14px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50% 50% 0 0;
+
+    background: #252b29;
+
+    z-index: -1;
+}
+
+
+/* EYES */
+
+.eye {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    background: #171717;
+
+    border-radius: 50%;
+
+    top: 16px;
+}
+
+.eye-left {
+    left: 7px;
+}
+
+.eye-right {
+    right: 7px;
+}
+
+
+/* MOUTH */
+
+.mouth {
+    position: absolute;
+
+    width: 8px;
+    height: 3px;
+
+    border-bottom:
+        1.5px solid rgba(0,0,0,0.55);
+
+    border-radius: 50%;
+
+    bottom: 7px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+}
+
+
+/* HAIR */
+
+.hair {
+    position: absolute;
+
+    z-index: 3;
+
+    background: var(--hair);
+}
+
+.hair.short {
+    width: 31px;
+    height: 13px;
+
+    left: -1px;
+    top: -4px;
+
+    border-radius:
+        60% 60% 35% 35%;
+}
+
+.hair.short::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 12px;
+
+    left: 0;
+    top: 6px;
+
+    background: var(--hair);
+
+    border-radius: 5px;
+}
+
+.hair.long {
+    width: 34px;
+    height: 39px;
+
+    left: -3px;
+    top: -4px;
+
+    border-radius:
+        50% 50% 40% 40%;
+}
+
+.hair.long::after {
+    content: "";
+
+    position: absolute;
+
+    width: 24px;
+    height: 28px;
+
+    left: 5px;
+    top: 8px;
+
+    background: var(--skin);
+
+    border-radius: 45%;
+}
+
+
+/* BALD */
+
+.avatar-face.bald .hair {
+    display: none;
+}
+
+
+/* HUMAN PLACEHOLDER */
+
+.default-human {
+    --skin: #c68b65;
+    --hair: #151515;
+}
+
+
+/* =========================================
    CARDS
-============================== */
+========================================= */
 
 .card {
     width: 78px;
@@ -212,11 +436,12 @@ button {
 
     border-radius: 8px;
 
-    background: #f8f5ec;
+    background: #faf7ee;
 
     color: #111;
 
-    border: 1px solid rgba(0,0,0,0.25);
+    border:
+        1px solid rgba(0,0,0,0.25);
 
     box-shadow:
         0 5px 15px rgba(0,0,0,0.35);
@@ -264,9 +489,9 @@ button {
 }
 
 
-/* ==============================
+/* =========================================
    HUMAN HAND
-============================== */
+========================================= */
 
 #human-hand {
     display: flex;
@@ -282,7 +507,8 @@ button {
 
     transition:
         transform 0.18s ease,
-        filter 0.18s ease;
+        filter 0.18s ease,
+        opacity 0.18s ease;
 }
 
 #human-hand .card:first-child {
@@ -290,11 +516,13 @@ button {
 }
 
 #human-hand .card:hover {
-    transform: translateY(-15px);
+    transform:
+        translateY(-15px);
 }
 
 #human-hand .card.illegal {
-    opacity: 0.35;
+    opacity: 0.32;
+
     cursor: not-allowed;
 }
 
@@ -303,9 +531,9 @@ button {
 }
 
 
-/* ==============================
+/* =========================================
    CARD BACKS
-============================== */
+========================================= */
 
 .hidden-hand {
     display: flex;
@@ -352,9 +580,9 @@ button {
 }
 
 
-/* ==============================
+/* =========================================
    CENTER
-============================== */
+========================================= */
 
 #center-area {
     position: absolute;
@@ -377,13 +605,16 @@ button {
     left: 50%;
     top: -20px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     font-size: 12px;
 
-    background: rgba(0,0,0,0.3);
+    background:
+        rgba(0,0,0,0.3);
 
-    padding: 7px 14px;
+    padding:
+        7px 14px;
 
     border-radius: 20px;
 
@@ -408,47 +639,82 @@ button {
     top: 0;
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 }
 
 .played-bottom {
     bottom: 0;
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 }
 
 .played-left {
     left: 35px;
     top: 50%;
 
-    transform: translateY(-50%);
+    transform:
+        translateY(-50%);
 }
 
 .played-right {
     right: 35px;
     top: 50%;
 
-    transform: translateY(-50%);
+    transform:
+        translateY(-50%);
 }
 
 
-/* ==============================
+/* =========================================
+   WINNING TRICK ANIMATION
+========================================= */
+
+#animation-layer {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 90;
+}
+
+.flying-card {
+    position: fixed;
+
+    transition:
+        left 0.75s cubic-bezier(.2,.8,.2,1),
+        top 0.75s cubic-bezier(.2,.8,.2,1),
+        transform 0.75s cubic-bezier(.2,.8,.2,1),
+        opacity 0.75s ease;
+
+    z-index: 91;
+}
+
+
+/* =========================================
    MODALS
-============================== */
+========================================= */
 
 .modal {
     position: fixed;
 
     inset: 0;
 
-    background: rgba(0,0,0,0.72);
+    background:
+        rgba(0,0,0,0.78);
 
     display: flex;
+
     justify-content: center;
     align-items: center;
 
     z-index: 100;
+
+    backdrop-filter: blur(8px);
 }
 
 .modal.hidden {
@@ -456,11 +722,14 @@ button {
 }
 
 .modal-box {
-    width: min(430px, 90vw);
+    width:
+        min(430px, 90vw);
 
-    background: #111713;
+    background:
+        #111713;
 
-    border: 1px solid rgba(255,255,255,0.15);
+    border:
+        1px solid rgba(255,255,255,0.15);
 
     border-radius: 18px;
 
@@ -478,8 +747,86 @@ button {
 
 .modal-box p {
     opacity: 0.7;
+
     line-height: 1.5;
 }
+
+
+/* =========================================
+   START SCREEN
+========================================= */
+
+.welcome-box h1 {
+    font-size: 60px;
+
+    letter-spacing: 8px;
+
+    margin:
+        5px 0 10px;
+}
+
+.omi-small {
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    opacity: 0.4;
+}
+
+#name-input {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 14px 16px;
+
+    border-radius: 10px;
+
+    border:
+        1px solid rgba(255,255,255,0.15);
+
+    background:
+        rgba(255,255,255,0.05);
+
+    color: white;
+
+    outline: none;
+
+    font-size: 16px;
+
+    text-align: center;
+}
+
+#name-input:focus {
+    border-color:
+        rgba(255,255,255,0.5);
+}
+
+#start-game,
+#next-round,
+#restart-game {
+    border: 0;
+
+    background: white;
+
+    color: black;
+
+    border-radius: 30px;
+
+    padding:
+        12px 25px;
+
+    margin-top: 18px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   TRUMP BUTTONS
+========================================= */
 
 .suit-buttons {
     display: grid;
@@ -499,7 +846,8 @@ button {
 
     border-radius: 10px;
 
-    background: #f8f5ec;
+    background:
+        #f8f5ec;
 
     color: #111;
 
@@ -512,49 +860,38 @@ button {
 }
 
 .suit-buttons button:hover {
-    transform: translateY(-4px);
+    transform:
+        translateY(-4px);
 }
 
 .suit-buttons button.red {
     color: #c81f32;
 }
 
-#next-round,
-#restart-game {
-    border: 0;
 
-    background: white;
-    color: black;
-
-    border-radius: 30px;
-
-    padding: 12px 25px;
-
-    margin-top: 15px;
-
-    cursor: pointer;
-
-    font-weight: bold;
-}
-
-
-/* ==============================
+/* =========================================
    MOBILE
-============================== */
+========================================= */
 
 @media (max-width: 700px) {
 
     #topBar {
         height: 70px;
-        padding: 0 12px;
+
+        padding:
+            0 12px;
     }
 
     #table {
         top: 70px;
     }
 
+    .score {
+        min-width: 70px;
+    }
+
     .score span {
-        font-size: 8px;
+        font-size: 7px;
     }
 
     .score strong {
@@ -562,7 +899,11 @@ button {
     }
 
     #round-status {
-        font-size: 11px;
+        font-size: 10px;
+    }
+
+    #trump-display {
+        font-size: 9px;
     }
 
     .card {
@@ -606,16 +947,40 @@ button {
     }
 
     .left-player {
-        left: 5px;
+        left: 4px;
     }
 
     .right-player {
-        right: 5px;
+        right: 4px;
+    }
+
+    .avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+    .avatar-face {
+        transform:
+            translateX(-50%)
+            scale(0.8);
+
+        transform-origin:
+            top center;
+    }
+
+    .identity {
+        gap: 5px;
+
+        padding:
+            4px 8px 4px 4px;
     }
 
     .player-name {
         font-size: 9px;
-        padding: 5px 9px;
+    }
+
+    .team-label {
+        font-size: 6px;
     }
 
     .card-back {
