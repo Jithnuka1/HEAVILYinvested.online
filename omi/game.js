@@ -151,7 +151,7 @@ let currentTrick = [];
 
 
 /*
-   TRICKS = SCORE INSIDE CURRENT HAND
+   CURRENT HAND TOTALS
 */
 
 let ourTricks = 0;
@@ -160,7 +160,7 @@ let theirTricks = 0;
 
 
 /*
-   TOKENS = OVERALL GAME SCORE
+   OVERALL TOKEN SCORE
 */
 
 let ourScore = 0;
@@ -333,11 +333,8 @@ function randomItem(array) {
 
 
 /*
-   AI takes a random amount of time
-   between 1 and 3 seconds.
-
-   This runs again EVERY turn,
-   so the delay is always different.
+   Every AI turn gets a NEW
+   random delay from 1–3 seconds.
 */
 
 function getThinkingTime() {
@@ -351,7 +348,210 @@ function getThinkingTime() {
 
 
 /* =========================================================
-   RANDOM PLAYERS
+   AI THINKING INDICATOR
+========================================================= */
+
+function getPlayerIdentity(
+    player
+) {
+
+    if (player === 1) {
+
+        return document
+            .getElementById(
+                "left-name"
+            )
+            .closest(
+                ".identity"
+            );
+    }
+
+
+    if (player === 2) {
+
+        return document
+            .getElementById(
+                "partner-name"
+            )
+            .closest(
+                ".identity"
+            );
+    }
+
+
+    if (player === 3) {
+
+        return document
+            .getElementById(
+                "right-name"
+            )
+            .closest(
+                ".identity"
+            );
+    }
+
+
+    return null;
+}
+
+
+function clearThinkingIndicators() {
+
+    document
+        .querySelectorAll(
+            ".identity"
+        )
+        .forEach(
+            identity => {
+
+                identity
+                    .classList
+                    .remove(
+                        "ai-thinking"
+                    );
+
+
+                const dots =
+                    identity
+                        .querySelector(
+                            ".thinking-dots"
+                        );
+
+
+                if (dots) {
+
+                    dots.textContent =
+                        "";
+                }
+            }
+        );
+}
+
+
+/*
+   Cycles:
+   .
+   ..
+   ...
+   blank
+
+   until the actual randomized
+   AI thinking time is finished.
+*/
+
+async function showThinkingDots(
+    player,
+    duration
+) {
+
+    clearThinkingIndicators();
+
+
+    const identity =
+        getPlayerIdentity(
+            player
+        );
+
+
+    if (!identity) {
+
+        await sleep(
+            duration
+        );
+
+        return;
+    }
+
+
+    const dots =
+        identity
+            .querySelector(
+                ".thinking-dots"
+            );
+
+
+    identity
+        .classList
+        .add(
+            "ai-thinking"
+        );
+
+
+    const patterns = [
+        ".",
+        "..",
+        "...",
+        ""
+    ];
+
+
+    let patternIndex = 0;
+
+    const startTime =
+        Date.now();
+
+
+    while (
+        Date.now() -
+        startTime <
+        duration
+    ) {
+
+        dots.textContent =
+            patterns[
+                patternIndex
+            ];
+
+
+        patternIndex =
+            (
+                patternIndex + 1
+            )
+            %
+            patterns.length;
+
+
+        const elapsed =
+            Date.now() -
+            startTime;
+
+
+        const remaining =
+            duration -
+            elapsed;
+
+
+        if (
+            remaining <= 0
+        ) {
+
+            break;
+        }
+
+
+        await sleep(
+            Math.min(
+                300,
+                remaining
+            )
+        );
+    }
+
+
+    dots.textContent =
+        "";
+
+
+    identity
+        .classList
+        .remove(
+            "ai-thinking"
+        );
+}
+
+
+/* =========================================================
+   RANDOM CHARACTERS
 ========================================================= */
 
 function chooseCharacters() {
@@ -361,12 +561,6 @@ function chooseCharacters() {
             TEAMMATES
         );
 
-
-    /*
-       Shuffle opponents so the
-       two opponents cannot be
-       the same person.
-    */
 
     const shuffled =
         [...OPPONENTS];
@@ -445,7 +639,7 @@ function chooseCharacters() {
 
 
 /* =========================================================
-   CARTOON AVATAR
+   CARTOON AVATARS
 ========================================================= */
 
 function createAvatar(
@@ -742,7 +936,7 @@ function renderHands() {
 
 
 /* =========================================================
-   SORT HUMAN CARDS
+   SORT HUMAN HAND
 ========================================================= */
 
 function sortHumanHand() {
@@ -801,6 +995,9 @@ async function startRound() {
     waitingForHuman = false;
 
 
+    clearThinkingIndicators();
+
+
     hands = [
         [],
         [],
@@ -826,7 +1023,7 @@ async function startRound() {
 
     /*
        Player to dealer's right
-       selects trump.
+       chooses trump.
     */
 
     trumpChooser =
@@ -840,7 +1037,7 @@ async function startRound() {
 
 
     /*
-       FIRST FOUR CARDS
+       FIRST FOUR
     */
 
     for (
@@ -877,11 +1074,13 @@ async function startRound() {
     renderHands();
 
 
-    await sleep(900);
+    await sleep(
+        900
+    );
 
 
     /*
-       TRUMP SELECTION
+       TRUMP
     */
 
     if (
@@ -907,13 +1106,13 @@ async function startRound() {
             " is choosing trump...";
 
 
-        /*
-           AI also waits before
-           choosing trump.
-        */
+        const thinkingTime =
+            getThinkingTime();
 
-        await sleep(
-            getThinkingTime()
+
+        await showThinkingDots(
+            trumpChooser,
+            thinkingTime
         );
 
 
@@ -932,7 +1131,7 @@ async function startRound() {
 
 
     /*
-       SECOND FOUR CARDS
+       SECOND FOUR
     */
 
     statusEl.textContent =
@@ -973,12 +1172,10 @@ async function startRound() {
     renderHands();
 
 
-    await sleep(900);
+    await sleep(
+        900
+    );
 
-
-    /*
-       Trump chooser leads.
-    */
 
     currentPlayer =
         trumpChooser;
@@ -997,7 +1194,7 @@ async function startRound() {
 
 
 /* =========================================================
-   HUMAN TRUMP CHOICE
+   HUMAN TRUMP
 ========================================================= */
 
 function humanChooseTrump() {
@@ -1149,15 +1346,15 @@ async function playTurn() {
 
 
     /*
-       HUMAN
-
-       No timer.
-       Human can take as long as desired.
+       HUMAN HAS NO TIMER.
     */
 
     if (
         currentPlayer === 0
     ) {
+
+        clearThinkingIndicators();
+
 
         waitingForHuman =
             true;
@@ -1194,23 +1391,24 @@ async function playTurn() {
 
 
     /*
-       RANDOM 1–3 SECOND DELAY
-       EVERY SINGLE AI TURN.
+       NEW random 1–3 second
+       delay every turn.
     */
 
     const thinkingTime =
         getThinkingTime();
 
 
-    await sleep(
+    /*
+       Dot animation runs for
+       exactly that thinking period.
+    */
+
+    await showThinkingDots(
+        currentPlayer,
         thinkingTime
     );
 
-
-    /*
-       Make sure round hasn't
-       somehow ended while waiting.
-    */
 
     if (
         !roundActive
@@ -1244,11 +1442,6 @@ function legalCardIndexes(
     const hand =
         hands[player];
 
-
-    /*
-       Leading player may play
-       anything.
-    */
 
     if (
         currentTrick.length === 0
@@ -1287,7 +1480,7 @@ function legalCardIndexes(
 
 
     /*
-       Must follow suit if possible.
+       Must follow suit.
     */
 
     if (
@@ -1297,11 +1490,6 @@ function legalCardIndexes(
         return matching;
     }
 
-
-    /*
-       Otherwise anything may
-       be played.
-    */
 
     return hand.map(
         (_, index) =>
@@ -1381,6 +1569,9 @@ async function playCard(
     index
 ) {
 
+    clearThinkingIndicators();
+
+
     const card =
         hands[player]
             .splice(
@@ -1405,17 +1596,12 @@ async function playCard(
 
 
     /*
-       All four cards have been
-       played.
+       ALL FOUR PLAYED
     */
 
     if (
         currentTrick.length === 4
     ) {
-
-        /*
-           Let player see final card.
-        */
 
         await sleep(
             900
@@ -1467,7 +1653,7 @@ function renderPlayedCard(
 
 
 /* =========================================================
-   CLEAR TABLE CARDS
+   CLEAR PLAYED CARDS
 ========================================================= */
 
 function clearPlayedCards() {
@@ -1501,7 +1687,7 @@ function cardBeats(
 
     /*
        Same suit:
-       higher rank wins.
+       higher card wins.
     */
 
     if (
@@ -1538,8 +1724,7 @@ function cardBeats(
 
 
     /*
-       Non-trump cannot beat
-       trump.
+       Non-trump cannot beat trump.
     */
 
     if (
@@ -1555,8 +1740,7 @@ function cardBeats(
 
 
     /*
-       Lead suit beats another
-       non-trump suit.
+       Lead suit beats unrelated suit.
     */
 
     if (
@@ -1576,7 +1760,7 @@ function cardBeats(
 
 
 /* =========================================================
-   CURRENT WINNING CARD
+   CURRENT WINNER
 ========================================================= */
 
 function currentWinningPlay() {
@@ -1628,7 +1812,7 @@ function currentWinningPlay() {
 
 
 /* =========================================================
-   ANIMATE TRICK TO WINNING TEAM
+   COLLECTION ANIMATION
 ========================================================= */
 
 async function animateTrickToScore(
@@ -1642,9 +1826,7 @@ async function animateTrickToScore(
 
 
     /*
-       IMPORTANT:
-
-       Cards fly to the TRICK SCORE,
+       Cards go to the CURRENT TOTAL,
        not the overall token score.
     */
 
@@ -1679,7 +1861,7 @@ async function animateTrickToScore(
 
 
     /*
-       Copy all four played cards.
+       COPY ALL FOUR PLAYED CARDS
     */
 
     for (
@@ -1751,17 +1933,12 @@ async function animateTrickToScore(
 
 
     /*
-       Remove originals.
+       ORIGINAL CARDS DISAPPEAR
+       FROM TABLE.
     */
 
     clearPlayedCards();
 
-
-    /*
-       Give browser a moment to
-       render clones in original
-       positions.
-    */
 
     await sleep(
         70
@@ -1769,8 +1946,8 @@ async function animateTrickToScore(
 
 
     /*
-       Send all four cards toward
-       the winning team's collector.
+       FOUR CARDS COLLECT AND
+       FLY TOWARD WINNING TOTAL.
     */
 
     clones.forEach(
@@ -1823,10 +2000,6 @@ async function animateTrickToScore(
     );
 
 
-    /*
-       Wait for animation.
-    */
-
     await sleep(
         820
     );
@@ -1839,7 +2012,7 @@ async function animateTrickToScore(
 
 
     /*
-       Flash collector.
+       WINNING TOTAL FLASHES.
     */
 
     target
@@ -1863,7 +2036,7 @@ async function animateTrickToScore(
 
 
 /* =========================================================
-   FINISH TRICK
+   FINISH FOUR-CARD SET
 ========================================================= */
 
 async function finishTrick() {
@@ -1873,8 +2046,8 @@ async function finishTrick() {
 
 
     /*
-       Players 0 and 2 = our team.
-       Players 1 and 3 = opponents.
+       0 + 2 = OUR TEAM
+       1 + 3 = OPPONENTS
     */
 
     const winningTeam =
@@ -1886,12 +2059,12 @@ async function finishTrick() {
             winner.player
         )
         +
-        " won the trick.";
+        " won the round.";
 
 
     /*
        FIRST:
-       Cards fly away.
+       cards animate toward winner.
     */
 
     await animateTrickToScore(
@@ -1900,8 +2073,8 @@ async function finishTrick() {
 
 
     /*
-       SECOND:
-       Trick score changes.
+       THEN:
+       current total changes.
     */
 
     if (
@@ -1921,10 +2094,6 @@ async function finishTrick() {
     updateScore();
 
 
-    /*
-       Pause before next trick.
-    */
-
     await sleep(
         700
     );
@@ -1934,7 +2103,8 @@ async function finishTrick() {
 
 
     /*
-       8 tricks = hand finished.
+       EIGHT FOUR-CARD ROUNDS
+       FINISH THE HAND.
     */
 
     if (
@@ -1950,7 +2120,7 @@ async function finishTrick() {
 
 
     /*
-       Trick winner leads next.
+       WINNER LEADS NEXT.
     */
 
     currentPlayer =
@@ -1962,7 +2132,7 @@ async function finishTrick() {
 
 
 /* =========================================================
-   AI CARD SELECTION
+   AI CARD CHOICE
 ========================================================= */
 
 function chooseAICard(
@@ -1976,7 +2146,7 @@ function chooseAICard(
 
 
     /*
-       AI LEADING
+       LEADING
     */
 
     if (
@@ -2001,8 +2171,7 @@ function chooseAICard(
 
 
     /*
-       Find cards capable of
-       currently winning.
+       CARDS THAT CAN CURRENTLY WIN
     */
 
     const winningOptions =
@@ -2025,9 +2194,8 @@ function chooseAICard(
 
 
     /*
-       Partner already winning.
-
-       Usually throw weakest card.
+       TEAMMATE ALREADY WINNING:
+       throw weaker card.
     */
 
     if (
@@ -2045,9 +2213,8 @@ function chooseAICard(
 
 
     /*
-       Opponent winning.
-
-       Use cheapest winning card.
+       OPPONENT WINNING:
+       play cheapest winning card.
     */
 
     if (
@@ -2062,9 +2229,7 @@ function chooseAICard(
 
 
     /*
-       Cannot win.
-
-       Throw weakest legal card.
+       CANNOT WIN.
     */
 
     return lowestCard(
@@ -2075,7 +2240,7 @@ function chooseAICard(
 
 
 /* =========================================================
-   AI LEAD CARD
+   AI LEAD
 ========================================================= */
 
 function chooseLeadCard(
@@ -2122,9 +2287,7 @@ function chooseLeadCard(
 
 
         /*
-           Small randomness keeps
-           AI from behaving exactly
-           the same every game.
+           Slight randomness.
         */
 
         score +=
@@ -2185,7 +2348,7 @@ function lowestCard(
 
 
         /*
-           AI tries to preserve trump.
+           Preserve trump.
         */
 
         if (
@@ -2218,7 +2381,7 @@ function lowestCard(
 
 
 /* =========================================================
-   FINISH HAND / TOKEN SCORING
+   FINISH HAND
 ========================================================= */
 
 function finishRound() {
@@ -2231,6 +2394,9 @@ function finishRound() {
         false;
 
 
+    clearThinkingIndicators();
+
+
     const chooserTeam =
         trumpChooser % 2;
 
@@ -2241,10 +2407,7 @@ function finishRound() {
 
 
     /*
-       4–4 tie.
-
-       Carry one token into
-       following hand.
+       4–4 DRAW
     */
 
     if (
@@ -2269,10 +2432,6 @@ function finishRound() {
     }
 
 
-    /*
-       Determine hand winner.
-    */
-
     winningTeam =
         ourTricks >
         theirTricks
@@ -2283,7 +2442,7 @@ function finishRound() {
 
 
     /*
-       8–0 = Kapothi.
+       8–0
     */
 
     if (
@@ -2299,7 +2458,7 @@ function finishRound() {
 
 
     /*
-       Trump choosing team won.
+       TRUMP-CHOOSING TEAM WON
     */
 
     else if (
@@ -2314,8 +2473,8 @@ function finishRound() {
 
 
     /*
-       Team that did NOT choose
-       trump defeated trump team.
+       NON-TRUMP-CHOOSING TEAM
+       BEAT THE CHOOSING TEAM
     */
 
     else {
@@ -2324,10 +2483,6 @@ function finishRound() {
             2;
     }
 
-
-    /*
-       Add carried tokens.
-    */
 
     tokens +=
         carryToken;
@@ -2338,8 +2493,8 @@ function finishRound() {
 
 
     /*
-       NOW the overall score
-       finally changes.
+       ONLY NOW DOES THE OVERALL
+       TOKEN SCORE CHANGE.
     */
 
     if (
@@ -2393,9 +2548,9 @@ function finishRound() {
 
     const text =
 
-        `Your team won ${ourTricks} tricks. ` +
+        `Your total: ${ourTricks}. ` +
 
-        `The opponents won ${theirTricks} tricks. ` +
+        `Their total: ${theirTricks}. ` +
 
         `${tokens} token${tokens === 1 ? "" : "s"} awarded.`;
 
@@ -2427,7 +2582,7 @@ function finishRound() {
 
 
 /* =========================================================
-   HAND RESULT
+   RESULT
 ========================================================= */
 
 function showRoundResult(
@@ -2490,13 +2645,13 @@ function showGameOver(
 
 
 /* =========================================================
-   UPDATE SCORES
+   UPDATE SCORE
 ========================================================= */
 
 function updateScore() {
 
     /*
-       CURRENT HAND
+       CURRENT HAND TOTAL
     */
 
     ourTricksEl.textContent =
@@ -2508,7 +2663,7 @@ function updateScore() {
 
 
     /*
-       OVERALL GAME
+       OVERALL TOKEN SCORE
     */
 
     teamScoreEl.textContent =
@@ -2521,7 +2676,7 @@ function updateScore() {
 
 
 /* =========================================================
-   PLAYER NAMES
+   PLAYER NAME
 ========================================================= */
 
 function playerName(
@@ -2597,8 +2752,8 @@ function beginGame() {
 
 
     /*
-       Random teammate and
-       opponents chosen here.
+       RANDOM TEAMMATE +
+       TWO DIFFERENT OPPONENTS.
     */
 
     chooseCharacters();
@@ -2619,7 +2774,7 @@ function beginGame() {
 
 
 /* =========================================================
-   START BUTTON
+   START
 ========================================================= */
 
 document.getElementById(
@@ -2630,8 +2785,6 @@ document.getElementById(
     beginGame
 );
 
-
-/* ENTER KEY */
 
 nameInput
     .addEventListener(
@@ -2667,10 +2820,6 @@ document.getElementById(
             );
 
 
-        /*
-           Move dealer.
-        */
-
         dealer =
             nextPlayer(
                 dealer
@@ -2683,7 +2832,7 @@ document.getElementById(
 
 
 /* =========================================================
-   PLAY AGAIN
+   RESTART
 ========================================================= */
 
 document.getElementById(
@@ -2693,20 +2842,13 @@ document.getElementById(
     "click",
     () => {
 
-        ourScore =
-            0;
+        ourScore = 0;
 
+        theirScore = 0;
 
-        theirScore =
-            0;
+        carryToken = 0;
 
-
-        carryToken =
-            0;
-
-
-        dealer =
-            1;
+        dealer = 1;
 
 
         gameOverModal
@@ -2715,11 +2857,6 @@ document.getElementById(
                 "hidden"
             );
 
-
-        /*
-           New random characters
-           for a completely new game.
-        */
 
         chooseCharacters();
 
@@ -2733,10 +2870,9 @@ document.getElementById(
 
 
 /* =========================================================
-   INITIAL PAGE
+   INITIAL
 ========================================================= */
 
 updateScore();
-
 
 nameInput.focus();
