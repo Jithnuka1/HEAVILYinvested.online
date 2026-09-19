@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omi | Heavily Invested</title>
+
+    <link rel="stylesheet" href="/omi/style.css">
+</head>
+
+<body>
+
+<div id="game">
+
+    <div id="topBar">
+        <div class="score">
+            <span>YOUR TEAM</span>
+            <strong id="team-score">0</strong>
+        </div>
+
+        <div id="game-info">
+            <div id="round-status">Starting Omi...</div>
+            <div id="trump-display">Trump: —</div>
+        </div>
+
+        <div class="score">
+            <span>OPPONENTS</span>
+            <strong id="opponent-score">0</strong>
+        </div>
+    </div>
+
+
+    <div id="table">
+
+        <!-- PARTNER -->
+        <div class="player top-player">
+            <div class="player-name">Partner</div>
+            <div id="partner-hand" class="hidden-hand"></div>
+        </div>
+
+
+        <!-- LEFT OPPONENT -->
+        <div class="player left-player">
+            <div class="player-name">Opponent 1</div>
+            <div id="left-hand" class="hidden-hand vertical"></div>
+        </div>
+
+
+        <!-- RIGHT OPPONENT -->
+        <div class="player right-player">
+            <div class="player-name">Opponent 2</div>
+            <div id="right-hand" class="hidden-hand vertical"></div>
+        </div>
+
+
+        <!-- CENTER -->
+        <div id="center-area">
+
+            <div id="trick-counter">
+                You: <span id="our-tricks">0</span>
+                &nbsp; • &nbsp;
+                Them: <span id="their-tricks">0</span>
+            </div>
+
+            <div id="played-cards">
+
+                <div id="played-2" class="played-position played-top"></div>
+
+                <div id="played-1" class="played-position played-left"></div>
+
+                <div id="played-3" class="played-position played-right"></div>
+
+                <div id="played-0" class="played-position played-bottom"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HUMAN PLAYER -->
+        <div class="player bottom-player">
+
+            <div class="player-name">
+                You
+            </div>
+
+            <div id="human-hand"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRUMP SELECTION -->
+
+    <div id="trump-modal" class="modal hidden">
+
+        <div class="modal-box">
+
+            <h2>Choose Trump</h2>
+
+            <p>You received your first four cards.</p>
+
+            <div class="suit-buttons">
+
+                <button data-suit="♠">
+                    ♠
+                </button>
+
+                <button class="red" data-suit="♥">
+                    ♥
+                </button>
+
+                <button class="red" data-suit="♦">
+                    ♦
+                </button>
+
+                <button data-suit="♣">
+                    ♣
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ROUND RESULT -->
+
+    <div id="result-modal" class="modal hidden">
+
+        <div class="modal-box">
+
+            <h2 id="result-title">
+                Round Complete
+            </h2>
+
+            <p id="result-text"></p>
+
+            <button id="next-round">
+                Next Round
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- GAME RESULT -->
+
+    <div id="game-over-modal" class="modal hidden">
+
+        <div class="modal-box">
+
+            <h2 id="game-over-title">
+                Game Over
+            </h2>
+
+            <p id="game-over-text"></p>
+
+            <button id="restart-game">
+                Play Again
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="/omi/game.js"></script>
+
+</body>
+</html>
