@@ -150,18 +150,14 @@ let currentPlayer = 0;
 let currentTrick = [];
 
 
-/*
-   CURRENT HAND TOTALS
-*/
+/* CURRENT HAND TOTAL */
 
 let ourTricks = 0;
 
 let theirTricks = 0;
 
 
-/*
-   OVERALL TOKEN SCORE
-*/
+/* OVERALL TOKEN SCORE */
 
 let ourScore = 0;
 
@@ -332,11 +328,6 @@ function randomItem(array) {
 }
 
 
-/*
-   Every AI turn gets a NEW
-   random delay from 1–3 seconds.
-*/
-
 function getThinkingTime() {
 
     return (
@@ -348,46 +339,32 @@ function getThinkingTime() {
 
 
 /* =========================================================
-   AI THINKING INDICATOR
+   THINKING INDICATOR
 ========================================================= */
 
-function getPlayerIdentity(
-    player
-) {
+function getPlayerIdentity(player) {
 
     if (player === 1) {
 
         return document
-            .getElementById(
-                "left-name"
-            )
-            .closest(
-                ".identity"
-            );
+            .getElementById("left-name")
+            .closest(".identity");
     }
 
 
     if (player === 2) {
 
         return document
-            .getElementById(
-                "partner-name"
-            )
-            .closest(
-                ".identity"
-            );
+            .getElementById("partner-name")
+            .closest(".identity");
     }
 
 
     if (player === 3) {
 
         return document
-            .getElementById(
-                "right-name"
-            )
-            .closest(
-                ".identity"
-            );
+            .getElementById("right-name")
+            .closest(".identity");
     }
 
 
@@ -398,46 +375,28 @@ function getPlayerIdentity(
 function clearThinkingIndicators() {
 
     document
-        .querySelectorAll(
-            ".identity"
-        )
-        .forEach(
-            identity => {
+        .querySelectorAll(".identity")
+        .forEach(identity => {
 
+            identity
+                .classList
+                .remove("ai-thinking");
+
+
+            const dots =
                 identity
-                    .classList
-                    .remove(
-                        "ai-thinking"
+                    .querySelector(
+                        ".thinking-dots"
                     );
 
 
-                const dots =
-                    identity
-                        .querySelector(
-                            ".thinking-dots"
-                        );
+            if (dots) {
 
-
-                if (dots) {
-
-                    dots.textContent =
-                        "";
-                }
+                dots.textContent = "";
             }
-        );
+        });
 }
 
-
-/*
-   Cycles:
-   .
-   ..
-   ...
-   blank
-
-   until the actual randomized
-   AI thinking time is finished.
-*/
 
 async function showThinkingDots(
     player,
@@ -448,16 +407,12 @@ async function showThinkingDots(
 
 
     const identity =
-        getPlayerIdentity(
-            player
-        );
+        getPlayerIdentity(player);
 
 
     if (!identity) {
 
-        await sleep(
-            duration
-        );
+        await sleep(duration);
 
         return;
     }
@@ -472,9 +427,7 @@ async function showThinkingDots(
 
     identity
         .classList
-        .add(
-            "ai-thinking"
-        );
+        .add("ai-thinking");
 
 
     const patterns = [
@@ -521,9 +474,7 @@ async function showThinkingDots(
             elapsed;
 
 
-        if (
-            remaining <= 0
-        ) {
+        if (remaining <= 0) {
 
             break;
         }
@@ -538,15 +489,12 @@ async function showThinkingDots(
     }
 
 
-    dots.textContent =
-        "";
+    dots.textContent = "";
 
 
     identity
         .classList
-        .remove(
-            "ai-thinking"
-        );
+        .remove("ai-thinking");
 }
 
 
@@ -639,7 +587,7 @@ function chooseCharacters() {
 
 
 /* =========================================================
-   CARTOON AVATARS
+   AVATARS
 ========================================================= */
 
 function createAvatar(
@@ -693,16 +641,11 @@ function createAvatar(
 
             ${hairHTML}
 
-            <div
-                class="eye eye-left">
-            </div>
+            <div class="eye eye-left"></div>
 
-            <div
-                class="eye eye-right">
-            </div>
+            <div class="eye eye-right"></div>
 
-            <div class="mouth">
-            </div>
+            <div class="mouth"></div>
 
         </div>
 
@@ -719,13 +662,9 @@ function createDeck() {
     const deck = [];
 
 
-    for (
-        const suit of SUITS
-    ) {
+    for (const suit of SUITS) {
 
-        for (
-            const rank of RANKS
-        ) {
+        for (const rank of RANKS) {
 
             deck.push({
                 suit,
@@ -795,9 +734,7 @@ function createCardElement(
     element.className =
         "card" +
         (
-            suitIsRed(
-                card.suit
-            )
+            suitIsRed(card.suit)
             ? " red"
             : ""
         );
@@ -834,17 +771,13 @@ function createCardElement(
                 "illegal"
             );
 
-        }
-
-        else {
+        } else {
 
             element.addEventListener(
                 "click",
                 () => {
 
-                    humanPlay(
-                        index
-                    );
+                    humanPlay(index);
 
                 }
             );
@@ -963,13 +896,9 @@ function sortHumanHand() {
 
 
             return (
-                RANK_VALUE[
-                    b.rank
-                ]
+                RANK_VALUE[b.rank]
                 -
-                RANK_VALUE[
-                    a.rank
-                ]
+                RANK_VALUE[a.rank]
             );
         }
     );
@@ -1021,11 +950,6 @@ async function startRound() {
         );
 
 
-    /*
-       Player to dealer's right
-       chooses trump.
-    */
-
     trumpChooser =
         nextPlayer(
             dealer
@@ -1036,9 +960,7 @@ async function startRound() {
         "Dealing first four cards...";
 
 
-    /*
-       FIRST FOUR
-    */
+    /* FIRST FOUR CARDS */
 
     for (
         let round = 0;
@@ -1062,9 +984,7 @@ async function startRound() {
 
 
             player =
-                nextPlayer(
-                    player
-                );
+                nextPlayer(player);
         }
     }
 
@@ -1074,14 +994,10 @@ async function startRound() {
     renderHands();
 
 
-    await sleep(
-        900
-    );
+    await sleep(900);
 
 
-    /*
-       TRUMP
-    */
+    /* CHOOSE TRUMP */
 
     if (
         trumpChooser === 0
@@ -1094,9 +1010,7 @@ async function startRound() {
 
         await humanChooseTrump();
 
-    }
-
-    else {
+    } else {
 
         statusEl.textContent =
             playerName(
@@ -1130,9 +1044,7 @@ async function startRound() {
         trump;
 
 
-    /*
-       SECOND FOUR
-    */
+    /* SECOND FOUR CARDS */
 
     statusEl.textContent =
         "Dealing remaining cards...";
@@ -1160,9 +1072,7 @@ async function startRound() {
 
 
             player =
-                nextPlayer(
-                    player
-                );
+                nextPlayer(player);
         }
     }
 
@@ -1172,9 +1082,7 @@ async function startRound() {
     renderHands();
 
 
-    await sleep(
-        900
-    );
+    await sleep(900);
 
 
     currentPlayer =
@@ -1204,9 +1112,7 @@ function humanChooseTrump() {
 
             trumpModal
                 .classList
-                .remove(
-                    "hidden"
-                );
+                .remove("hidden");
 
 
             const buttons =
@@ -1216,9 +1122,7 @@ function humanChooseTrump() {
                     );
 
 
-            function select(
-                event
-            ) {
+            function select(event) {
 
                 trump =
                     event
@@ -1229,9 +1133,7 @@ function humanChooseTrump() {
 
                 trumpModal
                     .classList
-                    .add(
-                        "hidden"
-                    );
+                    .add("hidden");
 
 
                 buttons.forEach(
@@ -1271,9 +1173,7 @@ function humanChooseTrump() {
    AI TRUMP
 ========================================================= */
 
-function aiChooseTrump(
-    hand
-) {
+function aiChooseTrump(hand) {
 
     let bestSuit =
         SUITS[0];
@@ -1283,9 +1183,7 @@ function aiChooseTrump(
         -Infinity;
 
 
-    for (
-        const suit of SUITS
-    ) {
+    for (const suit of SUITS) {
 
         const cards =
             hand.filter(
@@ -1299,9 +1197,7 @@ function aiChooseTrump(
             cards.length * 4;
 
 
-        for (
-            const card of cards
-        ) {
+        for (const card of cards) {
 
             score +=
                 RANK_VALUE[
@@ -1334,9 +1230,7 @@ function aiChooseTrump(
 
 async function playTurn() {
 
-    if (
-        !roundActive
-    ) {
+    if (!roundActive) {
 
         return;
     }
@@ -1345,9 +1239,7 @@ async function playTurn() {
     renderHands();
 
 
-    /*
-       HUMAN HAS NO TIMER.
-    */
+    /* HUMAN */
 
     if (
         currentPlayer === 0
@@ -1371,9 +1263,7 @@ async function playTurn() {
     }
 
 
-    /*
-       AI
-    */
+    /* AI */
 
     waitingForHuman =
         false;
@@ -1390,19 +1280,9 @@ async function playTurn() {
         " is thinking...";
 
 
-    /*
-       NEW random 1–3 second
-       delay every turn.
-    */
-
     const thinkingTime =
         getThinkingTime();
 
-
-    /*
-       Dot animation runs for
-       exactly that thinking period.
-    */
 
     await showThinkingDots(
         currentPlayer,
@@ -1410,9 +1290,7 @@ async function playTurn() {
     );
 
 
-    if (
-        !roundActive
-    ) {
+    if (!roundActive) {
 
         return;
     }
@@ -1435,9 +1313,7 @@ async function playTurn() {
    LEGAL CARDS
 ========================================================= */
 
-function legalCardIndexes(
-    player
-) {
+function legalCardIndexes(player) {
 
     const hand =
         hands[player];
@@ -1471,17 +1347,11 @@ function legalCardIndexes(
                 leadSuit
             ) {
 
-                matching.push(
-                    index
-                );
+                matching.push(index);
             }
         }
     );
 
-
-    /*
-       Must follow suit.
-    */
 
     if (
         matching.length > 0
@@ -1502,24 +1372,16 @@ function legalCardIndexes(
    HUMAN LEGAL CARD
 ========================================================= */
 
-function isLegalHumanCard(
-    index
-) {
+function isLegalHumanCard(index) {
 
-    if (
-        !waitingForHuman
-    ) {
+    if (!waitingForHuman) {
 
         return false;
     }
 
 
-    return legalCardIndexes(
-        0
-    )
-    .includes(
-        index
-    );
+    return legalCardIndexes(0)
+        .includes(index);
 }
 
 
@@ -1527,22 +1389,16 @@ function isLegalHumanCard(
    HUMAN PLAY
 ========================================================= */
 
-function humanPlay(
-    index
-) {
+function humanPlay(index) {
 
-    if (
-        !waitingForHuman
-    ) {
+    if (!waitingForHuman) {
 
         return;
     }
 
 
     if (
-        !isLegalHumanCard(
-            index
-        )
+        !isLegalHumanCard(index)
     ) {
 
         return;
@@ -1595,17 +1451,11 @@ async function playCard(
     );
 
 
-    /*
-       ALL FOUR PLAYED
-    */
-
     if (
         currentTrick.length === 4
     ) {
 
-        await sleep(
-            900
-        );
+        await sleep(900);
 
 
         await finishTrick();
@@ -1640,14 +1490,11 @@ function renderPlayedCard(
         );
 
 
-    container.innerHTML =
-        "";
+    container.innerHTML = "";
 
 
     container.appendChild(
-        createCardElement(
-            card
-        )
+        createCardElement(card)
     );
 }
 
@@ -1685,11 +1532,6 @@ function cardBeats(
     leadSuit
 ) {
 
-    /*
-       Same suit:
-       higher card wins.
-    */
-
     if (
         challenger.suit ===
         current.suit
@@ -1707,10 +1549,6 @@ function cardBeats(
     }
 
 
-    /*
-       Trump beats non-trump.
-    */
-
     if (
         challenger.suit ===
         trump
@@ -1723,10 +1561,6 @@ function cardBeats(
     }
 
 
-    /*
-       Non-trump cannot beat trump.
-    */
-
     if (
         challenger.suit !==
         trump
@@ -1738,10 +1572,6 @@ function cardBeats(
         return false;
     }
 
-
-    /*
-       Lead suit beats unrelated suit.
-    */
 
     if (
         challenger.suit ===
@@ -1826,8 +1656,9 @@ async function animateTrickToScore(
 
 
     /*
-       Cards go to the CURRENT TOTAL,
-       not the overall token score.
+       This automatically follows the
+       total counter even though we moved
+       it to the top-right.
     */
 
     const target =
@@ -1860,10 +1691,6 @@ async function animateTrickToScore(
     const clones = [];
 
 
-    /*
-       COPY ALL FOUR PLAYED CARDS
-    */
-
     for (
         let player = 0;
         player < 4;
@@ -1890,9 +1717,7 @@ async function animateTrickToScore(
 
 
         const clone =
-            original.cloneNode(
-                true
-            );
+            original.cloneNode(true);
 
 
         clone.classList.add(
@@ -1921,34 +1746,18 @@ async function animateTrickToScore(
 
 
         animationLayer
-            .appendChild(
-                clone
-            );
+            .appendChild(clone);
 
 
-        clones.push(
-            clone
-        );
+        clones.push(clone);
     }
 
-
-    /*
-       ORIGINAL CARDS DISAPPEAR
-       FROM TABLE.
-    */
 
     clearPlayedCards();
 
 
-    await sleep(
-        70
-    );
+    await sleep(70);
 
-
-    /*
-       FOUR CARDS COLLECT AND
-       FLY TOWARD WINNING TOTAL.
-    */
 
     clones.forEach(
         (card, index) => {
@@ -2000,9 +1809,7 @@ async function animateTrickToScore(
     );
 
 
-    await sleep(
-        820
-    );
+    await sleep(820);
 
 
     clones.forEach(
@@ -2011,27 +1818,17 @@ async function animateTrickToScore(
     );
 
 
-    /*
-       WINNING TOTAL FLASHES.
-    */
-
     target
         .classList
-        .add(
-            "trick-won"
-        );
+        .add("trick-won");
 
 
-    await sleep(
-        220
-    );
+    await sleep(220);
 
 
     target
         .classList
-        .remove(
-            "trick-won"
-        );
+        .remove("trick-won");
 }
 
 
@@ -2045,11 +1842,6 @@ async function finishTrick() {
         currentWinningPlay();
 
 
-    /*
-       0 + 2 = OUR TEAM
-       1 + 3 = OPPONENTS
-    */
-
     const winningTeam =
         winner.player % 2;
 
@@ -2062,20 +1854,10 @@ async function finishTrick() {
         " won the round.";
 
 
-    /*
-       FIRST:
-       cards animate toward winner.
-    */
-
     await animateTrickToScore(
         winningTeam
     );
 
-
-    /*
-       THEN:
-       current total changes.
-    */
 
     if (
         winningTeam === 0
@@ -2083,9 +1865,7 @@ async function finishTrick() {
 
         ourTricks++;
 
-    }
-
-    else {
+    } else {
 
         theirTricks++;
     }
@@ -2094,18 +1874,11 @@ async function finishTrick() {
     updateScore();
 
 
-    await sleep(
-        700
-    );
+    await sleep(700);
 
 
     currentTrick = [];
 
-
-    /*
-       EIGHT FOUR-CARD ROUNDS
-       FINISH THE HAND.
-    */
 
     if (
         ourTricks +
@@ -2119,10 +1892,6 @@ async function finishTrick() {
     }
 
 
-    /*
-       WINNER LEADS NEXT.
-    */
-
     currentPlayer =
         winner.player;
 
@@ -2135,19 +1904,13 @@ async function finishTrick() {
    AI CARD CHOICE
 ========================================================= */
 
-function chooseAICard(
-    player
-) {
+function chooseAICard(player) {
 
     const legal =
         legalCardIndexes(
             player
         );
 
-
-    /*
-       LEADING
-    */
 
     if (
         currentTrick.length === 0
@@ -2170,10 +1933,6 @@ function chooseAICard(
         currentWinningPlay();
 
 
-    /*
-       CARDS THAT CAN CURRENTLY WIN
-    */
-
     const winningOptions =
         legal.filter(
             index => {
@@ -2193,11 +1952,6 @@ function chooseAICard(
         );
 
 
-    /*
-       TEAMMATE ALREADY WINNING:
-       throw weaker card.
-    */
-
     if (
         sameTeam(
             player,
@@ -2212,11 +1966,6 @@ function chooseAICard(
     }
 
 
-    /*
-       OPPONENT WINNING:
-       play cheapest winning card.
-    */
-
     if (
         winningOptions.length > 0
     ) {
@@ -2227,10 +1976,6 @@ function chooseAICard(
         );
     }
 
-
-    /*
-       CANNOT WIN.
-    */
 
     return lowestCard(
         player,
@@ -2272,10 +2017,6 @@ function chooseLeadCard(
             ];
 
 
-        /*
-           Preserve trump slightly.
-        */
-
         if (
             card.suit ===
             trump
@@ -2285,10 +2026,6 @@ function chooseLeadCard(
                 1.5;
         }
 
-
-        /*
-           Slight randomness.
-        */
 
         score +=
             Math.random() *
@@ -2347,10 +2084,6 @@ function lowestCard(
             ];
 
 
-        /*
-           Preserve trump.
-        */
-
         if (
             card.suit ===
             trump
@@ -2406,9 +2139,7 @@ function finishRound() {
     let tokens;
 
 
-    /*
-       4–4 DRAW
-    */
+    /* 4–4 DRAW */
 
     if (
         ourTricks === 4
@@ -2441,9 +2172,7 @@ function finishRound() {
         : 1;
 
 
-    /*
-       8–0
-    */
+    /* KAPOTHI */
 
     if (
         ourTricks === 8
@@ -2451,36 +2180,28 @@ function finishRound() {
         theirTricks === 8
     ) {
 
-        tokens =
-            3;
+        tokens = 3;
 
     }
 
 
-    /*
-       TRUMP-CHOOSING TEAM WON
-    */
+    /* TRUMP-CHOOSING TEAM WINS */
 
     else if (
         winningTeam ===
         chooserTeam
     ) {
 
-        tokens =
-            1;
+        tokens = 1;
 
     }
 
 
-    /*
-       NON-TRUMP-CHOOSING TEAM
-       BEAT THE CHOOSING TEAM
-    */
+    /* OTHER TEAM WINS */
 
     else {
 
-        tokens =
-            2;
+        tokens = 2;
     }
 
 
@@ -2488,13 +2209,12 @@ function finishRound() {
         carryToken;
 
 
-    carryToken =
-        0;
+    carryToken = 0;
 
 
     /*
-       ONLY NOW DOES THE OVERALL
-       TOKEN SCORE CHANGE.
+       OVERALL SCORE ONLY CHANGES
+       AFTER THE FULL HAND.
     */
 
     if (
@@ -2504,9 +2224,7 @@ function finishRound() {
         ourScore +=
             tokens;
 
-    }
-
-    else {
+    } else {
 
         theirScore +=
             tokens;
@@ -2555,10 +2273,6 @@ function finishRound() {
         `${tokens} token${tokens === 1 ? "" : "s"} awarded.`;
 
 
-    /*
-       FIRST TO 10 TOKENS
-    */
-
     if (
         ourScore >= 10
         ||
@@ -2604,9 +2318,7 @@ function showRoundResult(
 
     resultModal
         .classList
-        .remove(
-            "hidden"
-        );
+        .remove("hidden");
 }
 
 
@@ -2638,9 +2350,7 @@ function showGameOver(
 
     gameOverModal
         .classList
-        .remove(
-            "hidden"
-        );
+        .remove("hidden");
 }
 
 
@@ -2650,10 +2360,6 @@ function showGameOver(
 
 function updateScore() {
 
-    /*
-       CURRENT HAND TOTAL
-    */
-
     ourTricksEl.textContent =
         ourTricks;
 
@@ -2661,10 +2367,6 @@ function updateScore() {
     theirTricksEl.textContent =
         theirTricks;
 
-
-    /*
-       OVERALL TOKEN SCORE
-    */
 
     teamScoreEl.textContent =
         ourScore;
@@ -2679,13 +2381,9 @@ function updateScore() {
    PLAYER NAME
 ========================================================= */
 
-function playerName(
-    player
-) {
+function playerName(player) {
 
-    switch (
-        player
-    ) {
+    switch (player) {
 
         case 0:
 
@@ -2751,19 +2449,12 @@ function beginGame() {
         humanName;
 
 
-    /*
-       RANDOM TEAMMATE +
-       TWO DIFFERENT OPPONENTS.
-    */
-
     chooseCharacters();
 
 
     nameModal
         .classList
-        .add(
-            "hidden"
-        );
+        .add("hidden");
 
 
     updateScore();
@@ -2774,7 +2465,7 @@ function beginGame() {
 
 
 /* =========================================================
-   START
+   START BUTTON
 ========================================================= */
 
 document.getElementById(
@@ -2815,9 +2506,7 @@ document.getElementById(
 
         resultModal
             .classList
-            .add(
-                "hidden"
-            );
+            .add("hidden");
 
 
         dealer =
@@ -2832,7 +2521,7 @@ document.getElementById(
 
 
 /* =========================================================
-   RESTART
+   RESTART GAME
 ========================================================= */
 
 document.getElementById(
@@ -2853,9 +2542,7 @@ document.getElementById(
 
         gameOverModal
             .classList
-            .add(
-                "hidden"
-            );
+            .add("hidden");
 
 
         chooseCharacters();
