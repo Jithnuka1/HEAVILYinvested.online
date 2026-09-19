@@ -17,7 +17,6 @@ body {
     overflow: hidden;
 
     background: #050806;
-
     color: white;
 
     font-family:
@@ -49,7 +48,7 @@ button {
 
 
 /* =========================================================
-   TOP BAR - OVERALL TOKEN SCORE
+   TOP SCORE BAR
 ========================================================= */
 
 #topBar {
@@ -66,8 +65,7 @@ button {
     align-items: center;
     justify-content: space-between;
 
-    padding:
-        0 30px;
+    padding: 0 30px;
 
     background:
         rgba(3, 6, 4, 0.96);
@@ -84,7 +82,6 @@ button {
 
 .overall-score {
     display: flex;
-
     flex-direction: column;
 
     min-width: 120px;
@@ -93,25 +90,20 @@ button {
 
 .overall-score span {
     font-size: 9px;
-
     letter-spacing: 2px;
-
     opacity: 0.55;
 }
 
 
 .overall-score strong {
     font-size: 29px;
-
     line-height: 30px;
 }
 
 
 .overall-score small {
     font-size: 7px;
-
     letter-spacing: 2px;
-
     opacity: 0.3;
 }
 
@@ -128,20 +120,18 @@ button {
 
 #round-status {
     font-size: 14px;
-
     margin-bottom: 5px;
 }
 
 
 #trump-display {
     font-size: 12px;
-
     opacity: 0.55;
 }
 
 
 /* =========================================================
-   POKER TABLE
+   TABLE
 ========================================================= */
 
 #table {
@@ -155,12 +145,11 @@ button {
     overflow: hidden;
 
     background:
-
         radial-gradient(
             ellipse at center,
-            #24704c 0%,
-            #195b3f 38%,
-            #10472f 67%,
+            #287654 0%,
+            #195e42 38%,
+            #104830 67%,
             #082d20 100%
         );
 
@@ -175,7 +164,6 @@ button {
     content: "";
 
     position: absolute;
-
     inset: 0;
 
     pointer-events: none;
@@ -202,7 +190,7 @@ button {
 }
 
 
-/* POKER TABLE RAIL */
+/* BROWN / WOOD-STYLE RAIL */
 
 .table-rail {
     position: absolute;
@@ -210,20 +198,23 @@ button {
     inset: 18px;
 
     border:
-        15px solid #19140f;
+        15px solid #4a2c1b;
 
-    border-radius:
-        46%;
+    border-radius: 46%;
 
     box-shadow:
 
         inset
         0 0 0 3px
-        rgba(255,255,255,0.05),
+        rgba(210,150,95,0.18),
+
+        inset
+        0 0 0 6px
+        rgba(35,15,8,0.35),
 
         inset
         0 0 50px
-        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.6),
 
         0 8px 35px
         rgba(0,0,0,0.7);
@@ -242,9 +233,7 @@ button {
     position: absolute;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
     z-index: 10;
@@ -253,7 +242,6 @@ button {
 
 .bottom-player {
     bottom: 17px;
-
     left: 50%;
 
     transform:
@@ -263,7 +251,6 @@ button {
 
 .top-player {
     top: 14px;
-
     left: 50%;
 
     transform:
@@ -273,7 +260,6 @@ button {
 
 .left-player {
     left: 20px;
-
     top: 50%;
 
     transform:
@@ -283,7 +269,6 @@ button {
 
 .right-player {
     right: 20px;
-
     top: 50%;
 
     transform:
@@ -292,15 +277,16 @@ button {
 
 
 /* =========================================================
-   PLAYER NAME BOX
+   IDENTITY
 ========================================================= */
 
 .identity {
     display: flex;
-
     align-items: center;
 
     gap: 9px;
+
+    min-height: 53px;
 
     margin-bottom: 8px;
 
@@ -320,23 +306,27 @@ button {
 
     backdrop-filter:
         blur(7px);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
 
 
 .identity-text {
     display: flex;
-
     flex-direction: column;
+
+    min-width: 60px;
 }
 
 
 .player-name {
     font-size: 12px;
-
     font-weight: 700;
 
-    text-transform:
-        capitalize;
+    text-transform: capitalize;
 }
 
 
@@ -352,7 +342,41 @@ button {
 
 
 /* =========================================================
-   CARTOON AVATARS
+   THINKING DOTS
+========================================================= */
+
+.thinking-dots {
+    height: 10px;
+
+    margin-top: 1px;
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+    line-height: 8px;
+
+    opacity: 0.8;
+}
+
+
+.identity.ai-thinking {
+    border-color:
+        rgba(255,255,255,0.42);
+
+    box-shadow:
+        0 0 18px rgba(255,255,255,0.1),
+        0 5px 18px rgba(0,0,0,0.25);
+
+    transform:
+        scale(1.025);
+}
+
+
+/* =========================================================
+   AVATARS
 ========================================================= */
 
 .avatar {
@@ -367,8 +391,7 @@ button {
 
     border-radius: 50%;
 
-    background:
-        #18201b;
+    background: #18201b;
 
     border:
         2px solid rgba(255,255,255,0.17);
@@ -431,8 +454,9 @@ button {
 
     border-radius: 50%;
 
-    background:
-        #151515;
+    background: #151515;
+
+    z-index: 8;
 }
 
 
@@ -464,15 +488,17 @@ button {
         1.5px solid rgba(0,0,0,0.55);
 
     border-radius: 50%;
+
+    z-index: 8;
 }
 
 
-/* HAIR */
+/* =========================================================
+   HAIR
+========================================================= */
 
 .hair {
     position: absolute;
-
-    z-index: 3;
 
     background:
         var(--hair);
@@ -488,6 +514,8 @@ button {
 
     border-radius:
         60% 60% 35% 35%;
+
+    z-index: 3;
 }
 
 
@@ -509,33 +537,47 @@ button {
 }
 
 
+/* LONG HAIR - MEEK */
+
 .hair.long {
     width: 35px;
     height: 40px;
 
     left: -3px;
-    top: -4px;
+    top: -5px;
 
     border-radius:
-        50% 50% 40% 40%;
+        50% 50% 38% 38%;
+
+    background:
+        var(--hair);
+
+    z-index: 1;
 }
 
+
+/*
+   Skin-colored opening in long hair.
+*/
 
 .hair.long::after {
     content: "";
 
     position: absolute;
 
-    width: 24px;
+    width: 25px;
     height: 28px;
 
     left: 5px;
-    top: 8px;
+    top: 9px;
 
     background:
         var(--skin);
 
-    border-radius: 45%;
+    border-radius:
+        45% 45% 48% 48%;
+
+    z-index: 2;
 }
 
 
@@ -551,7 +593,7 @@ button {
 
 
 /* =========================================================
-   PLAYING CARDS
+   CARDS
 ========================================================= */
 
 .card {
@@ -567,8 +609,7 @@ button {
     background:
         #faf7ee;
 
-    color:
-        #111;
+    color: #111;
 
     border:
         1px solid rgba(0,0,0,0.25);
@@ -581,8 +622,7 @@ button {
 
 
 .card.red {
-    color:
-        #c51f31;
+    color: #c51f31;
 }
 
 
@@ -593,7 +633,6 @@ button {
     left: 8px;
 
     font-size: 19px;
-
     font-weight: 700;
 }
 
@@ -627,10 +666,9 @@ button {
 
 #human-hand {
     display: flex;
-
     justify-content: center;
 
-    min-height: 115px;
+    min-height: 125px;
 }
 
 
@@ -640,8 +678,11 @@ button {
     cursor: pointer;
 
     transition:
-        transform 0.18s ease,
+        transform 0.22s
+        cubic-bezier(.2,.8,.2,1),
+
         opacity 0.18s ease,
+
         filter 0.18s ease;
 }
 
@@ -651,11 +692,52 @@ button {
 }
 
 
+/* =========================================================
+   MAC DOCK-STYLE CARD HOVER
+========================================================= */
+
+
+/*
+   MAIN CARD:
+   rises the most.
+*/
+
 #human-hand .card:hover {
     transform:
-        translateY(-15px);
+        translateY(-18px)
+        scale(1.04);
+
+    z-index: 10;
 }
 
+
+/*
+   IMMEDIATE RIGHT CARD
+*/
+
+#human-hand .card:hover + .card {
+    transform:
+        translateY(-8px)
+        scale(1.015);
+
+    z-index: 5;
+}
+
+
+/*
+   IMMEDIATE LEFT CARD
+*/
+
+#human-hand .card:has(+ .card:hover) {
+    transform:
+        translateY(-8px)
+        scale(1.015);
+
+    z-index: 5;
+}
+
+
+/* ILLEGAL CARDS */
 
 #human-hand .card.illegal {
     opacity: 0.3;
@@ -664,14 +746,20 @@ button {
 }
 
 
+/*
+   An illegal card shouldn't
+   become the primary raised card.
+*/
+
 #human-hand .card.illegal:hover {
     transform: none;
+
+    z-index: auto;
 }
 
 
 /* =========================================================
-   HIDDEN CARD BACKS
-   USES /logo2.png
+   CARD BACKS
 ========================================================= */
 
 .hidden-hand {
@@ -700,11 +788,16 @@ button {
     background-color:
         #050505;
 
+    /*
+       FULL HEAVILY INVESTED IMAGE.
+       "contain" prevents cropping.
+    */
+
     background-image:
-        url("/logo2.png");
+        url("/images/logo2.png");
 
     background-size:
-        88% auto;
+        contain;
 
     background-position:
         center;
@@ -724,7 +817,6 @@ button {
 
 .vertical .card-back {
     margin-left: 0;
-
     margin-top: -48px;
 }
 
@@ -755,7 +847,7 @@ button {
 
 
 /* =========================================================
-   TRICK / SET SCORE
+   CURRENT TOTAL
 ========================================================= */
 
 #trick-counter {
@@ -768,7 +860,6 @@ button {
         translateX(-50%);
 
     display: flex;
-
     align-items: center;
 
     gap: 13px;
@@ -781,7 +872,6 @@ button {
 
 .trick-score {
     display: flex;
-
     align-items: center;
 
     gap: 8px;
@@ -804,7 +894,8 @@ button {
 
     transition:
         transform 0.25s ease,
-        filter 0.25s ease;
+        filter 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 
@@ -825,7 +916,6 @@ button {
     margin-top: 1px;
 
     font-size: 21px;
-
     line-height: 21px;
 }
 
@@ -850,29 +940,58 @@ button {
 
     border-radius: 50%;
 
+    border:
+        2px solid rgba(255,255,255,0.22);
+}
+
+
+/* YOUR TOTAL ICON */
+
+.black-team-logo {
     background:
         #050505;
 
     border:
-        1px solid rgba(255,255,255,0.18);
+        2px solid rgba(255,255,255,0.35);
+
+    box-shadow:
+        inset 0 0 8px rgba(255,255,255,0.05);
 }
 
 
-.trick-logo img {
-    width: 90%;
-    height: 90%;
+/* OPPONENT TOTAL ICON */
 
-    object-fit: contain;
-}
+.red-checker-logo {
+    background-color:
+        #7e111b;
 
+    background-image:
 
-.opponent-logo {
-    font-size: 15px;
+        linear-gradient(
+            45deg,
+            #c62835 25%,
+            transparent 25%,
+            transparent 75%,
+            #c62835 75%
+        ),
 
-    font-weight: 800;
+        linear-gradient(
+            45deg,
+            #c62835 25%,
+            transparent 25%,
+            transparent 75%,
+            #c62835 75%
+        );
 
-    background:
-        #171717;
+    background-position:
+        0 0,
+        7px 7px;
+
+    background-size:
+        14px 14px;
+
+    border:
+        2px solid rgba(255,255,255,0.3);
 }
 
 
@@ -885,12 +1004,17 @@ button {
 }
 
 
+/* SCORE FLASH AFTER WIN */
+
 .trick-score.trick-won {
     transform:
         scale(1.25);
 
     filter:
         brightness(1.7);
+
+    box-shadow:
+        0 0 30px rgba(255,255,255,0.18);
 }
 
 
@@ -916,7 +1040,6 @@ button {
 
 .played-top {
     top: 0;
-
     left: 50%;
 
     transform:
@@ -926,7 +1049,6 @@ button {
 
 .played-bottom {
     bottom: 0;
-
     left: 50%;
 
     transform:
@@ -936,7 +1058,6 @@ button {
 
 .played-left {
     left: 35px;
-
     top: 50%;
 
     transform:
@@ -946,7 +1067,6 @@ button {
 
 .played-right {
     right: 35px;
-
     top: 50%;
 
     transform:
@@ -955,7 +1075,7 @@ button {
 
 
 /* =========================================================
-   FLYING CARD ANIMATION
+   FLYING CARDS
 ========================================================= */
 
 #animation-layer {
@@ -1059,7 +1179,7 @@ button {
 
 
 /* =========================================================
-   WELCOME SCREEN
+   WELCOME
 ========================================================= */
 
 .welcome-box h1 {
@@ -1125,11 +1245,9 @@ button {
 
     border-radius: 30px;
 
-    background:
-        white;
+    background: white;
 
-    color:
-        black;
+    color: black;
 
     font-weight: 700;
 }
@@ -1161,8 +1279,7 @@ button {
     background:
         #f8f5ec;
 
-    color:
-        #111;
+    color: #111;
 
     font-size: 32px;
 
@@ -1178,8 +1295,7 @@ button {
 
 
 .suit-buttons button.red {
-    color:
-        #c81f32;
+    color: #c81f32;
 }
 
 
@@ -1267,6 +1383,21 @@ button {
     }
 
 
+    #human-hand .card:hover {
+        transform:
+            translateY(-14px)
+            scale(1.035);
+    }
+
+
+    #human-hand .card:hover + .card,
+    #human-hand .card:has(+ .card:hover) {
+        transform:
+            translateY(-6px)
+            scale(1.01);
+    }
+
+
     #center-area {
         width: 300px;
         height: 250px;
@@ -1283,7 +1414,8 @@ button {
     .trick-score {
         min-width: 85px;
 
-        padding: 4px 6px;
+        padding:
+            4px 6px;
     }
 
 
@@ -1365,6 +1497,11 @@ button {
 
     .team-label {
         font-size: 6px;
+    }
+
+
+    .thinking-dots {
+        font-size: 8px;
     }
 
 
