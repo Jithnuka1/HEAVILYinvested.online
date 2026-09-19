@@ -121,28 +121,63 @@ input {
     background:
         radial-gradient(
             ellipse at center,
-            #24764d 0%,
-            #104c32 52%,
-            #061f16 100%
+            #287652 0%,
+            #185d40 42%,
+            #0d422d 72%,
+            #07291d 100%
         );
+
+    box-shadow:
+        inset 0 0 140px rgba(0,0,0,0.65);
 }
+
+
+/* FELT TEXTURE */
+
+#table::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 22px;
+
+    border-radius: 45%;
+
+    border:
+        14px solid rgba(18, 14, 10, 0.75);
+
+    box-shadow:
+        inset 0 0 0 3px rgba(255,255,255,0.05),
+        inset 0 0 70px rgba(0,0,0,0.35),
+        0 0 35px rgba(0,0,0,0.55);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
 
 #table::after {
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     pointer-events: none;
 
     background-image:
         repeating-linear-gradient(
-            45deg,
+            37deg,
             rgba(255,255,255,0.008) 0,
             rgba(255,255,255,0.008) 1px,
             transparent 1px,
             transparent 4px
         );
+
+    opacity: 0.8;
+
+    z-index: 2;
 }
 
 
