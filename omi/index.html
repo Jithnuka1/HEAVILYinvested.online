@@ -6,6 +6,7 @@
 
     <title>Omi | Heavily Invested</title>
 
+    <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="stylesheet" href="/omi/style.css">
 </head>
 
@@ -13,10 +14,7 @@
 
 <div id="game">
 
-    <!-- =========================================
-         OVERALL GAME SCORE
-    ========================================== -->
-
+    <!-- OVERALL SCORE -->
     <header id="topBar">
 
         <div class="overall-score">
@@ -26,13 +24,8 @@
         </div>
 
         <div id="game-info">
-            <div id="round-status">
-                Welcome to Omi
-            </div>
-
-            <div id="trump-display">
-                Trump: —
-            </div>
+            <div id="round-status">Welcome to Omi</div>
+            <div id="trump-display">Trump: —</div>
         </div>
 
         <div class="overall-score right-score">
@@ -44,17 +37,60 @@
     </header>
 
 
-    <!-- =========================================
-         TABLE
-    ========================================== -->
-
+    <!-- TABLE -->
     <main id="table">
 
         <div class="table-rail"></div>
 
+        <!-- LARGE FAINT TABLE LOGO -->
+        <div class="table-watermark">
+            <img
+                src="/images/logo2.png"
+                alt="">
+        </div>
+
+
+        <!-- CURRENT HAND TOTALS - TOP RIGHT -->
+        <div id="trick-counter">
+
+            <div
+                class="trick-score"
+                id="our-trick-target">
+
+                <div class="trick-logo black-team-logo">
+                    <img
+                        src="/images/logo2.png"
+                        alt="">
+                </div>
+
+                <div class="trick-score-text">
+                    <span>YOUR TOTAL</span>
+                    <strong id="our-tricks">0</strong>
+                </div>
+
+            </div>
+
+            <div class="trick-divider">
+                VS
+            </div>
+
+            <div
+                class="trick-score"
+                id="their-trick-target">
+
+                <div class="trick-score-text right-trick-text">
+                    <span>THEIR TOTAL</span>
+                    <strong id="their-tricks">0</strong>
+                </div>
+
+                <div class="trick-logo red-checker-logo"></div>
+
+            </div>
+
+        </div>
+
 
         <!-- TEAMMATE -->
-
         <div class="player top-player">
 
             <div class="identity">
@@ -91,7 +127,6 @@
 
 
         <!-- LEFT OPPONENT -->
-
         <div class="player left-player">
 
             <div class="identity">
@@ -128,7 +163,6 @@
 
 
         <!-- RIGHT OPPONENT -->
-
         <div class="player right-player">
 
             <div class="identity">
@@ -164,76 +198,8 @@
         </div>
 
 
-        <!-- =====================================
-             CENTER
-        ====================================== -->
-
+        <!-- CENTER PLAY AREA -->
         <div id="center-area">
-
-
-            <!-- CURRENT SET TOTAL -->
-
-            <div id="trick-counter">
-
-                <!-- OUR TEAM -->
-
-                <div
-                    class="trick-score"
-                    id="our-trick-target">
-
-                    <div
-                        class="trick-logo black-team-logo">
-                    </div>
-
-                    <div class="trick-score-text">
-
-                        <span>
-                            YOUR TOTAL
-                        </span>
-
-                        <strong id="our-tricks">
-                            0
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <div class="trick-divider">
-                    VS
-                </div>
-
-
-                <!-- OPPONENT TEAM -->
-
-                <div
-                    class="trick-score"
-                    id="their-trick-target">
-
-                    <div
-                        class="trick-score-text right-trick-text">
-
-                        <span>
-                            THEIR TOTAL
-                        </span>
-
-                        <strong id="their-tricks">
-                            0
-                        </strong>
-
-                    </div>
-
-                    <div
-                        class="trick-logo red-checker-logo">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- PLAYED CARDS -->
 
             <div id="played-cards">
 
@@ -262,18 +228,14 @@
         </div>
 
 
-        <!-- =====================================
-             HUMAN
-        ====================================== -->
-
+        <!-- HUMAN -->
         <div class="player bottom-player">
 
             <div class="identity">
 
                 <div class="avatar">
 
-                    <div
-                        class="avatar-face default-human">
+                    <div class="avatar-face default-human">
 
                         <div class="hair short"></div>
 
@@ -309,10 +271,7 @@
     </main>
 
 
-    <!-- =========================================
-         NAME SCREEN
-    ========================================== -->
-
+    <!-- NAME MODAL -->
     <div
         id="name-modal"
         class="modal">
@@ -345,19 +304,14 @@
     </div>
 
 
-    <!-- =========================================
-         TRUMP
-    ========================================== -->
-
+    <!-- TRUMP MODAL -->
     <div
         id="trump-modal"
         class="modal hidden">
 
         <div class="modal-box">
 
-            <h2>
-                Choose Trump
-            </h2>
+            <h2>Choose Trump</h2>
 
             <p>
                 Choose the trump suit using your first four cards.
@@ -365,9 +319,7 @@
 
             <div class="suit-buttons">
 
-                <button data-suit="♠">
-                    ♠
-                </button>
+                <button data-suit="♠">♠</button>
 
                 <button
                     class="red"
@@ -381,9 +333,7 @@
                     ♦
                 </button>
 
-                <button data-suit="♣">
-                    ♣
-                </button>
+                <button data-suit="♣">♣</button>
 
             </div>
 
@@ -392,10 +342,7 @@
     </div>
 
 
-    <!-- =========================================
-         HAND RESULT
-    ========================================== -->
-
+    <!-- HAND RESULT -->
     <div
         id="result-modal"
         class="modal hidden">
@@ -417,10 +364,7 @@
     </div>
 
 
-    <!-- =========================================
-         GAME OVER
-    ========================================== -->
-
+    <!-- GAME OVER -->
     <div
         id="game-over-modal"
         class="modal hidden">
@@ -442,12 +386,10 @@
     </div>
 
 
-    <!-- CARD COLLECTION ANIMATIONS -->
-
+    <!-- CARD COLLECTION ANIMATION -->
     <div id="animation-layer"></div>
 
 </div>
-
 
 <script src="/omi/game.js"></script>
 
