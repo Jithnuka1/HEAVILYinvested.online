@@ -149,14 +149,6 @@ let currentPlayer = 0;
 
 let currentTrick = [];
 
-
-/*
-   Stores the FOUR cards from the most recently
-   completed trick.
-
-   This is deliberately separate from currentTrick
-   because currentTrick is cleared before the next trick.
-*/
 let previousTrick = [];
 
 
@@ -561,7 +553,7 @@ async function showThinkingDots(
 
 
 /* =========================================================
-   RANDOM CHARACTERS
+   CHARACTERS
 ========================================================= */
 
 function chooseCharacters() {
@@ -913,6 +905,19 @@ function renderBacks(
             "card-back";
 
 
+        /*
+           z-index makes the later cards sit above
+           the earlier cards.
+
+           This keeps the final card completely visible
+           while the earlier cards show only their exposed
+           strip.
+        */
+
+        card.style.zIndex =
+            i + 1;
+
+
         element.appendChild(
             card
         );
@@ -1016,11 +1021,6 @@ function renderTrumpPreview() {
     trumpCardPreview.innerHTML =
         "";
 
-
-    /*
-       At this point the human has exactly the
-       FIRST FOUR cards from the deal.
-    */
 
     hands[0].forEach(
         card => {
@@ -1155,10 +1155,6 @@ async function startRound() {
         [];
 
 
-    /*
-       A new hand starts with no previous trick.
-    */
-
     previousTrick =
         [];
 
@@ -1274,12 +1270,6 @@ async function startRound() {
             humanName +
             ", choose trump.";
 
-
-        /*
-           Show the first four cards INSIDE the trump chooser.
-
-           The normal human hand remains on the table too.
-        */
 
         renderTrumpPreview();
 
@@ -2210,13 +2200,6 @@ async function finishTrick() {
         2;
 
 
-    /*
-       IMPORTANT:
-
-       Save the four cards BEFORE currentTrick
-       gets cleared.
-    */
-
     savePreviousTrick();
 
 
@@ -2525,7 +2508,7 @@ function finishRound() {
     let tokens;
 
 
-    /* 4–4 DRAW */
+    /* 4–4 */
 
     if (
         ourTricks ===
@@ -2946,7 +2929,7 @@ previousTrickModal
 
 
 /* =========================================================
-   START BUTTON
+   START
 ========================================================= */
 
 document
