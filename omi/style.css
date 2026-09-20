@@ -67,7 +67,6 @@ button {
 .overall-score {
     display: flex;
     flex-direction: column;
-
     min-width: 120px;
 }
 
@@ -355,7 +354,6 @@ button {
 
 .black-team-logo {
     background: #050505;
-
     padding: 3px;
 
     border: 2px solid rgba(255,255,255,0.35);
@@ -430,7 +428,6 @@ button {
 
 .bottom-player {
     bottom: 17px;
-
     left: 50%;
 
     transform: translateX(-50%);
@@ -438,7 +435,6 @@ button {
 
 .top-player {
     top: 14px;
-
     left: 50%;
 
     transform: translateX(-50%);
@@ -446,7 +442,6 @@ button {
 
 .left-player {
     left: 20px;
-
     top: 50%;
 
     transform: translateY(-50%);
@@ -454,7 +449,6 @@ button {
 
 .right-player {
     right: 20px;
-
     top: 50%;
 
     transform: translateY(-50%);
@@ -886,11 +880,6 @@ button {
     margin-left: 0;
 }
 
-
-/*
-   DESKTOP SIDE STACKS
-*/
-
 .vertical .card-back {
     margin-left: 0;
     margin-top: -48px;
@@ -935,7 +924,6 @@ button {
 
 .played-top {
     top: 0;
-
     left: 50%;
 
     transform: translateX(-50%);
@@ -943,7 +931,6 @@ button {
 
 .played-bottom {
     bottom: 0;
-
     left: 50%;
 
     transform: translateX(-50%);
@@ -951,7 +938,6 @@ button {
 
 .played-left {
     left: 35px;
-
     top: 50%;
 
     transform: translateY(-50%);
@@ -959,7 +945,6 @@ button {
 
 .played-right {
     right: 35px;
-
     top: 50%;
 
     transform: translateY(-50%);
@@ -991,10 +976,29 @@ button {
 
 #trump-card-preview .card {
     margin-left: -8px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
 #trump-card-preview .card:first-child {
     margin-left: 0;
+}
+
+#trump-card-preview .card:hover {
+    transform: translateY(-13px) scale(1.045);
+
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 12px 24px rgba(0,0,0,0.55),
+        0 0 0 2px rgba(255,255,255,0.75);
+
+    z-index: 10;
 }
 
 
@@ -1043,9 +1047,7 @@ button {
 
 .previous-card-entry {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
     gap: 8px;
@@ -1109,7 +1111,6 @@ button {
     inset: 0;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -1263,7 +1264,6 @@ button {
 
     #topBar {
         height: 115px;
-
         padding: 0 11px;
     }
 
@@ -1296,22 +1296,16 @@ button {
     }
 
 
-    /* TABLE */
-
     .table-rail {
         inset: 7px;
-
         border-width: 8px;
     }
 
     .table-watermark {
         width: 70%;
-
         opacity: 0.08;
     }
 
-
-    /* PREVIOUS ROUND BUTTON */
 
     #previous-trick-button {
         top: 9px;
@@ -1326,18 +1320,14 @@ button {
     }
 
 
-    /* CURRENT TOTAL */
-
     #trick-counter {
         top: 8px;
-
         right: 8px;
         left: auto;
 
         gap: 4px;
 
         transform: scale(0.68);
-
         transform-origin: top right;
 
         z-index: 26;
@@ -1367,11 +1357,8 @@ button {
     }
 
 
-    /* TEAMMATE */
-
     .top-player {
         top: 16px;
-
         left: 43%;
 
         transform: translateX(-50%);
@@ -1380,19 +1367,10 @@ button {
     }
 
 
-    /* =====================================================
-       SIDE OPPONENT POSITIONING
-
-       LEFT:
-       moved upward.
-
-       RIGHT:
-       moved downward.
-    ===================================================== */
+    /* LEFT OPPONENT = HIGHER */
 
     .left-player {
         left: 4px;
-
         top: 35%;
 
         width: 140px;
@@ -1405,13 +1383,24 @@ button {
         overflow: visible;
     }
 
+
+    /* RIGHT OPPONENT = LOWER */
+
     .right-player {
         right: 4px;
-
         top: 58%;
 
         width: 140px;
-        height: 250px;
+
+        /*
+           The player container now only needs to represent
+           the nameplate area.
+
+           The card stack itself is absolutely anchored
+           ABOVE this player.
+        */
+
+        height: 54px;
 
         transform: none;
 
@@ -1430,19 +1419,13 @@ button {
     }
 
 
-    /* =====================================================
-       MOBILE OPPONENT CARD SIZE
-    ===================================================== */
+    /* MOBILE SIDE CARD SIZE */
 
     .left-player .card-back,
     .right-player .card-back {
         width: 40px;
         height: 58px;
 
-        /*
-           Keep the borders thin enough that the exposed
-           portion of every card is easy to distinguish.
-        */
         border-width: 2px;
     }
 
@@ -1450,17 +1433,13 @@ button {
     /* =====================================================
        LEFT OPPONENT
 
-       Name is ABOVE.
+       Cards extend DOWN.
 
-       Cards stack DOWNWARD.
+       58px card.
+       Each additional card moves down only 12px.
+       About 20% of each covered card remains visible.
 
-       Card height = 58px.
-       Roughly 20% exposed = about 12px.
-
-       Therefore each card after the first overlaps the
-       previous card by about 46px.
-
-       The final card is naturally shown in full.
+       Last card remains fully visible.
     ===================================================== */
 
     .left-player #left-hand {
@@ -1483,10 +1462,6 @@ button {
 
     .left-player #left-hand .card-back {
         margin-left: 0;
-
-        /*
-           58px card - 46px overlap = 12px visible.
-        */
         margin-top: -46px;
     }
 
@@ -1498,14 +1473,23 @@ button {
     /* =====================================================
        RIGHT OPPONENT
 
-       Name is BELOW the cards.
+       IMPORTANT:
 
-       THIS STACK GOES UPWARD.
+       This is intentionally built differently from the
+       left stack.
 
-       We use column-reverse AND anchor the entire hand
-       above the identity card.
+       The stack is anchored immediately ABOVE the nameplate.
 
-       This is intentionally different from the left side.
+       Cards use normal DOM order, but the stack container
+       is rotated logically by using column-reverse.
+
+       Every overlapping card uses the SAME -46px spacing.
+
+       There is NO special margin reset on the card closest
+       to the nameplate.
+
+       The ONLY completely visible card is the card at the
+       far/top end of the stack.
     ===================================================== */
 
     .right-player #right-hand {
@@ -1514,21 +1498,14 @@ button {
         right: 29px;
 
         /*
-           Put the bottom of the card stack ABOVE the
-           opponent identity.
+           6px gap above the identity.
         */
-        bottom: calc(100% + 7px);
+        bottom: calc(100% + 6px);
 
         width: 40px;
 
         display: flex;
-
-        /*
-           Critical:
-           reverse vertical direction so additional cards
-           extend UP instead of DOWN.
-        */
-        flex-direction: column-reverse;
+        flex-direction: column;
 
         align-items: center;
 
@@ -1537,23 +1514,34 @@ button {
         overflow: visible;
     }
 
+
+    /*
+       Reset the normal .vertical behavior first.
+    */
+
     .right-player #right-hand .card-back {
         margin-left: 0;
-
-        /*
-           Same ~20% reveal as the left opponent.
-        */
-        margin-top: -46px;
-    }
-
-    .right-player #right-hand .card-back:first-child {
         margin-top: 0;
+        margin-bottom: -46px;
     }
 
 
-    /* =====================================================
-       NORMAL CARD SIZE
-    ===================================================== */
+    /*
+       CRITICAL FIX:
+
+       The LAST card in the DOM is the farthest card
+       from the nameplate.
+
+       It gets no negative bottom margin, so that is the
+       ONE card shown completely.
+
+       All cards below it remain approximately 20% visible.
+    */
+
+    .right-player #right-hand .card-back:last-child {
+        margin-bottom: 0;
+    }
+
 
     .card {
         width: 55px;
@@ -1575,8 +1563,6 @@ button {
     }
 
 
-    /* HUMAN */
-
     #human-hand .card {
         margin-left: -10px;
     }
@@ -1594,8 +1580,6 @@ button {
             scale(1.01);
     }
 
-
-    /* CENTER */
 
     #center-area {
         width: 300px;
@@ -1615,8 +1599,6 @@ button {
         right: 32px;
     }
 
-
-    /* IDENTITIES */
 
     .identity {
         gap: 5px;
@@ -1650,8 +1632,6 @@ button {
     }
 
 
-    /* GENERAL HIDDEN CARDS */
-
     .card-back {
         width: 40px;
         height: 58px;
@@ -1672,7 +1652,6 @@ button {
 
     .trump-box {
         width: 100%;
-
         max-width: 430px;
 
         padding: 18px 16px;
@@ -1691,14 +1670,31 @@ button {
     }
 
     #trump-card-preview {
-        min-height: 86px;
+        min-height: 90px;
 
-        margin: 12px 0;
+        margin: 14px 0;
     }
 
     #trump-card-preview .card {
         width: 55px;
         height: 80px;
+
+        margin-left: -5px;
+    }
+
+    #trump-card-preview .card:first-child {
+        margin-left: 0;
+    }
+
+    /*
+       Phones do not have a real mouse hover,
+       so active gives immediate feedback when tapped.
+    */
+
+    #trump-card-preview .card:active {
+        transform:
+            translateY(-8px)
+            scale(1.04);
     }
 
     .suit-buttons {
@@ -1711,8 +1707,6 @@ button {
         font-size: 25px;
     }
 
-
-    /* PREVIOUS CARDS */
 
     .previous-trick-box {
         padding: 26px 14px 20px;
@@ -1744,7 +1738,6 @@ button {
         right: 3px;
 
         transform: scale(0.62);
-
         transform-origin: top right;
     }
 
@@ -1752,22 +1745,14 @@ button {
         left: 39%;
     }
 
-
-    /* LEFT REMAINS HIGH */
-
     .left-player {
         top: 34%;
-
         height: 250px;
     }
 
-
-    /* RIGHT REMAINS LOW */
-
     .right-player {
         top: 60%;
-
-        height: 250px;
+        height: 54px;
     }
 
     .left-player .identity,
@@ -1775,28 +1760,15 @@ button {
         max-width: 128px;
     }
 
-
-    /*
-       LEFT:
-       starts just under the identity and goes DOWN.
-    */
-
     .left-player #left-hand {
         top: 58px;
         left: 27px;
     }
 
-
-    /*
-       RIGHT:
-       stays attached ABOVE the identity and goes UP.
-    */
-
     .right-player #right-hand {
         right: 27px;
         bottom: calc(100% + 5px);
     }
-
 
     #previous-trick-cards {
         gap: 2px;
