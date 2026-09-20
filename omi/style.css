@@ -13,11 +13,7 @@ body {
     overflow: hidden;
     background: #050806;
     color: white;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 button,
@@ -47,7 +43,6 @@ button {
 
 #topBar {
     position: absolute;
-
     top: 0;
     left: 0;
 
@@ -62,11 +57,9 @@ button {
 
     background: rgba(3, 6, 4, 0.96);
 
-    border-bottom:
-        1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 
-    box-shadow:
-        0 8px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
 
     z-index: 30;
 }
@@ -197,8 +190,7 @@ button {
     left: 50%;
     top: 50%;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     width: 55%;
     max-width: 700px;
@@ -247,20 +239,15 @@ button {
 
     border-radius: 6px;
 
-    border:
-        2px solid rgba(255,255,255,0.75);
+    border: 2px solid rgba(255,255,255,0.75);
 
-    background:
-        #050505;
-
-    color:
-        #ffffff;
+    background: #050505;
+    color: #ffffff;
 
     font-size: 27px;
     font-weight: 700;
 
-    box-shadow:
-        0 5px 18px rgba(0,0,0,0.45);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.45);
 
     z-index: 28;
 
@@ -271,11 +258,8 @@ button {
 }
 
 #previous-trick-button:hover:not(:disabled) {
-    transform:
-        translateY(-3px);
-
-    border-color:
-        white;
+    transform: translateY(-3px);
+    border-color: white;
 }
 
 #previous-trick-button:disabled {
@@ -316,17 +300,13 @@ button {
 
     border-radius: 13px;
 
-    background:
-        rgba(0,0,0,0.60);
+    background: rgba(0,0,0,0.60);
 
-    border:
-        1px solid rgba(255,255,255,0.13);
+    border: 1px solid rgba(255,255,255,0.13);
 
-    box-shadow:
-        0 5px 18px rgba(0,0,0,0.25);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.25);
 
-    backdrop-filter:
-        blur(5px);
+    backdrop-filter: blur(5px);
 
     transition:
         transform 0.25s ease,
@@ -370,8 +350,7 @@ button {
 
     border-radius: 50%;
 
-    border:
-        2px solid rgba(255,255,255,0.22);
+    border: 2px solid rgba(255,255,255,0.22);
 }
 
 .black-team-logo {
@@ -379,8 +358,7 @@ button {
 
     padding: 3px;
 
-    border:
-        2px solid rgba(255,255,255,0.35);
+    border: 2px solid rgba(255,255,255,0.35);
 }
 
 .black-team-logo img {
@@ -418,8 +396,7 @@ button {
     background-size:
         14px 14px;
 
-    border:
-        2px solid rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,255,255,0.3);
 }
 
 .trick-divider {
@@ -429,14 +406,11 @@ button {
 }
 
 .trick-score.trick-won {
-    transform:
-        scale(1.20);
+    transform: scale(1.20);
 
-    filter:
-        brightness(1.7);
+    filter: brightness(1.7);
 
-    box-shadow:
-        0 0 30px rgba(255,255,255,0.18);
+    box-shadow: 0 0 30px rgba(255,255,255,0.18);
 }
 
 
@@ -459,8 +433,7 @@ button {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 }
 
 .top-player {
@@ -468,8 +441,7 @@ button {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 }
 
 .left-player {
@@ -477,8 +449,7 @@ button {
 
     top: 50%;
 
-    transform:
-        translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .right-player {
@@ -486,8 +457,7 @@ button {
 
     top: 50%;
 
-    transform:
-        translateY(-50%);
+    transform: translateY(-50%);
 }
 
 
@@ -505,22 +475,17 @@ button {
 
     margin-bottom: 8px;
 
-    padding:
-        5px 13px 5px 5px;
+    padding: 5px 13px 5px 5px;
 
     border-radius: 50px;
 
-    background:
-        rgba(0,0,0,0.58);
+    background: rgba(0,0,0,0.58);
 
-    border:
-        1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.12);
 
-    box-shadow:
-        0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 
-    backdrop-filter:
-        blur(7px);
+    backdrop-filter: blur(7px);
 
     transition:
         border-color 0.2s ease,
@@ -552,7 +517,7 @@ button {
 
 
 /* =========================================================
-   THINKING DOTS
+   THINKING
 ========================================================= */
 
 .thinking-dots {
@@ -572,15 +537,13 @@ button {
 }
 
 .identity.ai-thinking {
-    border-color:
-        rgba(255,255,255,0.42);
+    border-color: rgba(255,255,255,0.42);
 
     box-shadow:
         0 0 18px rgba(255,255,255,0.1),
         0 5px 18px rgba(0,0,0,0.25);
 
-    transform:
-        scale(1.025);
+    transform: scale(1.025);
 }
 
 
@@ -600,11 +563,9 @@ button {
 
     border-radius: 50%;
 
-    background:
-        #18201b;
+    background: #18201b;
 
-    border:
-        2px solid rgba(255,255,255,0.17);
+    border: 2px solid rgba(255,255,255,0.17);
 }
 
 .avatar-face {
@@ -616,14 +577,11 @@ button {
     left: 50%;
     top: 9px;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
-    border-radius:
-        45% 45% 48% 48%;
+    border-radius: 45% 45% 48% 48%;
 
-    background:
-        var(--skin);
+    background: var(--skin);
 }
 
 .avatar-face::after {
@@ -637,14 +595,11 @@ button {
     left: 50%;
     bottom: -14px;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
-    border-radius:
-        50% 50% 0 0;
+    border-radius: 50% 50% 0 0;
 
-    background:
-        #292f2c;
+    background: #292f2c;
 
     z-index: -1;
 }
@@ -659,8 +614,7 @@ button {
 
     border-radius: 50%;
 
-    background:
-        #151515;
+    background: #151515;
 
     z-index: 8;
 }
@@ -682,11 +636,9 @@ button {
     left: 50%;
     bottom: 7px;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
-    border-bottom:
-        1.5px solid rgba(0,0,0,0.55);
+    border-bottom: 1.5px solid rgba(0,0,0,0.55);
 
     border-radius: 50%;
 
@@ -700,9 +652,7 @@ button {
 
 .hair {
     position: absolute;
-
-    background:
-        var(--hair);
+    background: var(--hair);
 }
 
 .hair.short {
@@ -712,8 +662,7 @@ button {
     left: -1px;
     top: -4px;
 
-    border-radius:
-        60% 60% 35% 35%;
+    border-radius: 60% 60% 35% 35%;
 
     z-index: 3;
 }
@@ -729,8 +678,7 @@ button {
     left: 0;
     top: 6px;
 
-    background:
-        var(--hair);
+    background: var(--hair);
 
     border-radius: 5px;
 }
@@ -742,11 +690,9 @@ button {
     left: -3px;
     top: -5px;
 
-    border-radius:
-        50% 50% 38% 38%;
+    border-radius: 50% 50% 38% 38%;
 
-    background:
-        var(--hair);
+    background: var(--hair);
 
     z-index: 1;
 }
@@ -762,11 +708,9 @@ button {
     left: 5px;
     top: 9px;
 
-    background:
-        var(--skin);
+    background: var(--skin);
 
-    border-radius:
-        45% 45% 48% 48%;
+    border-radius: 45% 45% 48% 48%;
 
     z-index: 2;
 }
@@ -795,23 +739,19 @@ button {
 
     border-radius: 8px;
 
-    background:
-        #faf7ee;
+    background: #faf7ee;
 
     color: #111;
 
-    border:
-        1px solid rgba(0,0,0,0.25);
+    border: 1px solid rgba(0,0,0,0.25);
 
-    box-shadow:
-        0 6px 17px rgba(0,0,0,0.4);
+    box-shadow: 0 6px 17px rgba(0,0,0,0.4);
 
     user-select: none;
 }
 
 .card.red {
-    color:
-        #c51f31;
+    color: #c51f31;
 }
 
 .card-rank {
@@ -839,8 +779,7 @@ button {
     left: 50%;
     top: 50%;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     font-size: 42px;
 }
@@ -929,31 +868,28 @@ button {
 
     border-radius: 7px;
 
-    border:
-        3px solid #e8e5dd;
+    border: 3px solid #e8e5dd;
 
-    background-color:
-        #050505;
+    background-color: #050505;
 
     background-image:
         url("/images/logo2.png");
 
-    background-size:
-        contain;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 
-    background-position:
-        center;
-
-    background-repeat:
-        no-repeat;
-
-    box-shadow:
-        0 4px 13px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 13px rgba(0,0,0,0.5);
 }
 
 .card-back:first-child {
     margin-left: 0;
 }
+
+
+/*
+   DESKTOP SIDE STACKS
+*/
 
 .vertical .card-back {
     margin-left: 0;
@@ -966,7 +902,7 @@ button {
 
 
 /* =========================================================
-   CENTER PLAY AREA
+   CENTER
 ========================================================= */
 
 #center-area {
@@ -975,8 +911,7 @@ button {
     left: 50%;
     top: 50%;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     width: 430px;
     height: 330px;
@@ -1003,8 +938,7 @@ button {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 }
 
 .played-bottom {
@@ -1012,8 +946,7 @@ button {
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 }
 
 .played-left {
@@ -1021,8 +954,7 @@ button {
 
     top: 50%;
 
-    transform:
-        translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .played-right {
@@ -1030,8 +962,7 @@ button {
 
     top: 50%;
 
-    transform:
-        translateY(-50%);
+    transform: translateY(-50%);
 }
 
 
@@ -1040,13 +971,11 @@ button {
 ========================================================= */
 
 .trump-modal {
-    background:
-        rgba(0,0,0,0.60);
+    background: rgba(0,0,0,0.60);
 }
 
 .trump-box {
-    width:
-        min(560px, 92vw);
+    width: min(560px, 92vw);
 }
 
 #trump-card-preview {
@@ -1057,8 +986,7 @@ button {
 
     min-height: 125px;
 
-    margin:
-        22px 0 18px;
+    margin: 22px 0 18px;
 }
 
 #trump-card-preview .card {
@@ -1077,8 +1005,7 @@ button {
 .previous-trick-box {
     position: relative;
 
-    width:
-        min(610px, 92vw);
+    width: min(610px, 92vw);
 }
 
 #close-previous-trick {
@@ -1096,8 +1023,7 @@ button {
 
     border-radius: 50%;
 
-    background:
-        rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.08);
 
     color: white;
 
@@ -1187,11 +1113,9 @@ button {
     align-items: center;
     justify-content: center;
 
-    background:
-        rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.8);
 
-    backdrop-filter:
-        blur(8px);
+    backdrop-filter: blur(8px);
 
     z-index: 100;
 }
@@ -1201,8 +1125,7 @@ button {
 }
 
 .modal-box {
-    width:
-        min(430px, 90vw);
+    width: min(430px, 90vw);
 
     padding: 35px;
 
@@ -1210,14 +1133,11 @@ button {
 
     border-radius: 18px;
 
-    background:
-        #111713;
+    background: #111713;
 
-    border:
-        1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.15);
 
-    box-shadow:
-        0 25px 80px rgba(0,0,0,0.65);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.65);
 }
 
 .modal-box h2 {
@@ -1235,8 +1155,7 @@ button {
 ========================================================= */
 
 .welcome-box h1 {
-    margin:
-        5px 0 10px;
+    margin: 5px 0 10px;
 
     font-size: 60px;
 
@@ -1256,8 +1175,7 @@ button {
 
     margin-top: 15px;
 
-    padding:
-        14px 16px;
+    padding: 14px 16px;
 
     text-align: center;
 
@@ -1269,16 +1187,13 @@ button {
 
     border-radius: 10px;
 
-    border:
-        1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.15);
 
-    background:
-        rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.05);
 }
 
 #name-input:focus {
-    border-color:
-        rgba(255,255,255,0.5);
+    border-color: rgba(255,255,255,0.5);
 }
 
 #start-game,
@@ -1286,8 +1201,7 @@ button {
 #restart-game {
     margin-top: 18px;
 
-    padding:
-        12px 25px;
+    padding: 12px 25px;
 
     border: 0;
 
@@ -1323,25 +1237,21 @@ button {
 
     border-radius: 10px;
 
-    background:
-        #f8f5ec;
+    background: #f8f5ec;
 
     color: #111;
 
     font-size: 32px;
 
-    transition:
-        transform 0.15s ease;
+    transition: transform 0.15s ease;
 }
 
 .suit-buttons button:hover {
-    transform:
-        translateY(-4px);
+    transform: translateY(-4px);
 }
 
 .suit-buttons button.red {
-    color:
-        #c81f32;
+    color: #c81f32;
 }
 
 
@@ -1354,8 +1264,7 @@ button {
     #topBar {
         height: 115px;
 
-        padding:
-            0 11px;
+        padding: 0 11px;
     }
 
     #table {
@@ -1427,11 +1336,9 @@ button {
 
         gap: 4px;
 
-        transform:
-            scale(0.68);
+        transform: scale(0.68);
 
-        transform-origin:
-            top right;
+        transform-origin: top right;
 
         z-index: 26;
     }
@@ -1439,8 +1346,7 @@ button {
     .trick-score {
         min-width: 85px;
 
-        padding:
-            4px 6px;
+        padding: 4px 6px;
     }
 
     .trick-logo {
@@ -1468,35 +1374,33 @@ button {
 
         left: 43%;
 
-        transform:
-            translateX(-50%);
+        transform: translateX(-50%);
 
         z-index: 11;
     }
 
 
     /* =====================================================
-       SIDE OPPONENTS
+       SIDE OPPONENT POSITIONING
 
-       LEFT PLAYER:
-       higher position + reserved room below
+       LEFT:
+       moved upward.
 
-       RIGHT PLAYER:
-       lower position + cards above
+       RIGHT:
+       moved downward.
     ===================================================== */
 
     .left-player {
         left: 4px;
 
-        top: 37%;
+        top: 35%;
 
-        width: 145px;
-        height: 265px;
+        width: 140px;
+        height: 250px;
 
         transform: none;
 
-        align-items:
-            flex-start;
+        align-items: flex-start;
 
         overflow: visible;
     }
@@ -1504,15 +1408,14 @@ button {
     .right-player {
         right: 4px;
 
-        top: 55%;
+        top: 58%;
 
-        width: 145px;
-        height: 265px;
+        width: 140px;
+        height: 250px;
 
         transform: none;
 
-        align-items:
-            flex-end;
+        align-items: flex-end;
 
         overflow: visible;
     }
@@ -1528,41 +1431,63 @@ button {
 
 
     /* =====================================================
-       LEFT STACK
+       MOBILE OPPONENT CARD SIZE
+    ===================================================== */
 
-       The stack starts WELL BELOW the nameplate.
+    .left-player .card-back,
+    .right-player .card-back {
+        width: 40px;
+        height: 58px;
 
-       Every remaining card stays inside its own reserved
-       vertical lane rather than moving behind the name.
+        /*
+           Keep the borders thin enough that the exposed
+           portion of every card is easy to distinguish.
+        */
+        border-width: 2px;
+    }
+
+
+    /* =====================================================
+       LEFT OPPONENT
+
+       Name is ABOVE.
+
+       Cards stack DOWNWARD.
+
+       Card height = 58px.
+       Roughly 20% exposed = about 12px.
+
+       Therefore each card after the first overlaps the
+       previous card by about 46px.
+
+       The final card is naturally shown in full.
     ===================================================== */
 
     .left-player #left-hand {
         position: absolute;
 
-        top: 72px;
-        left: 34px;
+        top: 61px;
+        left: 29px;
 
-        width: 42px;
+        width: 40px;
 
         display: flex;
-
         flex-direction: column;
 
         align-items: center;
 
         z-index: 9;
+
+        overflow: visible;
     }
 
     .left-player #left-hand .card-back {
         margin-left: 0;
 
         /*
-           Smaller overlap than before.
-
-           This makes the cards spread farther DOWN so
-           8, 7, 6 ... 1 cards all remain visually obvious.
+           58px card - 46px overlap = 12px visible.
         */
-        margin-top: -32px;
+        margin-top: -46px;
     }
 
     .left-player #left-hand .card-back:first-child {
@@ -1571,31 +1496,54 @@ button {
 
 
     /* =====================================================
-       RIGHT STACK
+       RIGHT OPPONENT
 
-       Anchored above the right opponent.
+       Name is BELOW the cards.
+
+       THIS STACK GOES UPWARD.
+
+       We use column-reverse AND anchor the entire hand
+       above the identity card.
+
+       This is intentionally different from the left side.
     ===================================================== */
 
     .right-player #right-hand {
         position: absolute;
 
-        right: 34px;
-        bottom: 72px;
+        right: 29px;
 
-        width: 42px;
+        /*
+           Put the bottom of the card stack ABOVE the
+           opponent identity.
+        */
+        bottom: calc(100% + 7px);
+
+        width: 40px;
 
         display: flex;
 
+        /*
+           Critical:
+           reverse vertical direction so additional cards
+           extend UP instead of DOWN.
+        */
         flex-direction: column-reverse;
 
         align-items: center;
 
         z-index: 9;
+
+        overflow: visible;
     }
 
     .right-player #right-hand .card-back {
         margin-left: 0;
-        margin-top: -32px;
+
+        /*
+           Same ~20% reveal as the left opponent.
+        */
+        margin-top: -46px;
     }
 
     .right-player #right-hand .card-back:first-child {
@@ -1603,7 +1551,9 @@ button {
     }
 
 
-    /* CARD SIZE */
+    /* =====================================================
+       NORMAL CARD SIZE
+    ===================================================== */
 
     .card {
         width: 55px;
@@ -1671,8 +1621,7 @@ button {
     .identity {
         gap: 5px;
 
-        padding:
-            4px 8px 4px 4px;
+        padding: 4px 8px 4px 4px;
     }
 
     .avatar {
@@ -1685,8 +1634,7 @@ button {
             translateX(-50%)
             scale(0.8);
 
-        transform-origin:
-            top center;
+        transform-origin: top center;
     }
 
     .player-name {
@@ -1702,7 +1650,7 @@ button {
     }
 
 
-    /* HIDDEN CARDS */
+    /* GENERAL HIDDEN CARDS */
 
     .card-back {
         width: 40px;
@@ -1710,20 +1658,16 @@ button {
     }
 
 
-    /* TRUMP CHOOSER */
+    /* TRUMP */
 
     .trump-modal {
-        align-items:
-            flex-end;
+        align-items: flex-end;
 
-        padding:
-            0 10px 22px;
+        padding: 0 10px 22px;
 
-        background:
-            rgba(0,0,0,0.42);
+        background: rgba(0,0,0,0.42);
 
-        backdrop-filter:
-            blur(3px);
+        backdrop-filter: blur(3px);
     }
 
     .trump-box {
@@ -1731,20 +1675,17 @@ button {
 
         max-width: 430px;
 
-        padding:
-            18px 16px;
+        padding: 18px 16px;
 
         border-radius: 18px;
     }
 
     .trump-box h2 {
-        margin:
-            5px 0;
+        margin: 5px 0;
     }
 
     .trump-box p {
-        margin:
-            6px 0;
+        margin: 6px 0;
 
         font-size: 11px;
     }
@@ -1752,8 +1693,7 @@ button {
     #trump-card-preview {
         min-height: 86px;
 
-        margin:
-            12px 0;
+        margin: 12px 0;
     }
 
     #trump-card-preview .card {
@@ -1775,8 +1715,7 @@ button {
     /* PREVIOUS CARDS */
 
     .previous-trick-box {
-        padding:
-            26px 14px 20px;
+        padding: 26px 14px 20px;
     }
 
     #previous-trick-cards {
@@ -1804,32 +1743,31 @@ button {
         top: 5px;
         right: 3px;
 
-        transform:
-            scale(0.62);
+        transform: scale(0.62);
 
-        transform-origin:
-            top right;
+        transform-origin: top right;
     }
 
     .top-player {
         left: 39%;
     }
 
-    /*
-       More room is deliberately reserved under the
-       left opponent than before.
-    */
+
+    /* LEFT REMAINS HIGH */
 
     .left-player {
-        top: 35%;
+        top: 34%;
 
-        height: 285px;
+        height: 250px;
     }
 
-    .right-player {
-        top: 56%;
 
-        height: 270px;
+    /* RIGHT REMAINS LOW */
+
+    .right-player {
+        top: 60%;
+
+        height: 250px;
     }
 
     .left-player .identity,
@@ -1837,13 +1775,28 @@ button {
         max-width: 128px;
     }
 
+
+    /*
+       LEFT:
+       starts just under the identity and goes DOWN.
+    */
+
     .left-player #left-hand {
-        top: 70px;
+        top: 58px;
+        left: 27px;
     }
 
+
+    /*
+       RIGHT:
+       stays attached ABOVE the identity and goes UP.
+    */
+
     .right-player #right-hand {
-        bottom: 70px;
+        right: 27px;
+        bottom: calc(100% + 5px);
     }
+
 
     #previous-trick-cards {
         gap: 2px;
