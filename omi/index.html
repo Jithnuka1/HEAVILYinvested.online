@@ -14,7 +14,6 @@
 
 <div id="game">
 
-  <!-- OVERALL SCORE -->
   <header id="topBar">
 
     <div class="overall-score">
@@ -37,18 +36,15 @@
   </header>
 
 
-  <!-- TABLE -->
   <main id="table">
 
     <div class="table-rail"></div>
 
-    <!-- WATERMARK -->
     <div class="table-watermark">
       <img src="/images/logo2.png" alt="">
     </div>
 
 
-    <!-- PREVIOUS TRICK -->
     <button
       id="previous-trick-button"
       type="button"
@@ -60,7 +56,6 @@
     </button>
 
 
-    <!-- CURRENT HAND TOTAL -->
     <div id="trick-counter">
 
       <div class="trick-score" id="our-trick-target">
@@ -76,11 +71,7 @@
 
       </div>
 
-
-      <div class="trick-divider">
-        VS
-      </div>
-
+      <div class="trick-divider">VS</div>
 
       <div class="trick-score" id="their-trick-target">
 
@@ -96,7 +87,6 @@
     </div>
 
 
-    <!-- TEAMMATE -->
     <div class="player top-player">
 
       <div class="identity">
@@ -104,17 +94,9 @@
         <div id="partner-avatar" class="avatar"></div>
 
         <div class="identity-text">
-
-          <div class="player-name" id="partner-name">
-            Partner
-          </div>
-
-          <div class="team-label">
-            YOUR TEAM
-          </div>
-
+          <div class="player-name" id="partner-name">Partner</div>
+          <div class="team-label">YOUR TEAM</div>
           <div class="thinking-dots"></div>
-
         </div>
 
       </div>
@@ -124,7 +106,6 @@
     </div>
 
 
-    <!-- LEFT OPPONENT -->
     <div class="player left-player">
 
       <div class="identity">
@@ -132,17 +113,9 @@
         <div id="left-avatar" class="avatar"></div>
 
         <div class="identity-text">
-
-          <div class="player-name" id="left-name">
-            Opponent
-          </div>
-
-          <div class="team-label">
-            OPPONENT
-          </div>
-
+          <div class="player-name" id="left-name">Opponent</div>
+          <div class="team-label">OPPONENT</div>
           <div class="thinking-dots"></div>
-
         </div>
 
       </div>
@@ -152,7 +125,6 @@
     </div>
 
 
-    <!-- RIGHT OPPONENT -->
     <div class="player right-player">
 
       <div class="identity">
@@ -160,17 +132,9 @@
         <div id="right-avatar" class="avatar"></div>
 
         <div class="identity-text">
-
-          <div class="player-name" id="right-name">
-            Opponent
-          </div>
-
-          <div class="team-label">
-            OPPONENT
-          </div>
-
+          <div class="player-name" id="right-name">Opponent</div>
+          <div class="team-label">OPPONENT</div>
           <div class="thinking-dots"></div>
-
         </div>
 
       </div>
@@ -180,22 +144,18 @@
     </div>
 
 
-    <!-- CENTER -->
     <div id="center-area">
 
       <div id="played-cards">
-
         <div id="played-2" class="played-position played-top"></div>
         <div id="played-1" class="played-position played-left"></div>
         <div id="played-3" class="played-position played-right"></div>
         <div id="played-0" class="played-position played-bottom"></div>
-
       </div>
 
     </div>
 
 
-    <!-- HUMAN -->
     <div class="player bottom-player">
 
       <div class="identity">
@@ -203,28 +163,17 @@
         <div class="avatar">
 
           <div class="avatar-face default-human">
-
             <div class="hair short"></div>
-
             <div class="eye eye-left"></div>
             <div class="eye eye-right"></div>
-
             <div class="mouth"></div>
-
           </div>
 
         </div>
 
         <div class="identity-text">
-
-          <div class="player-name" id="human-name">
-            You
-          </div>
-
-          <div class="team-label">
-            YOU
-          </div>
-
+          <div class="player-name" id="human-name">You</div>
+          <div class="team-label">YOU</div>
         </div>
 
       </div>
@@ -236,14 +185,11 @@
   </main>
 
 
-  <!-- NAME MODAL -->
   <div id="name-modal" class="modal">
 
     <div class="modal-box welcome-box">
 
-      <div class="omi-small">
-        HEAVILY INVESTED
-      </div>
+      <div class="omi-small">HEAVILY INVESTED</div>
 
       <h1>OMI</h1>
 
@@ -266,30 +212,27 @@
   </div>
 
 
-  <!-- TRUMP -->
+  <!-- TRUMP SELECTION -->
   <div id="trump-modal" class="modal trump-modal hidden">
 
     <div class="modal-box trump-box">
 
-      <div class="omi-small">
-        CHOOSE TRUMP
-      </div>
+      <div class="omi-small">CHOOSE TRUMP</div>
 
       <h2>Your First Four Cards</h2>
 
       <p>
-        Look at your first four cards, then choose the trump suit.
+        Click one of your cards to choose its suit,
+        or choose a suit below.
       </p>
 
       <div id="trump-card-preview"></div>
 
       <div class="suit-buttons">
-
         <button data-suit="♠">♠</button>
         <button class="red" data-suit="♥">♥</button>
         <button class="red" data-suit="♦">♦</button>
         <button data-suit="♣">♣</button>
-
       </div>
 
     </div>
@@ -297,7 +240,6 @@
   </div>
 
 
-  <!-- PREVIOUS TRICK -->
   <div id="previous-trick-modal" class="modal hidden">
 
     <div class="modal-box previous-trick-box">
@@ -310,9 +252,7 @@
         ×
       </button>
 
-      <div class="omi-small">
-        LAST ROUND
-      </div>
+      <div class="omi-small">LAST ROUND</div>
 
       <h2>Previous Four Cards</h2>
 
@@ -323,7 +263,6 @@
   </div>
 
 
-  <!-- RESULT -->
   <div id="result-modal" class="modal hidden">
 
     <div class="modal-box">
@@ -343,7 +282,6 @@
   </div>
 
 
-  <!-- GAME OVER -->
   <div id="game-over-modal" class="modal hidden">
 
     <div class="modal-box">
