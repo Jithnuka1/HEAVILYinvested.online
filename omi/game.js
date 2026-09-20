@@ -43,7 +43,6 @@ const RANK_VALUE = {
 };
 
 
-
 /* =========================================================
    CHARACTERS
 ========================================================= */
@@ -128,7 +127,6 @@ const OPPONENTS = [
 ];
 
 
-
 /* =========================================================
    GAME STATE
 ========================================================= */
@@ -150,6 +148,16 @@ let trump = null;
 let currentPlayer = 0;
 
 let currentTrick = [];
+
+
+/*
+   Stores the FOUR cards from the most recently
+   completed trick.
+
+   This is deliberately separate from currentTrick
+   because currentTrick is cleared before the next trick.
+*/
+let previousTrick = [];
 
 
 let ourTricks = 0;
@@ -176,7 +184,6 @@ let teammate = null;
 let opponentLeft = null;
 
 let opponentRight = null;
-
 
 
 /* =========================================================
@@ -249,6 +256,30 @@ const trumpModal =
     );
 
 
+const trumpCardPreview =
+    document.getElementById(
+        "trump-card-preview"
+    );
+
+
+const previousTrickButton =
+    document.getElementById(
+        "previous-trick-button"
+    );
+
+
+const previousTrickModal =
+    document.getElementById(
+        "previous-trick-modal"
+    );
+
+
+const previousTrickCards =
+    document.getElementById(
+        "previous-trick-cards"
+    );
+
+
 const resultModal =
     document.getElementById(
         "result-modal"
@@ -273,7 +304,6 @@ const nameInput =
     );
 
 
-
 /* =========================================================
    HELPERS
 ========================================================= */
@@ -290,14 +320,12 @@ function sleep(ms) {
 }
 
 
-
 function nextPlayer(player) {
 
     return (
         player + 3
     ) % 4;
 }
-
 
 
 function sameTeam(a, b) {
@@ -310,7 +338,6 @@ function sameTeam(a, b) {
 }
 
 
-
 function suitIsRed(suit) {
 
     return (
@@ -318,7 +345,6 @@ function suitIsRed(suit) {
         suit === "♦"
     );
 }
-
 
 
 function randomItem(array) {
@@ -332,7 +358,6 @@ function randomItem(array) {
 }
 
 
-
 function getThinkingTime() {
 
     return (
@@ -341,7 +366,6 @@ function getThinkingTime() {
         2000
     );
 }
-
 
 
 /* =========================================================
@@ -390,7 +414,6 @@ function getPlayerIdentity(player) {
 }
 
 
-
 function clearThinkingIndicators() {
 
     document
@@ -422,7 +445,6 @@ function clearThinkingIndicators() {
             }
         );
 }
-
 
 
 async function showThinkingDots(
@@ -538,7 +560,6 @@ async function showThinkingDots(
 }
 
 
-
 /* =========================================================
    RANDOM CHARACTERS
 ========================================================= */
@@ -633,7 +654,6 @@ function chooseCharacters() {
 }
 
 
-
 /* =========================================================
    AVATARS
 ========================================================= */
@@ -706,7 +726,6 @@ function createAvatar(
 }
 
 
-
 /* =========================================================
    DECK
 ========================================================= */
@@ -735,7 +754,6 @@ function createDeck() {
 
     return deck;
 }
-
 
 
 /* =========================================================
@@ -773,7 +791,6 @@ function shuffle(deck) {
 
     return deck;
 }
-
 
 
 /* =========================================================
@@ -865,7 +882,6 @@ function createCardElement(
 }
 
 
-
 /* =========================================================
    CARD BACKS
 ========================================================= */
@@ -902,7 +918,6 @@ function renderBacks(
         );
     }
 }
-
 
 
 /* =========================================================
@@ -951,7 +966,6 @@ function renderHands() {
 }
 
 
-
 /* =========================================================
    SORT HUMAN HAND
 ========================================================= */
@@ -993,6 +1007,135 @@ function sortHumanHand() {
 }
 
 
+/* =========================================================
+   TRUMP PREVIEW
+========================================================= */
+
+function renderTrumpPreview() {
+
+    trumpCardPreview.innerHTML =
+        "";
+
+
+    /*
+       At this point the human has exactly the
+       FIRST FOUR cards from the deal.
+    */
+
+    hands[0].forEach(
+        card => {
+
+            trumpCardPreview
+                .appendChild(
+                    createCardElement(
+                        card
+                    )
+                );
+        }
+    );
+}
+
+
+/* =========================================================
+   PREVIOUS TRICK
+========================================================= */
+
+function savePreviousTrick() {
+
+    previousTrick =
+        currentTrick.map(
+            play => ({
+                player:
+                    play.player,
+
+                card: {
+                    suit:
+                        play.card.suit,
+
+                    rank:
+                        play.card.rank
+                }
+            })
+        );
+
+
+    previousTrickButton.disabled =
+        previousTrick.length !==
+        4;
+}
+
+
+function showPreviousTrick() {
+
+    if (
+        previousTrick.length !==
+        4
+    ) {
+
+        return;
+    }
+
+
+    previousTrickCards.innerHTML =
+        "";
+
+
+    previousTrick.forEach(
+        play => {
+
+            const entry =
+                document.createElement(
+                    "div"
+                );
+
+
+            entry.className =
+                "previous-card-entry";
+
+
+            const label =
+                document.createElement(
+                    "div"
+                );
+
+
+            label.className =
+                "previous-player-name";
+
+
+            label.textContent =
+                playerName(
+                    play.player
+                );
+
+
+            entry.appendChild(
+                label
+            );
+
+
+            entry.appendChild(
+                createCardElement(
+                    play.card
+                )
+            );
+
+
+            previousTrickCards
+                .appendChild(
+                    entry
+                );
+        }
+    );
+
+
+    previousTrickModal
+        .classList
+        .remove(
+            "hidden"
+        );
+}
+
 
 /* =========================================================
    START HAND
@@ -1010,6 +1153,18 @@ async function startRound() {
 
     currentTrick =
         [];
+
+
+    /*
+       A new hand starts with no previous trick.
+    */
+
+    previousTrick =
+        [];
+
+
+    previousTrickButton.disabled =
+        true;
 
 
     ourTricks =
@@ -1061,7 +1216,6 @@ async function startRound() {
         "Dealing first four cards...";
 
 
-
     /* FIRST FOUR */
 
     for (
@@ -1109,7 +1263,6 @@ async function startRound() {
     );
 
 
-
     /* TRUMP */
 
     if (
@@ -1120,6 +1273,15 @@ async function startRound() {
         statusEl.textContent =
             humanName +
             ", choose trump.";
+
+
+        /*
+           Show the first four cards INSIDE the trump chooser.
+
+           The normal human hand remains on the table too.
+        */
+
+        renderTrumpPreview();
 
 
         await humanChooseTrump();
@@ -1158,7 +1320,6 @@ async function startRound() {
     trumpEl.textContent =
         "Trump: " +
         trump;
-
 
 
     /* SECOND FOUR */
@@ -1226,7 +1387,6 @@ async function startRound() {
 
     playTurn();
 }
-
 
 
 /* =========================================================
@@ -1303,7 +1463,6 @@ function humanChooseTrump() {
 }
 
 
-
 /* =========================================================
    AI TRUMP
 ========================================================= */
@@ -1367,7 +1526,6 @@ function aiChooseTrump(
 }
 
 
-
 /* =========================================================
    TURN
 ========================================================= */
@@ -1384,9 +1542,6 @@ async function playTurn() {
 
     renderHands();
 
-
-
-    /* HUMAN */
 
     if (
         currentPlayer ===
@@ -1411,9 +1566,6 @@ async function playTurn() {
         return;
     }
 
-
-
-    /* AI */
 
     waitingForHuman =
         false;
@@ -1459,7 +1611,6 @@ async function playTurn() {
         cardIndex
     );
 }
-
 
 
 /* =========================================================
@@ -1528,7 +1679,6 @@ function legalCardIndexes(
 }
 
 
-
 /* =========================================================
    HUMAN LEGAL CARD
 ========================================================= */
@@ -1552,7 +1702,6 @@ function isLegalHumanCard(
         index
     );
 }
-
 
 
 /* =========================================================
@@ -1590,7 +1739,6 @@ function humanPlay(
         index
     );
 }
-
 
 
 /* =========================================================
@@ -1655,7 +1803,6 @@ async function playCard(
 }
 
 
-
 /* =========================================================
    RENDER PLAYED CARD
 ========================================================= */
@@ -1684,7 +1831,6 @@ function renderPlayedCard(
 }
 
 
-
 /* =========================================================
    CLEAR PLAYED CARDS
 ========================================================= */
@@ -1708,7 +1854,6 @@ function clearPlayedCards() {
                 "";
     }
 }
-
 
 
 /* =========================================================
@@ -1778,7 +1923,6 @@ function cardBeats(
 }
 
 
-
 /* =========================================================
    CURRENT WINNER
 ========================================================= */
@@ -1833,7 +1977,6 @@ function currentWinningPlay() {
 
     return winner;
 }
-
 
 
 /* =========================================================
@@ -2052,9 +2195,8 @@ async function animateTrickToScore(
 }
 
 
-
 /* =========================================================
-   FINISH FOUR-CARD SET
+   FINISH FOUR-CARD ROUND
 ========================================================= */
 
 async function finishTrick() {
@@ -2066,6 +2208,16 @@ async function finishTrick() {
     const winningTeam =
         winner.player %
         2;
+
+
+    /*
+       IMPORTANT:
+
+       Save the four cards BEFORE currentTrick
+       gets cleared.
+    */
+
+    savePreviousTrick();
 
 
     statusEl.textContent =
@@ -2127,7 +2279,6 @@ async function finishTrick() {
 
     playTurn();
 }
-
 
 
 /* =========================================================
@@ -2218,7 +2369,6 @@ function chooseAICard(
 }
 
 
-
 /* =========================================================
    AI LEAD
 ========================================================= */
@@ -2286,7 +2436,6 @@ function chooseLeadCard(
 }
 
 
-
 /* =========================================================
    LOWEST CARD
 ========================================================= */
@@ -2349,7 +2498,6 @@ function lowestCard(
 }
 
 
-
 /* =========================================================
    FINISH HAND
 ========================================================= */
@@ -2375,7 +2523,6 @@ function finishRound() {
     let winningTeam;
 
     let tokens;
-
 
 
     /* 4–4 DRAW */
@@ -2413,7 +2560,6 @@ function finishRound() {
         : 1;
 
 
-
     /* KAPOTHI */
 
     if (
@@ -2430,7 +2576,6 @@ function finishRound() {
     }
 
 
-
     /* TRUMP TEAM WINS */
 
     else if (
@@ -2442,7 +2587,6 @@ function finishRound() {
             1;
 
     }
-
 
 
     /* NON-TRUMP TEAM WINS */
@@ -2549,7 +2693,6 @@ function finishRound() {
 }
 
 
-
 /* =========================================================
    RESULT
 ========================================================= */
@@ -2581,7 +2724,6 @@ function showRoundResult(
             "hidden"
         );
 }
-
 
 
 /* =========================================================
@@ -2624,7 +2766,6 @@ function showGameOver(
 }
 
 
-
 /* =========================================================
    UPDATE SCORE
 ========================================================= */
@@ -2646,7 +2787,6 @@ function updateScore() {
     opponentScoreEl.textContent =
         theirScore;
 }
-
 
 
 /* =========================================================
@@ -2706,7 +2846,6 @@ function playerName(
 }
 
 
-
 /* =========================================================
    BEGIN GAME
 ========================================================= */
@@ -2758,9 +2897,56 @@ function beginGame() {
 }
 
 
+/* =========================================================
+   PREVIOUS TRICK BUTTONS
+========================================================= */
+
+previousTrickButton
+    .addEventListener(
+        "click",
+        showPreviousTrick
+    );
+
+
+document
+    .getElementById(
+        "close-previous-trick"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            previousTrickModal
+                .classList
+                .add(
+                    "hidden"
+                );
+        }
+    );
+
+
+previousTrickModal
+    .addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                previousTrickModal
+            ) {
+
+                previousTrickModal
+                    .classList
+                    .add(
+                        "hidden"
+                    );
+            }
+        }
+    );
+
 
 /* =========================================================
-   START
+   START BUTTON
 ========================================================= */
 
 document
@@ -2787,7 +2973,6 @@ nameInput
             }
         }
     );
-
 
 
 /* =========================================================
@@ -2820,7 +3005,6 @@ document
     );
 
 
-
 /* =========================================================
    RESTART
 ========================================================= */
@@ -2849,6 +3033,14 @@ document
                 1;
 
 
+            previousTrick =
+                [];
+
+
+            previousTrickButton.disabled =
+                true;
+
+
             gameOverModal
                 .classList
                 .add(
@@ -2867,12 +3059,10 @@ document
     );
 
 
-
 /* =========================================================
    INITIAL
 ========================================================= */
 
 updateScore();
-
 
 nameInput.focus();
