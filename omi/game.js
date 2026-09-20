@@ -905,15 +905,6 @@ function renderBacks(
             "card-back";
 
 
-        /*
-           z-index makes the later cards sit above
-           the earlier cards.
-
-           This keeps the final card completely visible
-           while the earlier cards show only their exposed
-           strip.
-        */
-
         card.style.zIndex =
             i + 1;
 
@@ -1014,9 +1005,16 @@ function sortHumanHand() {
 
 /* =========================================================
    TRUMP PREVIEW
+
+   IMPORTANT:
+   These cards are clickable.
+
+   Clicking a card selects THAT CARD'S SUIT as trump.
 ========================================================= */
 
-function renderTrumpPreview() {
+function renderTrumpPreview(
+    selectTrump
+) {
 
     trumpCardPreview.innerHTML =
         "";
@@ -1025,11 +1023,73 @@ function renderTrumpPreview() {
     hands[0].forEach(
         card => {
 
+            const cardElement =
+                createCardElement(
+                    card
+                );
+
+
+            cardElement
+                .setAttribute(
+                    "role",
+                    "button"
+                );
+
+
+            cardElement
+                .setAttribute(
+                    "tabindex",
+                    "0"
+                );
+
+
+            cardElement
+                .setAttribute(
+                    "aria-label",
+                    `Choose ${card.suit} as trump`
+                );
+
+
+            cardElement
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        selectTrump(
+                            card.suit
+                        );
+
+                    }
+                );
+
+
+            cardElement
+                .addEventListener(
+                    "keydown",
+                    event => {
+
+                        if (
+                            event.key ===
+                            "Enter"
+                            ||
+                            event.key ===
+                            " "
+                        ) {
+
+                            event.preventDefault();
+
+
+                            selectTrump(
+                                card.suit
+                            );
+                        }
+                    }
+                );
+
+
             trumpCardPreview
                 .appendChild(
-                    createCardElement(
-                        card
-                    )
+                    cardElement
                 );
         }
     );
@@ -1271,9 +1331,6 @@ async function startRound() {
             ", choose trump.";
 
 
-        renderTrumpPreview();
-
-
         await humanChooseTrump();
 
     }
@@ -1381,6 +1438,13 @@ async function startRound() {
 
 /* =========================================================
    HUMAN TRUMP
+
+   The player can choose trump in TWO ways:
+
+   1. Click one of the four suit buttons.
+   2. Click one of their four preview cards.
+
+   Clicking a preview card chooses that card's suit.
 ========================================================= */
 
 function humanChooseTrump() {
@@ -1388,11 +1452,8 @@ function humanChooseTrump() {
     return new Promise(
         resolve => {
 
-            trumpModal
-                .classList
-                .remove(
-                    "hidden"
-                );
+            let choiceMade =
+                false;
 
 
             const buttons =
@@ -1402,15 +1463,44 @@ function humanChooseTrump() {
                     );
 
 
-            function select(
-                event
+            function cleanup() {
+
+                buttons.forEach(
+                    button => {
+
+                        button
+                            .removeEventListener(
+                                "click",
+                                selectSuitButton
+                            );
+
+                    }
+                );
+
+
+                trumpCardPreview.innerHTML =
+                    "";
+            }
+
+
+            function chooseSuit(
+                suit
             ) {
 
+                if (
+                    choiceMade
+                ) {
+
+                    return;
+                }
+
+
+                choiceMade =
+                    true;
+
+
                 trump =
-                    event
-                        .currentTarget
-                        .dataset
-                        .suit;
+                    suit;
 
 
                 trumpModal
@@ -1420,21 +1510,35 @@ function humanChooseTrump() {
                     );
 
 
-                buttons.forEach(
-                    button => {
-
-                        button
-                            .removeEventListener(
-                                "click",
-                                select
-                            );
-
-                    }
-                );
+                cleanup();
 
 
                 resolve();
             }
+
+
+            function selectSuitButton(
+                event
+            ) {
+
+                chooseSuit(
+                    event
+                        .currentTarget
+                        .dataset
+                        .suit
+                );
+            }
+
+
+            /*
+               Build the four clickable cards.
+
+               Each card calls chooseSuit(card.suit).
+            */
+
+            renderTrumpPreview(
+                chooseSuit
+            );
 
 
             buttons.forEach(
@@ -1443,11 +1547,18 @@ function humanChooseTrump() {
                     button
                         .addEventListener(
                             "click",
-                            select
+                            selectSuitButton
                         );
 
                 }
             );
+
+
+            trumpModal
+                .classList
+                .remove(
+                    "hidden"
+                );
         }
     );
 }
@@ -2251,7 +2362,6 @@ async function finishTrick() {
 
         finishRound();
 
-
         return;
     }
 
@@ -2508,8 +2618,6 @@ function finishRound() {
     let tokens;
 
 
-    /* 4–4 */
-
     if (
         ourTricks ===
         4
@@ -2543,8 +2651,6 @@ function finishRound() {
         : 1;
 
 
-    /* KAPOTHI */
-
     if (
         ourTricks ===
         8
@@ -2558,9 +2664,6 @@ function finishRound() {
 
     }
 
-
-    /* TRUMP TEAM WINS */
-
     else if (
         winningTeam ===
         chooserTeam
@@ -2570,9 +2673,6 @@ function finishRound() {
             1;
 
     }
-
-
-    /* NON-TRUMP TEAM WINS */
 
     else {
 
