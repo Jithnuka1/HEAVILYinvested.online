@@ -1,397 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-    <title>Omi | Heavily Invested</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-    <link rel="icon" type="image/png" href="/images/favicon.png">
-    <link rel="stylesheet" href="/omi/style.css">
+  <title>Omi | Heavily Invested</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/images/logo2.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/omi/style.css"
+  >
 </head>
+
 
 <body>
 
 <div id="game">
 
-    <!-- OVERALL SCORE -->
-    <header id="topBar">
 
-        <div class="overall-score">
-            <span>YOUR TEAM</span>
-            <strong id="team-score">0</strong>
-            <small>TOKENS</small>
-        </div>
+  <!-- =========================================
+       OVERALL SCORE
+  ========================================== -->
 
-        <div id="game-info">
-            <div id="round-status">Welcome to Omi</div>
-            <div id="trump-display">Trump: —</div>
-        </div>
+  <header id="topBar">
 
-        <div class="overall-score right-score">
-            <span>OPPONENTS</span>
-            <strong id="opponent-score">0</strong>
-            <small>TOKENS</small>
-        </div>
+    <div class="overall-score">
 
-    </header>
+      <span>
+        YOUR TEAM
+      </span>
 
+      <strong id="team-score">
+        0
+      </strong>
 
-    <!-- TABLE -->
-    <main id="table">
-
-        <div class="table-rail"></div>
-
-        <!-- LARGE FAINT TABLE LOGO -->
-        <div class="table-watermark">
-            <img
-                src="/images/logo2.png"
-                alt="">
-        </div>
-
-
-        <!-- CURRENT HAND TOTALS - TOP RIGHT -->
-        <div id="trick-counter">
-
-            <div
-                class="trick-score"
-                id="our-trick-target">
-
-                <div class="trick-logo black-team-logo">
-                    <img
-                        src="/images/logo2.png"
-                        alt="">
-                </div>
-
-                <div class="trick-score-text">
-                    <span>YOUR TOTAL</span>
-                    <strong id="our-tricks">0</strong>
-                </div>
-
-            </div>
-
-            <div class="trick-divider">
-                VS
-            </div>
-
-            <div
-                class="trick-score"
-                id="their-trick-target">
-
-                <div class="trick-score-text right-trick-text">
-                    <span>THEIR TOTAL</span>
-                    <strong id="their-tricks">0</strong>
-                </div>
-
-                <div class="trick-logo red-checker-logo"></div>
-
-            </div>
-
-        </div>
-
-
-        <!-- TEAMMATE -->
-        <div class="player top-player">
-
-            <div class="identity">
-
-                <div
-                    id="partner-avatar"
-                    class="avatar">
-                </div>
-
-                <div class="identity-text">
-
-                    <div
-                        class="player-name"
-                        id="partner-name">
-                        Partner
-                    </div>
-
-                    <div class="team-label">
-                        YOUR TEAM
-                    </div>
-
-                    <div class="thinking-dots"></div>
-
-                </div>
-
-            </div>
-
-            <div
-                id="partner-hand"
-                class="hidden-hand">
-            </div>
-
-        </div>
-
-
-        <!-- LEFT OPPONENT -->
-        <div class="player left-player">
-
-            <div class="identity">
-
-                <div
-                    id="left-avatar"
-                    class="avatar">
-                </div>
-
-                <div class="identity-text">
-
-                    <div
-                        class="player-name"
-                        id="left-name">
-                        Opponent
-                    </div>
-
-                    <div class="team-label">
-                        OPPONENT
-                    </div>
-
-                    <div class="thinking-dots"></div>
-
-                </div>
-
-            </div>
-
-            <div
-                id="left-hand"
-                class="hidden-hand vertical">
-            </div>
-
-        </div>
-
-
-        <!-- RIGHT OPPONENT -->
-        <div class="player right-player">
-
-            <div class="identity">
-
-                <div
-                    id="right-avatar"
-                    class="avatar">
-                </div>
-
-                <div class="identity-text">
-
-                    <div
-                        class="player-name"
-                        id="right-name">
-                        Opponent
-                    </div>
-
-                    <div class="team-label">
-                        OPPONENT
-                    </div>
-
-                    <div class="thinking-dots"></div>
-
-                </div>
-
-            </div>
-
-            <div
-                id="right-hand"
-                class="hidden-hand vertical">
-            </div>
-
-        </div>
-
-
-        <!-- CENTER PLAY AREA -->
-        <div id="center-area">
-
-            <div id="played-cards">
-
-                <div
-                    id="played-2"
-                    class="played-position played-top">
-                </div>
-
-                <div
-                    id="played-1"
-                    class="played-position played-left">
-                </div>
-
-                <div
-                    id="played-3"
-                    class="played-position played-right">
-                </div>
-
-                <div
-                    id="played-0"
-                    class="played-position played-bottom">
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- HUMAN -->
-        <div class="player bottom-player">
-
-            <div class="identity">
-
-                <div class="avatar">
-
-                    <div class="avatar-face default-human">
-
-                        <div class="hair short"></div>
-
-                        <div class="eye eye-left"></div>
-                        <div class="eye eye-right"></div>
-
-                        <div class="mouth"></div>
-
-                    </div>
-
-                </div>
-
-                <div class="identity-text">
-
-                    <div
-                        class="player-name"
-                        id="human-name">
-                        You
-                    </div>
-
-                    <div class="team-label">
-                        YOU
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div id="human-hand"></div>
-
-        </div>
-
-    </main>
-
-
-    <!-- NAME MODAL -->
-    <div
-        id="name-modal"
-        class="modal">
-
-        <div class="modal-box welcome-box">
-
-            <div class="omi-small">
-                HEAVILY INVESTED
-            </div>
-
-            <h1>OMI</h1>
-
-            <p>
-                Enter your name to take a seat.
-            </p>
-
-            <input
-                id="name-input"
-                type="text"
-                maxlength="18"
-                placeholder="Your name"
-                autocomplete="off">
-
-            <button id="start-game">
-                Take Your Seat
-            </button>
-
-        </div>
+      <small>
+        TOKENS
+      </small>
 
     </div>
 
 
-    <!-- TRUMP MODAL -->
-    <div
-        id="trump-modal"
-        class="modal hidden">
+    <div id="game-info">
 
-        <div class="modal-box">
+      <div id="round-status">
+        Welcome to Omi
+      </div>
 
-            <h2>Choose Trump</h2>
-
-            <p>
-                Choose the trump suit using your first four cards.
-            </p>
-
-            <div class="suit-buttons">
-
-                <button data-suit="♠">♠</button>
-
-                <button
-                    class="red"
-                    data-suit="♥">
-                    ♥
-                </button>
-
-                <button
-                    class="red"
-                    data-suit="♦">
-                    ♦
-                </button>
-
-                <button data-suit="♣">♣</button>
-
-            </div>
-
-        </div>
+      <div id="trump-display">
+        Trump: —
+      </div>
 
     </div>
 
 
-    <!-- HAND RESULT -->
-    <div
-        id="result-modal"
-        class="modal hidden">
+    <div class="overall-score right-score">
 
-        <div class="modal-box">
+      <span>
+        OPPONENTS
+      </span>
 
-            <h2 id="result-title">
-                Hand Complete
-            </h2>
+      <strong id="opponent-score">
+        0
+      </strong>
 
-            <p id="result-text"></p>
+      <small>
+        TOKENS
+      </small>
 
-            <button id="next-round">
-                Next Hand
-            </button>
+    </div>
 
-        </div>
+  </header>
+
+
+
+  <!-- =========================================
+       TABLE
+  ========================================== -->
+
+  <main id="table">
+
+
+    <div class="table-rail"></div>
+
+
+    <!-- LARGE FAINT LOGO -->
+
+    <div class="table-watermark">
+
+      <img
+        src="/images/logo2.png"
+        alt=""
+      >
 
     </div>
 
 
-    <!-- GAME OVER -->
-    <div
-        id="game-over-modal"
-        class="modal hidden">
 
-        <div class="modal-box">
+    <!-- =======================================
+         CURRENT HAND TOTALS
+    ======================================== -->
 
-            <h2 id="game-over-title">
-                Game Over
-            </h2>
+    <div id="trick-counter">
 
-            <p id="game-over-text"></p>
 
-            <button id="restart-game">
-                Play Again
-            </button>
+      <!-- OUR TOTAL -->
+
+      <div
+        class="trick-score"
+        id="our-trick-target"
+      >
+
+        <div class="trick-logo black-team-logo">
+
+          <img
+            src="/images/logo2.png"
+            alt=""
+          >
 
         </div>
+
+
+        <div class="trick-score-text">
+
+          <span>
+            YOUR TOTAL
+          </span>
+
+          <strong id="our-tricks">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="trick-divider">
+        VS
+      </div>
+
+
+
+      <!-- THEIR TOTAL -->
+
+      <div
+        class="trick-score"
+        id="their-trick-target"
+      >
+
+        <div class="trick-score-text right-trick-text">
+
+          <span>
+            THEIR TOTAL
+          </span>
+
+          <strong id="their-tricks">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="trick-logo red-checker-logo"></div>
+
+      </div>
 
     </div>
 
 
-    <!-- CARD COLLECTION ANIMATION -->
-    <div id="animation-layer"></div>
+
+    <!-- =======================================
+         TEAMMATE
+    ======================================== -->
+
+    <div class="player top-player">
+
+      <div class="identity">
+
+        <div
+          id="partner-avatar"
+          class="avatar"
+        ></div>
+
+
+        <div class="identity-text">
+
+          <div
+            class="player-name"
+            id="partner-name"
+          >
+            Partner
+          </div>
+
+
+          <div class="team-label">
+            YOUR TEAM
+          </div>
+
+
+          <div class="thinking-dots"></div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="partner-hand"
+        class="hidden-hand"
+      ></div>
+
+    </div>
+
+
+
+    <!-- =======================================
+         LEFT OPPONENT
+    ======================================== -->
+
+    <div class="player left-player">
+
+      <div class="identity">
+
+        <div
+          id="left-avatar"
+          class="avatar"
+        ></div>
+
+
+        <div class="identity-text">
+
+          <div
+            class="player-name"
+            id="left-name"
+          >
+            Opponent
+          </div>
+
+
+          <div class="team-label">
+            OPPONENT
+          </div>
+
+
+          <div class="thinking-dots"></div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="left-hand"
+        class="hidden-hand vertical"
+      ></div>
+
+    </div>
+
+
+
+    <!-- =======================================
+         RIGHT OPPONENT
+    ======================================== -->
+
+    <div class="player right-player">
+
+      <div class="identity">
+
+        <div
+          id="right-avatar"
+          class="avatar"
+        ></div>
+
+
+        <div class="identity-text">
+
+          <div
+            class="player-name"
+            id="right-name"
+          >
+            Opponent
+          </div>
+
+
+          <div class="team-label">
+            OPPONENT
+          </div>
+
+
+          <div class="thinking-dots"></div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="right-hand"
+        class="hidden-hand vertical"
+      ></div>
+
+    </div>
+
+
+
+    <!-- =======================================
+         CENTER PLAY AREA
+    ======================================== -->
+
+    <div id="center-area">
+
+      <div id="played-cards">
+
+
+        <div
+          id="played-2"
+          class="played-position played-top"
+        ></div>
+
+
+        <div
+          id="played-1"
+          class="played-position played-left"
+        ></div>
+
+
+        <div
+          id="played-3"
+          class="played-position played-right"
+        ></div>
+
+
+        <div
+          id="played-0"
+          class="played-position played-bottom"
+        ></div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =======================================
+         HUMAN
+    ======================================== -->
+
+    <div class="player bottom-player">
+
+      <div class="identity">
+
+        <div class="avatar">
+
+          <div class="avatar-face default-human">
+
+            <div class="hair short"></div>
+
+            <div class="eye eye-left"></div>
+
+            <div class="eye eye-right"></div>
+
+            <div class="mouth"></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="identity-text">
+
+          <div
+            class="player-name"
+            id="human-name"
+          >
+            You
+          </div>
+
+
+          <div class="team-label">
+            YOU
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div id="human-hand"></div>
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- =========================================
+       NAME MODAL
+  ========================================== -->
+
+  <div
+    id="name-modal"
+    class="modal"
+  >
+
+    <div class="modal-box welcome-box">
+
+      <div class="omi-small">
+        HEAVILY INVESTED
+      </div>
+
+
+      <h1>
+        OMI
+      </h1>
+
+
+      <p>
+        Enter your name to take a seat.
+      </p>
+
+
+      <input
+        id="name-input"
+        type="text"
+        maxlength="18"
+        placeholder="Your name"
+        autocomplete="off"
+      >
+
+
+      <button id="start-game">
+        Take Your Seat
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================
+       TRUMP MODAL
+  ========================================== -->
+
+  <div
+    id="trump-modal"
+    class="modal hidden"
+  >
+
+    <div class="modal-box">
+
+      <h2>
+        Choose Trump
+      </h2>
+
+
+      <p>
+        Choose the trump suit using your first four cards.
+      </p>
+
+
+      <div class="suit-buttons">
+
+        <button data-suit="♠">
+          ♠
+        </button>
+
+
+        <button
+          class="red"
+          data-suit="♥"
+        >
+          ♥
+        </button>
+
+
+        <button
+          class="red"
+          data-suit="♦"
+        >
+          ♦
+        </button>
+
+
+        <button data-suit="♣">
+          ♣
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================
+       HAND RESULT
+  ========================================== -->
+
+  <div
+    id="result-modal"
+    class="modal hidden"
+  >
+
+    <div class="modal-box">
+
+      <h2 id="result-title">
+        Hand Complete
+      </h2>
+
+
+      <p id="result-text"></p>
+
+
+      <button id="next-round">
+        Next Hand
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================
+       GAME OVER
+  ========================================== -->
+
+  <div
+    id="game-over-modal"
+    class="modal hidden"
+  >
+
+    <div class="modal-box">
+
+      <h2 id="game-over-title">
+        Game Over
+      </h2>
+
+
+      <p id="game-over-text"></p>
+
+
+      <button id="restart-game">
+        Play Again
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <div id="animation-layer"></div>
+
 
 </div>
+
 
 <script src="/omi/game.js"></script>
 
 </body>
+
 </html>
