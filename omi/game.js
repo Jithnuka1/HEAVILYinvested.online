@@ -43,6 +43,7 @@ const RANK_VALUE = {
 };
 
 
+
 /* =========================================================
    CHARACTERS
 ========================================================= */
@@ -127,6 +128,7 @@ const OPPONENTS = [
 ];
 
 
+
 /* =========================================================
    GAME STATE
 ========================================================= */
@@ -150,14 +152,10 @@ let currentPlayer = 0;
 let currentTrick = [];
 
 
-/* CURRENT HAND TOTAL */
-
 let ourTricks = 0;
 
 let theirTricks = 0;
 
-
-/* OVERALL TOKEN SCORE */
 
 let ourScore = 0;
 
@@ -178,6 +176,7 @@ let teammate = null;
 let opponentLeft = null;
 
 let opponentRight = null;
+
 
 
 /* =========================================================
@@ -274,6 +273,7 @@ const nameInput =
     );
 
 
+
 /* =========================================================
    HELPERS
 ========================================================= */
@@ -290,12 +290,14 @@ function sleep(ms) {
 }
 
 
+
 function nextPlayer(player) {
 
     return (
         player + 3
     ) % 4;
 }
+
 
 
 function sameTeam(a, b) {
@@ -308,6 +310,7 @@ function sameTeam(a, b) {
 }
 
 
+
 function suitIsRed(suit) {
 
     return (
@@ -315,6 +318,7 @@ function suitIsRed(suit) {
         suit === "♦"
     );
 }
+
 
 
 function randomItem(array) {
@@ -328,6 +332,7 @@ function randomItem(array) {
 }
 
 
+
 function getThinkingTime() {
 
     return (
@@ -336,6 +341,7 @@ function getThinkingTime() {
         2000
     );
 }
+
 
 
 /* =========================================================
@@ -347,24 +353,36 @@ function getPlayerIdentity(player) {
     if (player === 1) {
 
         return document
-            .getElementById("left-name")
-            .closest(".identity");
+            .getElementById(
+                "left-name"
+            )
+            .closest(
+                ".identity"
+            );
     }
 
 
     if (player === 2) {
 
         return document
-            .getElementById("partner-name")
-            .closest(".identity");
+            .getElementById(
+                "partner-name"
+            )
+            .closest(
+                ".identity"
+            );
     }
 
 
     if (player === 3) {
 
         return document
-            .getElementById("right-name")
-            .closest(".identity");
+            .getElementById(
+                "right-name"
+            )
+            .closest(
+                ".identity"
+            );
     }
 
 
@@ -372,30 +390,39 @@ function getPlayerIdentity(player) {
 }
 
 
+
 function clearThinkingIndicators() {
 
     document
-        .querySelectorAll(".identity")
-        .forEach(identity => {
+        .querySelectorAll(
+            ".identity"
+        )
+        .forEach(
+            identity => {
 
-            identity
-                .classList
-                .remove("ai-thinking");
-
-
-            const dots =
                 identity
-                    .querySelector(
-                        ".thinking-dots"
+                    .classList
+                    .remove(
+                        "ai-thinking"
                     );
 
 
-            if (dots) {
+                const dots =
+                    identity
+                        .querySelector(
+                            ".thinking-dots"
+                        );
 
-                dots.textContent = "";
+
+                if (dots) {
+
+                    dots.textContent =
+                        "";
+                }
             }
-        });
+        );
 }
+
 
 
 async function showThinkingDots(
@@ -407,12 +434,16 @@ async function showThinkingDots(
 
 
     const identity =
-        getPlayerIdentity(player);
+        getPlayerIdentity(
+            player
+        );
 
 
     if (!identity) {
 
-        await sleep(duration);
+        await sleep(
+            duration
+        );
 
         return;
     }
@@ -427,7 +458,9 @@ async function showThinkingDots(
 
     identity
         .classList
-        .add("ai-thinking");
+        .add(
+            "ai-thinking"
+        );
 
 
     const patterns = [
@@ -438,7 +471,9 @@ async function showThinkingDots(
     ];
 
 
-    let patternIndex = 0;
+    let patternIndex =
+        0;
+
 
     const startTime =
         Date.now();
@@ -474,7 +509,9 @@ async function showThinkingDots(
             elapsed;
 
 
-        if (remaining <= 0) {
+        if (
+            remaining <= 0
+        ) {
 
             break;
         }
@@ -489,13 +526,17 @@ async function showThinkingDots(
     }
 
 
-    dots.textContent = "";
+    dots.textContent =
+        "";
 
 
     identity
         .classList
-        .remove("ai-thinking");
+        .remove(
+            "ai-thinking"
+        );
 }
+
 
 
 /* =========================================================
@@ -549,22 +590,28 @@ function chooseCharacters() {
         shuffled[1];
 
 
-    document.getElementById(
-        "partner-name"
-    ).textContent =
-        teammate.name;
+    document
+        .getElementById(
+            "partner-name"
+        )
+        .textContent =
+            teammate.name;
 
 
-    document.getElementById(
-        "left-name"
-    ).textContent =
-        opponentLeft.name;
+    document
+        .getElementById(
+            "left-name"
+        )
+        .textContent =
+            opponentLeft.name;
 
 
-    document.getElementById(
-        "right-name"
-    ).textContent =
-        opponentRight.name;
+    document
+        .getElementById(
+            "right-name"
+        )
+        .textContent =
+            opponentRight.name;
 
 
     createAvatar(
@@ -586,6 +633,7 @@ function chooseCharacters() {
 }
 
 
+
 /* =========================================================
    AVATARS
 ========================================================= */
@@ -602,12 +650,16 @@ function createAvatar(
 
 
     const baldClass =
-        character.hairStyle === "bald"
+        character.hairStyle ===
+        "bald"
+
         ? " bald"
+
         : "";
 
 
-    let hairHTML = "";
+    let hairHTML =
+        "";
 
 
     if (
@@ -623,8 +675,8 @@ function createAvatar(
                     --hair:${character.hair};
                     --skin:${character.skin};
                     background:${character.hair};
-                ">
-            </div>
+                "
+            ></div>
 
         `;
     }
@@ -637,7 +689,8 @@ function createAvatar(
             style="
                 --skin:${character.skin};
                 --hair:${character.hair};
-            ">
+            "
+        >
 
             ${hairHTML}
 
@@ -653,18 +706,24 @@ function createAvatar(
 }
 
 
+
 /* =========================================================
    DECK
 ========================================================= */
 
 function createDeck() {
 
-    const deck = [];
+    const deck =
+        [];
 
 
-    for (const suit of SUITS) {
+    for (
+        const suit of SUITS
+    ) {
 
-        for (const rank of RANKS) {
+        for (
+            const rank of RANKS
+        ) {
 
             deck.push({
                 suit,
@@ -676,6 +735,7 @@ function createDeck() {
 
     return deck;
 }
+
 
 
 /* =========================================================
@@ -715,6 +775,7 @@ function shuffle(deck) {
 }
 
 
+
 /* =========================================================
    CREATE CARD
 ========================================================= */
@@ -734,8 +795,12 @@ function createCardElement(
     element.className =
         "card" +
         (
-            suitIsRed(card.suit)
+            suitIsRed(
+                card.suit
+            )
+
             ? " red"
+
             : ""
         );
 
@@ -757,7 +822,9 @@ function createCardElement(
     `;
 
 
-    if (playable) {
+    if (
+        playable
+    ) {
 
         const legal =
             isLegalHumanCard(
@@ -765,28 +832,38 @@ function createCardElement(
             );
 
 
-        if (!legal) {
+        if (
+            !legal
+        ) {
 
-            element.classList.add(
-                "illegal"
-            );
+            element
+                .classList
+                .add(
+                    "illegal"
+                );
 
-        } else {
+        }
 
-            element.addEventListener(
-                "click",
-                () => {
+        else {
 
-                    humanPlay(index);
+            element
+                .addEventListener(
+                    "click",
+                    () => {
 
-                }
-            );
+                        humanPlay(
+                            index
+                        );
+
+                    }
+                );
         }
     }
 
 
     return element;
 }
+
 
 
 /* =========================================================
@@ -798,12 +875,15 @@ function renderBacks(
     amount
 ) {
 
-    element.innerHTML = "";
+    element.innerHTML =
+        "";
 
 
     for (
         let i = 0;
+
         i < amount;
+
         i++
     ) {
 
@@ -824,27 +904,30 @@ function renderBacks(
 }
 
 
+
 /* =========================================================
    RENDER HANDS
 ========================================================= */
 
 function renderHands() {
 
-    humanHand.innerHTML = "";
+    humanHand.innerHTML =
+        "";
 
 
     hands[0].forEach(
         (card, index) => {
 
-            humanHand.appendChild(
+            humanHand
+                .appendChild(
 
-                createCardElement(
-                    card,
-                    waitingForHuman,
-                    index
-                )
+                    createCardElement(
+                        card,
+                        waitingForHuman,
+                        index
+                    )
 
-            );
+                );
         }
     );
 
@@ -866,6 +949,7 @@ function renderHands() {
         hands[3].length
     );
 }
+
 
 
 /* =========================================================
@@ -896,13 +980,18 @@ function sortHumanHand() {
 
 
             return (
-                RANK_VALUE[b.rank]
+                RANK_VALUE[
+                    b.rank
+                ]
                 -
-                RANK_VALUE[a.rank]
+                RANK_VALUE[
+                    a.rank
+                ]
             );
         }
     );
 }
+
 
 
 /* =========================================================
@@ -911,17 +1000,28 @@ function sortHumanHand() {
 
 async function startRound() {
 
-    roundActive = true;
+    roundActive =
+        true;
 
-    trump = null;
 
-    currentTrick = [];
+    trump =
+        null;
 
-    ourTricks = 0;
 
-    theirTricks = 0;
+    currentTrick =
+        [];
 
-    waitingForHuman = false;
+
+    ourTricks =
+        0;
+
+
+    theirTricks =
+        0;
+
+
+    waitingForHuman =
+        false;
 
 
     clearThinkingIndicators();
@@ -936,6 +1036,7 @@ async function startRound() {
 
 
     clearPlayedCards();
+
 
     updateScore();
 
@@ -960,11 +1061,14 @@ async function startRound() {
         "Dealing first four cards...";
 
 
-    /* FIRST FOUR CARDS */
+
+    /* FIRST FOUR */
 
     for (
         let round = 0;
+
         round < 4;
+
         round++
     ) {
 
@@ -974,33 +1078,43 @@ async function startRound() {
 
         for (
             let count = 0;
+
             count < 4;
+
             count++
         ) {
 
-            hands[player].push(
-                deck.pop()
-            );
+            hands[player]
+                .push(
+                    deck.pop()
+                );
 
 
             player =
-                nextPlayer(player);
+                nextPlayer(
+                    player
+                );
         }
     }
 
 
     sortHumanHand();
 
+
     renderHands();
 
 
-    await sleep(900);
+    await sleep(
+        900
+    );
 
 
-    /* CHOOSE TRUMP */
+
+    /* TRUMP */
 
     if (
-        trumpChooser === 0
+        trumpChooser ===
+        0
     ) {
 
         statusEl.textContent =
@@ -1010,7 +1124,9 @@ async function startRound() {
 
         await humanChooseTrump();
 
-    } else {
+    }
+
+    else {
 
         statusEl.textContent =
             playerName(
@@ -1044,7 +1160,8 @@ async function startRound() {
         trump;
 
 
-    /* SECOND FOUR CARDS */
+
+    /* SECOND FOUR */
 
     statusEl.textContent =
         "Dealing remaining cards...";
@@ -1052,7 +1169,9 @@ async function startRound() {
 
     for (
         let round = 0;
+
         round < 4;
+
         round++
     ) {
 
@@ -1062,27 +1181,35 @@ async function startRound() {
 
         for (
             let count = 0;
+
             count < 4;
+
             count++
         ) {
 
-            hands[player].push(
-                deck.pop()
-            );
+            hands[player]
+                .push(
+                    deck.pop()
+                );
 
 
             player =
-                nextPlayer(player);
+                nextPlayer(
+                    player
+                );
         }
     }
 
 
     sortHumanHand();
 
+
     renderHands();
 
 
-    await sleep(900);
+    await sleep(
+        900
+    );
 
 
     currentPlayer =
@@ -1101,6 +1228,7 @@ async function startRound() {
 }
 
 
+
 /* =========================================================
    HUMAN TRUMP
 ========================================================= */
@@ -1112,7 +1240,9 @@ function humanChooseTrump() {
 
             trumpModal
                 .classList
-                .remove("hidden");
+                .remove(
+                    "hidden"
+                );
 
 
             const buttons =
@@ -1122,7 +1252,9 @@ function humanChooseTrump() {
                     );
 
 
-            function select(event) {
+            function select(
+                event
+            ) {
 
                 trump =
                     event
@@ -1133,7 +1265,9 @@ function humanChooseTrump() {
 
                 trumpModal
                     .classList
-                    .add("hidden");
+                    .add(
+                        "hidden"
+                    );
 
 
                 buttons.forEach(
@@ -1169,11 +1303,14 @@ function humanChooseTrump() {
 }
 
 
+
 /* =========================================================
    AI TRUMP
 ========================================================= */
 
-function aiChooseTrump(hand) {
+function aiChooseTrump(
+    hand
+) {
 
     let bestSuit =
         SUITS[0];
@@ -1183,7 +1320,9 @@ function aiChooseTrump(hand) {
         -Infinity;
 
 
-    for (const suit of SUITS) {
+    for (
+        const suit of SUITS
+    ) {
 
         const cards =
             hand.filter(
@@ -1194,10 +1333,13 @@ function aiChooseTrump(hand) {
 
 
         let score =
-            cards.length * 4;
+            cards.length *
+            4;
 
 
-        for (const card of cards) {
+        for (
+            const card of cards
+        ) {
 
             score +=
                 RANK_VALUE[
@@ -1214,6 +1356,7 @@ function aiChooseTrump(hand) {
             bestScore =
                 score;
 
+
             bestSuit =
                 suit;
         }
@@ -1224,13 +1367,16 @@ function aiChooseTrump(hand) {
 }
 
 
+
 /* =========================================================
    TURN
 ========================================================= */
 
 async function playTurn() {
 
-    if (!roundActive) {
+    if (
+        !roundActive
+    ) {
 
         return;
     }
@@ -1239,10 +1385,12 @@ async function playTurn() {
     renderHands();
 
 
+
     /* HUMAN */
 
     if (
-        currentPlayer === 0
+        currentPlayer ===
+        0
     ) {
 
         clearThinkingIndicators();
@@ -1259,8 +1407,10 @@ async function playTurn() {
 
         renderHands();
 
+
         return;
     }
+
 
 
     /* AI */
@@ -1290,7 +1440,9 @@ async function playTurn() {
     );
 
 
-    if (!roundActive) {
+    if (
+        !roundActive
+    ) {
 
         return;
     }
@@ -1309,18 +1461,22 @@ async function playTurn() {
 }
 
 
+
 /* =========================================================
    LEGAL CARDS
 ========================================================= */
 
-function legalCardIndexes(player) {
+function legalCardIndexes(
+    player
+) {
 
     const hand =
         hands[player];
 
 
     if (
-        currentTrick.length === 0
+        currentTrick.length ===
+        0
     ) {
 
         return hand.map(
@@ -1336,7 +1492,8 @@ function legalCardIndexes(player) {
             .suit;
 
 
-    const matching = [];
+    const matching =
+        [];
 
 
     hand.forEach(
@@ -1347,14 +1504,17 @@ function legalCardIndexes(player) {
                 leadSuit
             ) {
 
-                matching.push(index);
+                matching.push(
+                    index
+                );
             }
         }
     );
 
 
     if (
-        matching.length > 0
+        matching.length >
+        0
     ) {
 
         return matching;
@@ -1368,37 +1528,53 @@ function legalCardIndexes(player) {
 }
 
 
+
 /* =========================================================
    HUMAN LEGAL CARD
 ========================================================= */
 
-function isLegalHumanCard(index) {
+function isLegalHumanCard(
+    index
+) {
 
-    if (!waitingForHuman) {
+    if (
+        !waitingForHuman
+    ) {
 
         return false;
     }
 
 
-    return legalCardIndexes(0)
-        .includes(index);
+    return legalCardIndexes(
+        0
+    )
+    .includes(
+        index
+    );
 }
+
 
 
 /* =========================================================
    HUMAN PLAY
 ========================================================= */
 
-function humanPlay(index) {
+function humanPlay(
+    index
+) {
 
-    if (!waitingForHuman) {
+    if (
+        !waitingForHuman
+    ) {
 
         return;
     }
 
 
     if (
-        !isLegalHumanCard(index)
+        !isLegalHumanCard(
+            index
+        )
     ) {
 
         return;
@@ -1414,6 +1590,7 @@ function humanPlay(index) {
         index
     );
 }
+
 
 
 /* =========================================================
@@ -1452,13 +1629,17 @@ async function playCard(
 
 
     if (
-        currentTrick.length === 4
+        currentTrick.length ===
+        4
     ) {
 
-        await sleep(900);
+        await sleep(
+            900
+        );
 
 
         await finishTrick();
+
 
         return;
     }
@@ -1472,6 +1653,7 @@ async function playCard(
 
     playTurn();
 }
+
 
 
 /* =========================================================
@@ -1490,13 +1672,17 @@ function renderPlayedCard(
         );
 
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
 
 
     container.appendChild(
-        createCardElement(card)
+        createCardElement(
+            card
+        )
     );
 }
+
 
 
 /* =========================================================
@@ -1507,7 +1693,9 @@ function clearPlayedCards() {
 
     for (
         let i = 0;
+
         i < 4;
+
         i++
     ) {
 
@@ -1520,6 +1708,7 @@ function clearPlayedCards() {
                 "";
     }
 }
+
 
 
 /* =========================================================
@@ -1589,6 +1778,7 @@ function cardBeats(
 }
 
 
+
 /* =========================================================
    CURRENT WINNER
 ========================================================= */
@@ -1596,7 +1786,8 @@ function cardBeats(
 function currentWinningPlay() {
 
     if (
-        currentTrick.length === 0
+        currentTrick.length ===
+        0
     ) {
 
         return null;
@@ -1615,7 +1806,10 @@ function currentWinningPlay() {
 
     for (
         let i = 1;
-        i < currentTrick.length;
+
+        i <
+        currentTrick.length;
+
         i++
     ) {
 
@@ -1641,6 +1835,7 @@ function currentWinningPlay() {
 }
 
 
+
 /* =========================================================
    COLLECTION ANIMATION
 ========================================================= */
@@ -1655,20 +1850,17 @@ async function animateTrickToScore(
         );
 
 
-    /*
-       This automatically follows the
-       total counter even though we moved
-       it to the top-right.
-    */
-
     const target =
-        winningTeam === 0
+        winningTeam ===
+        0
 
-        ? document.getElementById(
+        ?
+        document.getElementById(
             "our-trick-target"
         )
 
-        : document.getElementById(
+        :
+        document.getElementById(
             "their-trick-target"
         );
 
@@ -1680,20 +1872,25 @@ async function animateTrickToScore(
 
     const targetX =
         targetRect.left +
-        targetRect.width / 2;
+        targetRect.width /
+        2;
 
 
     const targetY =
         targetRect.top +
-        targetRect.height / 2;
+        targetRect.height /
+        2;
 
 
-    const clones = [];
+    const clones =
+        [];
 
 
     for (
         let player = 0;
+
         player < 4;
+
         player++
     ) {
 
@@ -1705,7 +1902,9 @@ async function animateTrickToScore(
             );
 
 
-        if (!original) {
+        if (
+            !original
+        ) {
 
             continue;
         }
@@ -1717,7 +1916,10 @@ async function animateTrickToScore(
 
 
         const clone =
-            original.cloneNode(true);
+            original
+                .cloneNode(
+                    true
+                );
 
 
         clone.classList.add(
@@ -1746,17 +1948,23 @@ async function animateTrickToScore(
 
 
         animationLayer
-            .appendChild(clone);
+            .appendChild(
+                clone
+            );
 
 
-        clones.push(clone);
+        clones.push(
+            clone
+        );
     }
 
 
     clearPlayedCards();
 
 
-    await sleep(70);
+    await sleep(
+        70
+    );
 
 
     clones.forEach(
@@ -1767,14 +1975,16 @@ async function animateTrickToScore(
                     index -
                     1.5
                 )
-                * 4;
+                *
+                4;
 
 
             card.style.left =
                 (
                     targetX
                     -
-                    card.offsetWidth / 2
+                    card.offsetWidth /
+                    2
                     +
                     offset
                 )
@@ -1786,7 +1996,8 @@ async function animateTrickToScore(
                 (
                     targetY
                     -
-                    card.offsetHeight / 2
+                    card.offsetHeight /
+                    2
                     +
                     offset
                 )
@@ -1798,7 +2009,8 @@ async function animateTrickToScore(
                 `
                 scale(0.25)
                 rotate(${(
-                    index - 1.5
+                    index -
+                    1.5
                 ) * 7}deg)
                 `;
 
@@ -1809,7 +2021,9 @@ async function animateTrickToScore(
     );
 
 
-    await sleep(820);
+    await sleep(
+        820
+    );
 
 
     clones.forEach(
@@ -1820,16 +2034,23 @@ async function animateTrickToScore(
 
     target
         .classList
-        .add("trick-won");
+        .add(
+            "trick-won"
+        );
 
 
-    await sleep(220);
+    await sleep(
+        220
+    );
 
 
     target
         .classList
-        .remove("trick-won");
+        .remove(
+            "trick-won"
+        );
 }
+
 
 
 /* =========================================================
@@ -1843,7 +2064,8 @@ async function finishTrick() {
 
 
     const winningTeam =
-        winner.player % 2;
+        winner.player %
+        2;
 
 
     statusEl.textContent =
@@ -1860,12 +2082,15 @@ async function finishTrick() {
 
 
     if (
-        winningTeam === 0
+        winningTeam ===
+        0
     ) {
 
         ourTricks++;
 
-    } else {
+    }
+
+    else {
 
         theirTricks++;
     }
@@ -1874,10 +2099,13 @@ async function finishTrick() {
     updateScore();
 
 
-    await sleep(700);
+    await sleep(
+        700
+    );
 
 
-    currentTrick = [];
+    currentTrick =
+        [];
 
 
     if (
@@ -1887,6 +2115,7 @@ async function finishTrick() {
     ) {
 
         finishRound();
+
 
         return;
     }
@@ -1900,11 +2129,14 @@ async function finishTrick() {
 }
 
 
+
 /* =========================================================
    AI CARD CHOICE
 ========================================================= */
 
-function chooseAICard(player) {
+function chooseAICard(
+    player
+) {
 
     const legal =
         legalCardIndexes(
@@ -1913,7 +2145,8 @@ function chooseAICard(player) {
 
 
     if (
-        currentTrick.length === 0
+        currentTrick.length ===
+        0
     ) {
 
         return chooseLeadCard(
@@ -1967,7 +2200,8 @@ function chooseAICard(player) {
 
 
     if (
-        winningOptions.length > 0
+        winningOptions.length >
+        0
     ) {
 
         return lowestCard(
@@ -1982,6 +2216,7 @@ function chooseAICard(player) {
         legal
     );
 }
+
 
 
 /* =========================================================
@@ -2051,6 +2286,7 @@ function chooseLeadCard(
 }
 
 
+
 /* =========================================================
    LOWEST CARD
 ========================================================= */
@@ -2113,6 +2349,7 @@ function lowestCard(
 }
 
 
+
 /* =========================================================
    FINISH HAND
 ========================================================= */
@@ -2131,7 +2368,8 @@ function finishRound() {
 
 
     const chooserTeam =
-        trumpChooser % 2;
+        trumpChooser %
+        2;
 
 
     let winningTeam;
@@ -2139,12 +2377,15 @@ function finishRound() {
     let tokens;
 
 
+
     /* 4–4 DRAW */
 
     if (
-        ourTricks === 4
+        ourTricks ===
+        4
         &&
-        theirTricks === 4
+        theirTricks ===
+        4
     ) {
 
         carryToken++;
@@ -2172,36 +2413,44 @@ function finishRound() {
         : 1;
 
 
+
     /* KAPOTHI */
 
     if (
-        ourTricks === 8
+        ourTricks ===
+        8
         ||
-        theirTricks === 8
+        theirTricks ===
+        8
     ) {
 
-        tokens = 3;
+        tokens =
+            3;
 
     }
 
 
-    /* TRUMP-CHOOSING TEAM WINS */
+
+    /* TRUMP TEAM WINS */
 
     else if (
         winningTeam ===
         chooserTeam
     ) {
 
-        tokens = 1;
+        tokens =
+            1;
 
     }
 
 
-    /* OTHER TEAM WINS */
+
+    /* NON-TRUMP TEAM WINS */
 
     else {
 
-        tokens = 2;
+        tokens =
+            2;
     }
 
 
@@ -2209,22 +2458,21 @@ function finishRound() {
         carryToken;
 
 
-    carryToken = 0;
+    carryToken =
+        0;
 
-
-    /*
-       OVERALL SCORE ONLY CHANGES
-       AFTER THE FULL HAND.
-    */
 
     if (
-        winningTeam === 0
+        winningTeam ===
+        0
     ) {
 
         ourScore +=
             tokens;
 
-    } else {
+    }
+
+    else {
 
         theirScore +=
             tokens;
@@ -2238,9 +2486,11 @@ function finishRound() {
 
 
     if (
-        ourTricks === 8
+        ourTricks ===
+        8
         ||
-        theirTricks === 8
+        theirTricks ===
+        8
     ) {
 
         title =
@@ -2249,7 +2499,8 @@ function finishRound() {
     }
 
     else if (
-        winningTeam === 0
+        winningTeam ===
+        0
     ) {
 
         title =
@@ -2274,13 +2525,16 @@ function finishRound() {
 
 
     if (
-        ourScore >= 10
+        ourScore >=
+        10
         ||
-        theirScore >= 10
+        theirScore >=
+        10
     ) {
 
         showGameOver(
-            ourScore >= 10
+            ourScore >=
+            10
         );
 
 
@@ -2295,6 +2549,7 @@ function finishRound() {
 }
 
 
+
 /* =========================================================
    RESULT
 ========================================================= */
@@ -2304,22 +2559,29 @@ function showRoundResult(
     text
 ) {
 
-    document.getElementById(
-        "result-title"
-    ).textContent =
-        title;
+    document
+        .getElementById(
+            "result-title"
+        )
+        .textContent =
+            title;
 
 
-    document.getElementById(
-        "result-text"
-    ).textContent =
-        text;
+    document
+        .getElementById(
+            "result-text"
+        )
+        .textContent =
+            text;
 
 
     resultModal
         .classList
-        .remove("hidden");
+        .remove(
+            "hidden"
+        );
 }
+
 
 
 /* =========================================================
@@ -2330,28 +2592,37 @@ function showGameOver(
     humanWon
 ) {
 
-    document.getElementById(
-        "game-over-title"
-    ).textContent =
+    document
+        .getElementById(
+            "game-over-title"
+        )
+        .textContent =
 
-        humanWon
+            humanWon
 
-        ? "Your Team Wins!"
+            ?
+            "Your Team Wins!"
 
-        : "Opponents Win";
+            :
+            "Opponents Win";
 
 
-    document.getElementById(
-        "game-over-text"
-    ).textContent =
+    document
+        .getElementById(
+            "game-over-text"
+        )
+        .textContent =
 
-        `Final token score: ${ourScore} – ${theirScore}`;
+            `Final token score: ${ourScore} – ${theirScore}`;
 
 
     gameOverModal
         .classList
-        .remove("hidden");
+        .remove(
+            "hidden"
+        );
 }
+
 
 
 /* =========================================================
@@ -2377,13 +2648,18 @@ function updateScore() {
 }
 
 
+
 /* =========================================================
    PLAYER NAME
 ========================================================= */
 
-function playerName(player) {
+function playerName(
+    player
+) {
 
-    switch (player) {
+    switch (
+        player
+    ) {
 
         case 0:
 
@@ -2393,22 +2669,34 @@ function playerName(player) {
         case 1:
 
             return opponentLeft
-                ? opponentLeft.name
-                : "Opponent";
+
+                ?
+                opponentLeft.name
+
+                :
+                "Opponent";
 
 
         case 2:
 
             return teammate
-                ? teammate.name
-                : "Partner";
+
+                ?
+                teammate.name
+
+                :
+                "Partner";
 
 
         case 3:
 
             return opponentRight
-                ? opponentRight.name
-                : "Opponent";
+
+                ?
+                opponentRight.name
+
+                :
+                "Opponent";
 
 
         default:
@@ -2416,6 +2704,7 @@ function playerName(player) {
             return "Player";
     }
 }
+
 
 
 /* =========================================================
@@ -2431,7 +2720,8 @@ function beginGame() {
 
 
     if (
-        enteredName === ""
+        enteredName ===
+        ""
     ) {
 
         enteredName =
@@ -2443,10 +2733,12 @@ function beginGame() {
         enteredName;
 
 
-    document.getElementById(
-        "human-name"
-    ).textContent =
-        humanName;
+    document
+        .getElementById(
+            "human-name"
+        )
+        .textContent =
+            humanName;
 
 
     chooseCharacters();
@@ -2454,7 +2746,9 @@ function beginGame() {
 
     nameModal
         .classList
-        .add("hidden");
+        .add(
+            "hidden"
+        );
 
 
     updateScore();
@@ -2464,17 +2758,19 @@ function beginGame() {
 }
 
 
+
 /* =========================================================
-   START BUTTON
+   START
 ========================================================= */
 
-document.getElementById(
-    "start-game"
-)
-.addEventListener(
-    "click",
-    beginGame
-);
+document
+    .getElementById(
+        "start-game"
+    )
+    .addEventListener(
+        "click",
+        beginGame
+    );
 
 
 nameInput
@@ -2493,67 +2789,83 @@ nameInput
     );
 
 
+
 /* =========================================================
    NEXT HAND
 ========================================================= */
 
-document.getElementById(
-    "next-round"
-)
-.addEventListener(
-    "click",
-    () => {
+document
+    .getElementById(
+        "next-round"
+    )
+    .addEventListener(
+        "click",
+        () => {
 
-        resultModal
-            .classList
-            .add("hidden");
-
-
-        dealer =
-            nextPlayer(
-                dealer
-            );
+            resultModal
+                .classList
+                .add(
+                    "hidden"
+                );
 
 
-        startRound();
-    }
-);
+            dealer =
+                nextPlayer(
+                    dealer
+                );
+
+
+            startRound();
+        }
+    );
+
 
 
 /* =========================================================
-   RESTART GAME
+   RESTART
 ========================================================= */
 
-document.getElementById(
-    "restart-game"
-)
-.addEventListener(
-    "click",
-    () => {
+document
+    .getElementById(
+        "restart-game"
+    )
+    .addEventListener(
+        "click",
+        () => {
 
-        ourScore = 0;
-
-        theirScore = 0;
-
-        carryToken = 0;
-
-        dealer = 1;
+            ourScore =
+                0;
 
 
-        gameOverModal
-            .classList
-            .add("hidden");
+            theirScore =
+                0;
 
 
-        chooseCharacters();
+            carryToken =
+                0;
 
 
-        updateScore();
+            dealer =
+                1;
 
 
-        startRound();
-    }
-);
+            gameOverModal
+                .classList
+                .add(
+                    "hidden"
+                );
+
+
+            chooseCharacters();
+
+
+            updateScore();
+
+
+            startRound();
+        }
+    );
+
 
 
 /* =========================================================
@@ -2561,5 +2873,6 @@ document.getElementById(
 ========================================================= */
 
 updateScore();
+
 
 nameInput.focus();
